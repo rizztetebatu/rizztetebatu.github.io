@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Rizz Tetebatu Launch Kit</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Figtree:wght@400;500;700&display=swap">
+<style>
+/* Layout: a single-column field manual. Checklist first, then every text ready to copy, grouped by app. */
+:root{
+  --bg:#F2F4EA; --surface:#FFFFFF; --ink:#132018; --muted:#56665A; --line:#D9E0CF;
+  --paddy:#2F7A3B; --shoot:#C9E15C; --lava:#DE4F22; --lava-ink:#FFFFFF; --done:#E4EDDC;
+  --display:"Bricolage Grotesque","Arial Black",system-ui,sans-serif;
+  --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E1611; --surface:#16211A; --ink:#E8EFE2; --muted:#9BAB9E; --line:#26362B;
+  --paddy:#6FC07A; --shoot:#C9E15C; --lava:#FF6E3F; --lava-ink:#1A0E08; --done:#132019; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1611; --surface:#16211A; --ink:#E8EFE2; --muted:#9BAB9E; --line:#26362B;
+  --paddy:#6FC07A; --shoot:#C9E15C; --lava:#FF6E3F; --lava-ink:#1A0E08; --done:#132019; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.55 var(--body)}
+.wrap{max-width:760px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 80px}
+h1,h2,h3{font-family:var(--display);font-weight:800;line-height:1.08;text-wrap:balance;margin:0}
+h1{font-size:clamp(32px,7vw,48px);letter-spacing:-.03em}
+h1 i{font-style:normal;color:var(--lava)}
+h2{font-size:26px;margin-top:44px;padding-top:20px;border-top:2px solid var(--ink)}
+h3{font-size:18px;margin-top:22px}
+p{margin:8px 0 0}
+.muted{color:var(--muted)}
+.eyebrow{font:700 12px/1 var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--paddy)}
+nav{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+nav a{font:700 13px/1 var(--body);padding:9px 12px;border-radius:99px;background:var(--surface);border:1px solid var(--line);text-decoration:none;color:var(--ink)}
+.check{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:8px}
+.check li label{display:flex;gap:12px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer}
+.check input{width:22px;height:22px;flex:none;margin-top:1px;accent-color:var(--paddy)}
+.check li:has(input:checked) label{background:var(--done)}
+.check li:has(input:checked) .tx{text-decoration:line-through;color:var(--muted)}
+.check .tx b{display:block}
+.check .tx small{color:var(--muted);font-size:14px}
+.progress{font:700 14px/1 var(--body);margin-top:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.field{margin-top:12px;background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.field .top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 12px 0 14px}
+.field .lbl{font:700 12px/1.2 var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.field pre{margin:0;padding:8px 14px 14px;white-space:pre-wrap;word-break:break-word;font:400 15px/1.5 var(--body)}
+.copy{border:0;background:var(--ink);color:var(--bg);font:700 13px/1 var(--body);padding:8px 12px;border-radius:99px;cursor:pointer;flex:none}
+.copy.ok{background:var(--paddy);color:var(--bg)}
+.tip{margin-top:14px;padding:12px 14px;border-left:4px solid var(--lava);background:var(--surface);border-radius:0 12px 12px 0}
+.tip b{color:var(--lava)}
+.good{border-left-color:var(--paddy)}
+.good b{color:var(--paddy)}
+.tabs{display:flex;gap:6px;margin-top:12px}
+.tabs button{border:1px solid var(--line);background:var(--surface);color:var(--ink);font:700 13px/1 var(--body);padding:8px 12px;border-radius:99px;cursor:pointer}
+.tabs button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+input[type=url]{width:100%;font:400 16px/1.3 var(--body);padding:12px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);margin-top:8px}
+.card{margin-top:14px;background:#FFFFFF;color:#132018;border-radius:16px;padding:22px;display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;max-width:460px;border:2px solid #132018}
+.card .q{width:140px;height:140px;display:grid;place-items:center;background:#F2F4EA;border-radius:8px;font:600 12px/1.3 var(--body);color:#56665A;text-align:center;padding:8px}
+.card .q img,.card .q canvas{width:140px!important;height:140px!important}
+.card h4{font:800 22px/1.05 var(--display);margin:0}
+.card h4 i{font-style:normal;color:#DE4F22}
+.card p{font-size:14px;margin-top:8px;color:#384A3D}
+@media (max-width:420px){.card{grid-template-columns:1fr;justify-items:center;text-align:center}}
+table{border-collapse:collapse;width:100%;margin-top:12px;font-size:15px}
+td,th{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:700 12px/1.2 var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+td.n{font-variant-numeric:tabular-nums;white-space:nowrap}
+.tw{overflow-x:auto}
+.brand{margin-top:16px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (max-width:560px){.brand{grid-template-columns:1fr}}
+.brand div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.brand small{display:block;font:700 11px/1.2 var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.brand b{font-size:16px;word-break:break-all}
+:focus-visible{outline:3px solid var(--lava);outline-offset:2px}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <p class="eyebrow">Launch kit</p>
+  <h1>rizz<i>.</i> Tetebatu</h1>
+  <p class="muted">Everything to set up today, in the right order. Every text is ready: tap <b>Copy</b>, then paste it in the app. Change words so they sound like you.</p>
+  <div class="brand">
+    <div><small>Name everywhere</small><b>Rizz Tetebatu</b></div>
+    <div><small>Instagram</small><b>@rizztetebatu</b></div>
+    <div><small>Website</small><b>rizztetebatu.com</b></div>
+  </div>
+  <nav>
+    <a href="#today">Today</a><a href="#prices">Prices</a><a href="#guests">What guests love</a><a href="#whatsapp">WhatsApp</a><a href="#google">Google Maps</a><a href="#reviews">Reviews</a><a href="#photos">Photos</a><a href="#instagram">Instagram</a><a href="#website">Website</a><a href="#later">Later</a>
+  </nav>
+
+  <h2 id="today">Today, step by step</h2>
+  <p class="muted">Your progress is saved on this phone.</p>
+  <ul class="check" id="checklist"></ul>
+  <p class="progress" id="progress"></p>
+  <div class="tip"><b>Your accounts are yours.</b> Use your own phone number for Gmail, WhatsApp and Instagram, and write your passwords on paper at home. Never send passwords in a chat. Q helps you as a manager on Google, without your password.</div>
+
+  <h2 id="prices">Your prices and promises</h2>
+  <p>Surprises about money are the biggest reason for bad reviews in Tetebatu. So: fixed prices, everything included, the same price on WhatsApp, Google and the website.</p>
+  <h3>Proposal (you decide)</h3>
+  <div class="tw"><table>
+    <tr><th>Tour</th><th>Time</th><th>Per person, all-in</th></tr>
+    <tr><td>Rice fields &amp; spice garden walk</td><td class="n">3 h</td><td class="n">IDR 150.000</td></tr>
+    <tr><td>Rice fields &amp; waterfall</td><td class="n">5 h</td><td class="n">IDR 250.000</td></tr>
+    <tr><td>Classic Tetebatu day, with lunch</td><td class="n">7 h</td><td class="n">IDR 400.000</td></tr>
+    <tr><td>Mount Rinjani</td><td class="n">2 to 3 days</td><td class="n">Price of the organizer</td></tr>
+  </table></div>
+  <p class="muted">All-in means: guide, entrance fees (waterfall about IDR 20.000, monkey forest about IDR 30.000), water and fruit. Groups of 4 or more: 10% off. Tours sold online for Tetebatu cost about EUR 20 to 40 per person, because the website takes a big part. Your direct price can be lower and you still earn more.</p>
+  <h3>Four promises</h3>
+  <p class="muted">These are on the website. Only keep them if you agree.</p>
+  <div data-copy="Promises">1. Pay on the day. No prepayment, cash in rupiah.
+2. Free cancellation until 24 hours before.
+3. All-in prices: entrance fees and water included.
+4. Pickup at your homestay in Tetebatu, on time.</div>
+
+  <h2 id="guests">What guests love (from reviews)</h2>
+  <p>We read reviews of the best guides in Tetebatu. This is what guests write about again and again:</p>
+  <div class="tip good"><b>Do this every tour.</b>
+  <ul style="margin:8px 0 0;padding-left:18px">
+    <li><b>Explain the plants.</b> "He knows a lot about all the plants and spices." This is your strongest point.</li>
+    <li><b>Let them taste.</b> Fresh fruit, cassava, coffee or cacao from the tree.</li>
+    <li><b>A home-made lunch.</b> The most praised thing: lunch cooked by the guide's family at home. If you can arrange this with family or friends, it makes you stand out.</li>
+    <li><b>Be a real local.</b> "A true local who grew up in Tetebatu." Tell your story, show your village.</li>
+    <li><b>Make them laugh</b> and take great photos of them, on their own phone.</li>
+    <li><b>Take the safe way.</b> The bamboo bridge instead of the slippery stairs at the Tetebatu waterfall.</li>
+  </ul></div>
+  <div class="tip"><b>Avoid this.</b> Guests complain about: prices that change on the spot, extra fees at the gate, a guide who barely talks, slippery paths without a warning, and being pushed to buy things. Monkeys are wild: never promise them.</div>
+
+  <h2 id="whatsapp">1. WhatsApp Business</h2>
+  <p>Free app. You keep your number and your chats. Install <b>WhatsApp Business</b> from the Play Store and choose your current number.</p>
+  <p class="muted">Settings › Business tools › Business profile</p>
+  <div data-copy="Business name">Rizz Tetebatu</div>
+  <div data-copy="Category">Travel &amp; Transportation</div>
+  <div data-copy="Description">Local guide in Tetebatu, Lombok 🌾 Rice fields, spice gardens, waterfalls and the monkey forest. Fixed all-in prices, pickup at your homestay, pay on the day. English, a bit of Nederlands, Deutsch and français.</div>
+  <div data-copy="Address">Tetebatu, Sikur, East Lombok, NTB, Indonesia</div>
+  <div data-copy="Website">https://rizztetebatu.com</div>
+
+  <h3>Greeting message</h3>
+  <p class="muted">Business tools › Greeting message › On. Sent automatically to new people.</p>
+  <div data-copy="Greeting">Hi, thanks for your message! 👋 I'm Rizz, your local guide in Tetebatu.
+
+Tell me:
+1. Which tour (rice fields, waterfall, classic day or Rinjani)
+2. Which day
+3. How many people
+4. Where you stay
+
+I reply as fast as I can, also when I'm out on a walk. 🌾</div>
+
+  <h3>Away message</h3>
+  <p class="muted">Business tools › Away message. Turn it on when you are on a tour or on Rinjani.</p>
+  <div data-copy="Away">Hi! I'm out on a tour right now 🌄 I will reply as soon as I'm back. Send me your day, number of people and where you stay, so I can confirm quickly.</div>
+
+  <h3>Quick replies</h3>
+  <p class="muted">Business tools › Quick replies › +. Type the shortcut in a chat (for example /price) and the full text appears.</p>
+  <div data-copy="/tours">My tours in Tetebatu, all with pickup at your homestay:
+🌾 Rice fields &amp; spice garden walk, 3 hours
+💦 Rice fields &amp; waterfall, 5 hours
+🐒 Classic Tetebatu day: monkey forest, rice fields, Sasak lunch and waterfall, 7 hours
+🌋 Mount Rinjani, 2 or 3 days, with a licensed organizer
+
+Which one do you like? I can also make a route for your pace.</div>
+  <div data-copy="/price">Prices per person, all-in (guide, entrance fees, water and fruit):
+🌾 Rice fields walk: IDR 150.000
+💦 Rice fields &amp; waterfall: IDR 250.000
+🐒 Classic day with lunch: IDR 400.000
+Groups of 4 or more: 10% off. No prepayment, you pay cash on the day. Free cancellation until 24 hours before. 🙏</div>
+  <div data-copy="/pickup">I pick you up at your homestay in Tetebatu at the time we agree. Please send me the name of your homestay. 👍</div>
+  <div data-copy="/bring">Please bring: water shoes or shoes with grip (paths can be slippery), sun cream, swimwear for the waterfall, and a light rain jacket in the rainy season. 🎒</div>
+  <div data-copy="/cash">Good to know: there is no ATM in Tetebatu. Please bring enough cash in rupiah before you come. 💵</div>
+  <div data-copy="/rinjani">Mount Rinjani 🌋 I go as guide and porter with a licensed trekking organizer, because the national park requires it. Permits go through the official eRinjani system. Tell me your dates and number of people, and I will send you the options and price.</div>
+  <div data-copy="/review">Thank you so much for walking with me today! 🙏 It would help me a lot if you leave a short review on Google. Every review brings me closer to building my own guesthouse:
+REVIEW_LINK</div>
+
+  <h3>Catalog</h3>
+  <p class="muted">Business tools › Catalog › Add new item. One item per tour, with your best horizontal photo and the price.</p>
+  <div class="tw"><table>
+    <tr><th>Item</th><th>Description</th></tr>
+    <tr><td>Rice fields &amp; spice garden walk</td><td>3 hours through the terraces and Sasak villages. How rice grows, coffee, cacao, vanilla and cloves on the tree, fresh fruit. Pickup at your homestay. All-in.</td></tr>
+    <tr><td>Rice fields &amp; waterfall</td><td>5 hours. Rice fields, then the Tetebatu waterfall over the bamboo bridge, swim stop. Entrance fee included.</td></tr>
+    <tr><td>Classic Tetebatu day</td><td>7 hours. Monkey forest in the morning, rice fields and spice gardens, Sasak lunch, waterfall swim. All-in.</td></tr>
+    <tr><td>Mount Rinjani trek</td><td>2D1N or 3D2N with a licensed trekking organizer and eRinjani permit. Ask for dates and price.</td></tr>
+  </table></div>
+
+  <h3>Labels</h3>
+  <p class="muted">Long-press a chat › Label. Then you never forget who you still need to ask for a review.</p>
+  <div data-copy="Labels">New request
+Booked
+Paid
+Review asked
+Review done</div>
+
+  <h2 id="google">2. Google Maps profile</h2>
+  <p>This is where most travellers find guides. Free. Open Google Maps › your photo › <b>Add your business</b>, with your own Gmail.</p>
+  <div data-copy="Business name">Rizz Tetebatu</div>
+  <div class="tip"><b>Only the name.</b> Never add words like "best guide" or "cheap tours" to the name. Google sees it as spam and can block the profile.</div>
+  <div data-copy="Main category">Tour operator</div>
+  <div data-copy="Extra category">Hiking guide</div>
+  <div class="tip"><b>Location.</b> If guests can meet you at your home or a fixed meeting point in Tetebatu, add that address: then you show as a pin on the map, which is best. If not, choose that you visit your customers and add the service area below. Never use the address of a homestay that is not yours.</div>
+  <div data-copy="Service area">Tetebatu, Sikur, East Lombok</div>
+  <div data-copy="Phone">Your WhatsApp number, with +62</div>
+  <div data-copy="Website (until the website is live, use WhatsApp)">https://wa.me/62XXXXXXXXXX</div>
+  <div data-copy="Hours">Monday to Sunday, 06:00 to 20:00</div>
+  <div data-copy="Description (max 750 characters)">Rizz Tetebatu is a local guide in Tetebatu, East Lombok. Rizz shows you the real Lombok on foot: rice terraces and Sasak villages, spice gardens with coffee, cacao, vanilla and cloves, the monkey forest with its black monkeys, and the Tetebatu waterfall over the bamboo bridge. He explains how rice grows and which plant helps against what, and lets you taste fresh fruit on the way. Small groups, your own pace, pickup at your homestay. Fixed all-in prices with entrance fees included, no prepayment and free cancellation until 24 hours before. Rizz also guides and carries on Mount Rinjani treks with a licensed trekking organizer. English, a bit of Dutch, German and French. Book by WhatsApp.</div>
+
+  <h3>Services</h3>
+  <p class="muted">Edit profile › Services. Add each tour with its price.</p>
+  <div data-copy="Services">Rice fields & spice garden walk, 3 hours
+Rice fields & waterfall, 5 hours
+Classic Tetebatu day with lunch, 7 hours
+Monkey forest walk
+Mount Rinjani trek, 2D1N or 3D2N</div>
+
+  <h3>Add Q as manager</h3>
+  <p>Profile › ⋮ › Business Profile settings › Managers › Add. Fill in Q's Gmail and choose <b>Manager</b>. Then Q can help with photos, texts and review replies, without your password. You stay the owner.</p>
+
+  <h3>Verification</h3>
+  <div class="tip"><b>Google often asks for a short video.</b> Film in one take: a street sign or landmark in Tetebatu, then your guide gear (backpack, rain gear, first aid kit), then you on a trail you guide. A T-shirt or small sign with "Rizz Tetebatu" helps. It can take a few days. Reviews only work after verification.</div>
+
+  <h3>First post</h3>
+  <p class="muted">Profile › Add update.</p>
+  <div data-copy="First post">New in Tetebatu: walk with a local! 🌾 Rice terraces, spice gardens, waterfalls and the monkey forest with Rizz. Fixed all-in prices, pickup at your homestay, pay on the day. Book by WhatsApp.</div>
+
+  <h2 id="reviews">3. Reviews: your most important job</h2>
+  <p>The top guides in Tetebatu have 150 to 240 Google reviews with 4.7 stars or more. Google looks at how many reviews you have, how recent they are and whether they have text. Ask <b>every</b> guest, every time.</p>
+  <h3>Your review link and QR code</h3>
+  <p class="muted">In Google Maps on your profile: tap "Ask for reviews" or "Share review form" and copy the link. Paste it here.</p>
+  <label for="revUrl" style="display:block;margin-top:10px;font:700 13px/1 var(--body)">Review link</label>
+  <input type="url" id="revUrl" placeholder="https://g.page/r/...">
+  <div class="card">
+    <div class="q" id="qr">Paste your review link above and your QR code appears here</div>
+    <div><h4>Enjoyed your day with Rizz<i>?</i></h4><p>Scan to leave a Google review. It helps me build my own guesthouse. Terima kasih! 🙏</p></div>
+  </div>
+  <p class="muted">Screenshot this card and keep it as a favourite photo. A print shop in Masbagik or Selong can print 50 small cards cheaply.</p>
+
+  <h3>Message after the tour</h3>
+  <p class="muted">Send it the same evening, with a nice photo from the day. Choose the guest's language.</p>
+  <div class="tabs" role="group" aria-label="Language">
+    <button type="button" data-l="en" aria-pressed="true">English</button><button type="button" data-l="nl" aria-pressed="false">Nederlands</button><button type="button" data-l="de" aria-pressed="false">Deutsch</button>
+  </div>
+  <div id="revMsg"></div>
+
+  <h3>The routine</h3>
+  <ul class="check" id="routine"></ul>
+  <div class="tip"><b>Never</b> write reviews yourself, ask family to write them, or give a discount or gift for a review. Google forbids it and can delete all your reviews or the whole profile.</div>
+
+  <h2 id="photos">4. Photos that get bookings</h2>
+  <p>Big booking websites agree: the <b>first photo</b> decides. It must be horizontal and show guests having fun, not only landscape. Guests also want to see the guide's face.</p>
+  <div class="tip good"><b>How to shoot.</b> Hold the phone horizontal. Daylight, flash off. Wipe the lens. Tap on the face to focus. No zoom. Ask guests before you take their photo or use it.</div>
+  <ul class="check" id="shots"></ul>
+  <p class="muted">Add 10 photos to Google today and 2 new ones every week. After 3 weeks, try another main photo and see if you get more messages.</p>
+
+  <h2 id="instagram">5. Instagram</h2>
+  <p>Make the account <b>@rizztetebatu</b>. If it is taken, use <b>@rizz.tetebatu</b> and tell Q. Switch to a business account and add the WhatsApp button.</p>
+  <div data-copy="Name">Rizz Tetebatu · local guide</div>
+  <div data-copy="Bio">🌾 Local guide in Tetebatu, Lombok
+💦 Rice fields · spice gardens · waterfalls · 🐒 monkeys
+🗣️ EN · NL · DE · a bit of FR
+👇 Book on WhatsApp</div>
+  <p class="muted">Post a short vertical video from every tour. Ask guests to tag @rizztetebatu.</p>
+
+  <h2 id="website">6. For the website (send to Q)</h2>
+  <p>The website is ready except for these things. Send them to Q:</p>
+  <ul class="check" id="site"></ul>
+
+  <h2 id="later">Later this month</h2>
+  <ul class="check" id="later-list"></ul>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+const LISTS = {
+  checklist: [
+    ["Make a Gmail: rizztetebatu@gmail.com","With your own phone number for recovery. Password on paper."],
+    ["Check @rizztetebatu on Instagram and make the account","If taken: @rizz.tetebatu."],
+    ["Decide your prices and the four promises","See \"Your prices and promises\" below."],
+    ["Install WhatsApp Business and move your number","Your chats come with you."],
+    ["Fill in WhatsApp: profile, greeting, away message, quick replies","All texts are below."],
+    ["Add the 4 tours to the WhatsApp catalog","With price and a horizontal photo."],
+    ["Create the Google Maps profile \"Rizz Tetebatu\"","Name, categories, location, description, services."],
+    ["Add Q as manager on Google",""],
+    ["Add 10 photos to Google","Use the photo list below."],
+    ["Start the Google verification","Usually a short video."],
+    ["Copy your review link and make the QR card","Screenshot the card."],
+    ["Ask Q for the first review","As soon as Google has verified the profile."],
+    ["Send Q the website info","List in section 6."]
+  ],
+  routine: [
+    ["At the end of the tour: take a group photo on their phone and yours",""],
+    ["Ask in person: \"Can you help me with a Google review? It really helps me.\"","Show the QR card."],
+    ["The same evening: send the review message with the photo","Label the chat \"Review asked\"."],
+    ["Reply to every review within a day, with the guest's name","Thank them and mention something from the tour."]
+  ],
+  shots: [
+    ["Main photo: guests walking happily through the rice fields","Wide, horizontal, real smiles. The most important photo."],
+    ["You smiling into the camera, rice fields behind you","For your profile and the website. Guests book a person."],
+    ["You explaining a plant to guests","Your strongest point, show it."],
+    ["Guests at the Tetebatu waterfall, swimming or splashing",""],
+    ["The bamboo bridge with guests on it","Shows you take the safe way."],
+    ["Close-up: coffee, cacao or vanilla on the plant, in a hand",""],
+    ["Fresh fruit tasting with guests",""],
+    ["Black monkey in the trees","From a distance. Never feed or touch."],
+    ["Lunch: the food on the table, guests eating",""],
+    ["Rice terraces in morning light, Rinjani behind","Landscape, but not as main photo."],
+    ["Village life: Sasak houses, people working the field","Ask permission first."],
+    ["Happy group at the end of the tour, thumbs up",""],
+    ["Pickup moment: you at a homestay entrance","Shows guests where you meet."],
+    ["Rinjani: crater rim or sunrise, you with guests or porters",""],
+    ["Video, 15 to 30 seconds: walking through the rice fields",""],
+    ["Video, 15 to 30 seconds: you say hello and who you are","In English. Short and smiling."]
+  ],
+  site: [
+    ["Your WhatsApp number","With +62."],
+    ["Your final prices and the four promises","Or tell Q what you want to change."],
+    ["Start time per tour","Now 07:30 or 08:00. Correct?"],
+    ["Lunch on the classic day: where and by whom?","At home with family is the most praised thing in reviews."],
+    ["Which waterfalls you go to","Tetebatu waterfall over the bamboo bridge? Others?"],
+    ["Which of the extra places you can do","Jukut, Benang Kelambu and Stokel, Sarang Walet, Tibu Bunter, Pringgasela, cooking class, Pergasingan sunset."],
+    ["Can you arrange a driver to Tetebatu?","For guests coming from Kuta or the airport."],
+    ["15 to 20 photos from the photo list","Horizontal. Send as file, not compressed."],
+    ["Check your story on the website","OK to say: 20 years old, care for your mother and sister, saving for a guesthouse?"],
+    ["Your Google Maps link and review link",""]
+  ],
+  "later-list": [
+    ["Claim a free listing on Tripadvisor","Many travellers check it before they book."],
+    ["Ask homestays in Tetebatu to recommend you","Give them QR cards and a fixed thank-you per guest."],
+    ["Airbnb Experiences or Klook","They take a commission, but bring new guests. Start with one."],
+    ["Rinjani: one licensed organizer to work with","Agree a fixed price and what you earn per guest."],
+    ["GetYourGuide or Viator","Only later: they usually need a registered business and insurance, and take 20 to 30%."]
+  ]
+};
+function load(){ try{ return JSON.parse(localStorage.getItem("rizz-kit2")||"{}"); }catch(e){ return {}; } }
+function save(s){ try{ localStorage.setItem("rizz-kit2", JSON.stringify(s)); }catch(e){} }
+const state = load();
+function esc(s){ return String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+Object.entries(LISTS).forEach(([id, items]) => {
+  const ul = document.getElementById(id);
+  ul.innerHTML = items.map(([t, s], i) => {
+    const key = id + "-" + i;
+    return '<li><label for="' + key + '"><input type="checkbox" id="' + key + '"' + (state[key] ? " checked" : "") + '><span class="tx"><b>' + esc(t) + '</b>' + (s ? '<small>' + esc(s) + '</small>' : '') + '</span></label></li>';
+  }).join("");
+});
+function progress(){
+  const n = LISTS.checklist.length, d = LISTS.checklist.filter((_, i) => state["checklist-" + i]).length;
+  document.getElementById("progress").textContent = d + " of " + n + " done";
+}
+document.addEventListener("change", e => {
+  if (e.target.type !== "checkbox") return;
+  state[e.target.id] = e.target.checked; save(state); progress();
+});
+progress();
+
+function makeField(label, text){
+  const box = document.createElement("div"); box.className = "field";
+  box.innerHTML = '<div class="top"><span class="lbl"></span><button type="button" class="copy">Copy</button></div><pre></pre>';
+  box.querySelector(".lbl").textContent = label;
+  box.querySelector("pre").textContent = text;
+  box.querySelector(".copy").addEventListener("click", ev => {
+    const btn = ev.currentTarget, pre = box.querySelector("pre");
+    const done = () => { btn.textContent = "Copied"; btn.classList.add("ok"); setTimeout(() => { btn.textContent = "Copy"; btn.classList.remove("ok"); }, 1600); };
+    const fallback = () => { const r = document.createRange(); r.selectNodeContents(pre); const s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = "Selected"; };
+    try{ navigator.clipboard.writeText(pre.textContent).then(done, fallback); }catch(e){ fallback(); }
+  });
+  return box;
+}
+document.querySelectorAll("[data-copy]").forEach(el => el.replaceWith(makeField(el.dataset.copy, el.textContent)));
+
+const MSG = {
+  en:"Hi! Thank you so much for walking with me today 🙏 I hope you enjoyed Tetebatu. Would you help me with a short Google review? It really helps a young local guide like me, and every review brings me closer to building my own guesthouse:\nREVIEW_LINK\n\nTerima kasih! Rizz 🌾",
+  nl:"Hoi! Heel erg bedankt dat je vandaag met mij hebt gelopen 🙏 Ik hoop dat je genoten hebt van Tetebatu. Wil je me helpen met een korte review op Google? Dat helpt een jonge lokale gids zoals ik enorm, en elke review brengt mijn eigen guesthouse dichterbij:\nREVIEW_LINK\n\nTerima kasih! Rizz 🌾",
+  de:"Hi! Vielen Dank, dass du heute mit mir unterwegs warst 🙏 Ich hoffe, dir hat Tetebatu gefallen. Hilfst du mir mit einer kurzen Google-Bewertung? Das hilft einem jungen lokalen Guide wie mir sehr, und jede Bewertung bringt mich meinem eigenen Guesthouse näher:\nREVIEW_LINK\n\nTerima kasih! Rizz 🌾"
+};
+let lang = "en";
+function link(){ return document.getElementById("revUrl").value.trim() || "(your review link)"; }
+function renderMsg(){
+  const host = document.getElementById("revMsg"); host.innerHTML = "";
+  host.appendChild(makeField("Review message", MSG[lang].replace("REVIEW_LINK", link())));
+}
+document.querySelectorAll(".tabs button").forEach(b => b.addEventListener("click", () => {
+  lang = b.dataset.l;
+  document.querySelectorAll(".tabs button").forEach(x => x.setAttribute("aria-pressed", x === b));
+  renderMsg();
+}));
+function renderQR(){
+  const url = document.getElementById("revUrl").value.trim();
+  const box = document.getElementById("qr");
+  try{ localStorage.setItem("rizz-review-url", url); }catch(e){}
+  if (!/^https?:\/\//.test(url)) { box.textContent = "Paste your review link above and your QR code appears here"; return; }
+  box.innerHTML = "";
+  if (window.QRCode) new QRCode(box, { text:url, width:280, height:280, colorDark:"#132018", colorLight:"#FFFFFF", correctLevel:QRCode.CorrectLevel.M });
+  else box.textContent = "QR could not load. Check your internet.";
+}
+const ri = document.getElementById("revUrl");
+try{ ri.value = localStorage.getItem("rizz-review-url") || ""; }catch(e){}
+ri.addEventListener("input", () => { renderQR(); renderMsg(); });
+renderQR(); renderMsg();
+</script>
+
+</body>
+</html>
