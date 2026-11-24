@@ -269,6 +269,7 @@ footer a{text-decoration:none;font-weight:700;color:var(--ink)}
       <a class="js-wa" href="#" target="_blank" rel="noopener">WhatsApp <span id="waNum"></span></a>
       <a id="mailLink" href="#">Email</a>
       <a id="igLink" href="#" target="_blank" rel="noopener">Instagram</a>
+      <a id="ttLink" href="#" target="_blank" rel="noopener">TikTok</a>
       <a id="mapsLink" href="#" target="_blank" rel="noopener">Google Maps</a>
     </div>
   </div>
@@ -280,6 +281,7 @@ footer a{text-decoration:none;font-weight:700;color:var(--ink)}
 const CONFIG = {
   whatsapp: "6283114613953",           // number with country code, no + or spaces
   instagram: "rizztetebatu",
+  tiktok: "rizztetebatu",               // TikTok name without @, or "" to hide the link
   email: "rizztetebatu@gmail.com",
   googleMapsUrl: "",                    // link to the Google Maps profile
   googleReviewUrl: "",                  // the "write a review" link from Google Business Profile
@@ -4620,7 +4622,7 @@ function pickLang(){
       "areaServed": "Tetebatu, Lombok Timur",
       "priceRange": nums.length ? fmt(Math.min.apply(null, nums)) + " to " + fmt(Math.max.apply(null, nums)) : undefined,
       "knowsLanguage": ["id", "en"],
-      "sameAs": ["https://www.instagram.com/" + CONFIG.instagram].concat(CONFIG.googleMapsUrl ? [CONFIG.googleMapsUrl] : []),
+      "sameAs": ["https://www.instagram.com/" + CONFIG.instagram].concat(CONFIG.tiktok ? ["https://www.tiktok.com/@" + CONFIG.tiktok] : []).concat(CONFIG.googleMapsUrl ? [CONFIG.googleMapsUrl] : []),
       "makesOffer": priced.map(function(t){ return { "@type": "Offer", "name": en["tour_" + t.id + "_t"], "description": en["tour_" + t.id + "_p"], "price": String(t.idr), "priceCurrency": "IDR" }; })
     };
     var s = document.createElement("script");
@@ -4671,6 +4673,8 @@ function setup(){
   const maps = CONFIG.googleMapsUrl || "https://www.google.com/maps/search/Rizz+Tetebatu";
   document.getElementById("waNum").textContent = "+" + CONFIG.whatsapp;
   document.getElementById("igLink").href = "https://instagram.com/" + CONFIG.instagram;
+  const tt = document.getElementById("ttLink");
+  if (CONFIG.tiktok) tt.href = "https://www.tiktok.com/@" + CONFIG.tiktok; else tt.remove();
   document.getElementById("mailLink").href = "mailto:" + CONFIG.email;
   document.getElementById("mailLink").textContent = CONFIG.email;
   document.getElementById("mapsLink").href = maps;
