@@ -4572,6 +4572,36 @@ function pickLang(){
   }
   return "en";
 }
+/* Business info for Google (built from CONFIG, so prices stay in one place) */
+(function(){
+  try {
+    var en = T.en, priced = CONFIG.tours.filter(function(t){ return t.idr; });
+    var nums = priced.map(function(t){ return t.idr; });
+    var fmt = function(n){ return "IDR " + n.toLocaleString("id-ID"); };
+    var ld = {
+      "@context": "https://schema.org",
+      "@type": "TravelAgency",
+      "name": "Rizz Tetebatu",
+      "description": "Local guide in Tetebatu, Lombok: rice field walks, spice gardens, waterfalls, the monkey forest and Mount Rinjani.",
+      "url": "https://rizztetebatu.com/",
+      "image": "https://rizztetebatu.com/img/hero.jpg",
+      "telephone": "+" + CONFIG.whatsapp,
+      "email": CONFIG.email,
+      "address": { "@type": "PostalAddress", "streetAddress": "Jalan Desa Tetebatu", "addressLocality": "Tetebatu", "addressRegion": "Nusa Tenggara Barat", "addressCountry": "ID" },
+      "geo": { "@type": "GeoCoordinates", "latitude": -8.528, "longitude": 116.414 },
+      "areaServed": "Tetebatu, Lombok Timur",
+      "priceRange": nums.length ? fmt(Math.min.apply(null, nums)) + " to " + fmt(Math.max.apply(null, nums)) : undefined,
+      "knowsLanguage": ["id", "en", "nl", "de", "fr"],
+      "sameAs": ["https://www.instagram.com/" + CONFIG.instagram].concat(CONFIG.googleMapsUrl ? [CONFIG.googleMapsUrl] : []),
+      "makesOffer": priced.map(function(t){ return { "@type": "Offer", "name": en["tour_" + t.id + "_t"], "description": en["tour_" + t.id + "_p"], "price": String(t.idr), "priceCurrency": "IDR" }; })
+    };
+    var s = document.createElement("script");
+    s.type = "application/ld+json";
+    s.textContent = JSON.stringify(ld);
+    document.head.appendChild(s);
+  } catch (e) {}
+})();
+
 function render(lang){
   const t = T[lang];
   document.documentElement.lang = lang;
