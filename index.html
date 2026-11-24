@@ -4,16 +4,21 @@
 <meta charset="utf-8">
 <script>if(location.protocol==="http:"&&location.hostname==="rizztetebatu.com")location.replace("https://rizztetebatu.com"+location.pathname+location.search+location.hash)</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="robots" content="noindex">
 <link rel="canonical" href="https://rizztetebatu.com/">
 <meta property="og:url" content="https://rizztetebatu.com/">
 <meta property="og:title" content="Rizz Tetebatu · local guide in Lombok">
 <meta property="og:description" content="Rice fields, spice gardens, waterfalls and the monkey forest with a local guide in Tetebatu. Book on WhatsApp.">
+<meta property="og:image" content="https://rizztetebatu.com/img/hero.jpg">
+<meta property="og:image:width" content="1300">
+<meta property="og:image:height" content="1300">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#2F7A3B">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23132018'/%3E%3Ctext x='30' y='44' font-family='Arial Black,sans-serif' font-size='34' font-weight='900' text-anchor='middle' fill='%23C9E15C'%3Er%3C/text%3E%3Ccircle cx='47' cy='42' r='5' fill='%23DE4F22'/%3E%3C/svg%3E">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Rizz Tetebatu</title>
 <meta name="description" content="Rizz Tetebatu: local guide in Tetebatu, Lombok. Rice field walks, waterfalls, monkey forest and Mount Rinjani. English, Nederlands, Deutsch.">
+<link rel="preload" as="image" href="img/hero.jpg" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Figtree:wght@400;500;700&display=swap">
 <style>
@@ -68,7 +73,7 @@ h1,h2,h3{overflow-wrap:break-word}
 
 /* hero */
 .hero{padding-block:56px 0;overflow:hidden}
-.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:32px;align-items:end}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:32px;align-items:center}
 .hero h1{font-size:clamp(44px,8.4vw,92px);font-weight:800;letter-spacing:-.035em}
 .hero h1 em{font-style:normal;color:var(--paddy);background:linear-gradient(transparent 62%,color-mix(in srgb,var(--shoot) 70%,transparent) 62%)}
 .hero .lede{font-size:clamp(18px,2.2vw,21px);color:var(--muted);max-width:36ch;margin-top:20px}
@@ -76,8 +81,10 @@ h1,h2,h3{overflow-wrap:break-word}
 .speaks{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
 .chip{font:700 13px/1 var(--body);padding:8px 12px;border-radius:99px;background:var(--surface);border:1px solid var(--line)}
 .scene{width:100%;max-width:100%;height:auto;display:block}
+.hero-photo{aspect-ratio:1/1;border-radius:var(--r);overflow:hidden;background:var(--sky)}
+.hero-photo img{width:100%;height:100%;object-fit:cover;display:block}
 .alt{display:flex;justify-content:space-between;font:700 12px/1 var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border-top:2px solid var(--ink);padding-top:10px;margin-top:8px;font-variant-numeric:tabular-nums}
-@media (max-width:820px){.hero-grid{grid-template-columns:minmax(0,1fr)}.hero{padding-top:36px}}
+@media (max-width:820px){.hero-grid{grid-template-columns:minmax(0,1fr)}.hero{padding-top:36px}.hero-photo{aspect-ratio:5/4}}
 
 /* promises */
 .promises{padding-block:40px 0}
@@ -92,6 +99,7 @@ h1,h2,h3{overflow-wrap:break-word}
 .head p{color:var(--muted);max-width:42ch}
 .tours{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
 @media (max-width:760px){.tours{grid-template-columns:1fr}}
+.tour .photo{overflow:hidden}
 .tour{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
 .photo{aspect-ratio:4/3;max-width:100%;background:var(--sky);display:grid;place-items:center;color:var(--muted);font:600 14px/1.3 var(--body);text-align:center;padding:16px;position:relative}
 .photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
@@ -99,6 +107,7 @@ h1,h2,h3{overflow-wrap:break-word}
 .meta{display:flex;flex-wrap:wrap;gap:8px}
 .meta span{font:700 13px/1 var(--body);padding:7px 10px;border-radius:8px;background:var(--bg);font-variant-numeric:tabular-nums}
 .meta .price{background:var(--shoot);color:#132018}
+.meta .conv{background:transparent;border:1px solid var(--line);color:var(--muted)}
 .tour ul{margin:0;padding-inline-start:18px}
 .facts{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:15px;margin:0}
 .facts dt{font-weight:700}
@@ -113,11 +122,16 @@ h1,h2,h3{overflow-wrap:break-word}
 .about .eyebrow{color:var(--shoot)}
 .about-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:40px;align-items:center}
 @media (max-width:760px){.about-grid{grid-template-columns:1fr}}
-.about .photo{aspect-ratio:4/5;border-radius:var(--r);background:color-mix(in srgb,var(--bg) 10%,var(--ink));color:color-mix(in srgb,var(--bg) 60%,var(--ink))}
+.about .photo{aspect-ratio:4/5;overflow:hidden;border-radius:var(--r);background:color-mix(in srgb,var(--bg) 10%,var(--ink));color:color-mix(in srgb,var(--bg) 60%,var(--ink))}
 .about .story{display:grid;gap:16px;font-size:19px;max-width:58ch}
 .about .story p:first-of-type{font:800 clamp(26px,3.6vw,36px)/1.15 var(--display);letter-spacing:-.01em}
 .plants{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
 .plants span{font:700 13px/1 var(--body);padding:8px 12px;border-radius:99px;border:1px solid color-mix(in srgb,var(--bg) 30%,var(--ink))}
+
+/* gallery */
+.gallery-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.gallery-grid figure{margin:0;aspect-ratio:4/5;border-radius:var(--r);overflow:hidden;background:var(--sky)}
+.gallery-grid img{width:100%;height:100%;object-fit:cover;display:block}
 
 /* steps */
 .steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;counter-reset:s}
@@ -145,10 +159,8 @@ footer{border-top:1px solid var(--line);padding-block:40px 110px;color:var(--mut
 footer .wrap{display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between}
 footer a{text-decoration:none;font-weight:700;color:var(--ink)}
 .float{position:fixed;inset-inline-end:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:8;box-shadow:0 8px 24px rgba(0,0,0,.18)}
-@media (prefers-reduced-motion:no-preference){.scene .sun{animation:rise 2.4s ease-out both}@keyframes rise{from{transform:translateY(30px)}to{transform:none}}}
 </style>
-</head>
-<body>
+
 <header class="bar">
   <div class="wrap">
     <a class="logo" href="#top" aria-label="Rizz Tetebatu"><span class="r">rizz<i>.</i></span><span class="t">Tetebatu</span></a>
@@ -173,15 +185,7 @@ footer a{text-decoration:none;font-weight:700;color:var(--ink)}
         </div>
       </div>
       <div>
-        <svg class="scene" viewBox="0 0 520 360" role="img" aria-label="Mount Rinjani above the rice terraces of Tetebatu">
-          <circle class="sun" cx="350" cy="120" r="46" fill="var(--lava)"/>
-          <path d="M40 300 L250 70 L285 92 L300 78 L480 300 Z" fill="var(--paddy)" opacity=".35"/>
-          <path d="M0 300 L170 160 L260 230 L340 180 L520 300 Z" fill="var(--paddy)" opacity=".6"/>
-          <path d="M0 300 C80 270 160 290 260 270 S440 250 520 268 L520 360 L0 360 Z" fill="var(--paddy)"/>
-          <path d="M0 318 C90 296 170 312 260 296 S440 280 520 292" stroke="var(--shoot)" stroke-width="3" fill="none"/>
-          <path d="M0 336 C90 316 170 330 260 316 S440 302 520 312" stroke="var(--shoot)" stroke-width="3" fill="none"/>
-          <path d="M0 354 C90 336 170 348 260 336 S440 324 520 332" stroke="var(--shoot)" stroke-width="3" fill="none"/>
-        </svg>
+        <div class="hero-photo"><img src="img/hero.jpg" width="1300" height="1300" fetchpriority="high" alt="Mount Rinjani above the rice fields of Tetebatu"></div>
         <div class="alt"><span>Tetebatu ± 700 m</span><span>Rinjani 3,726 m</span></div>
       </div>
     </div>
@@ -215,6 +219,16 @@ footer a{text-decoration:none;font-weight:700;color:var(--ink)}
         <p data-i18n="about_2"></p>
         <p data-i18n="about_3"></p>
         <div class="plants" id="plants"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery" aria-labelledby="galTitle">
+    <div class="wrap">
+      <div class="head"><div><h2 id="galTitle" data-i18n="gallery_title"></h2></div></div>
+      <div class="gallery-grid">
+        <figure><img src="img/trail.jpg" width="880" height="1100" loading="lazy" alt="Rizz walking between the rice terraces of Tetebatu"></figure>
+        <figure><img src="img/kondo.jpg" width="880" height="1100" loading="lazy" alt="Rizz at Puncak Kondo, 1,937 m, on Mount Rinjani"></figure>
       </div>
     </div>
   </section>
@@ -269,12 +283,12 @@ const CONFIG = {
   email: "rizztetebatu@gmail.com",
   googleMapsUrl: "",                    // link to the Google Maps profile
   googleReviewUrl: "",                  // the "write a review" link from Google Business Profile
-  photos: { about: "" },                // e.g. "img/rizz.jpg"
+  photos: { about: "img/rizz.jpg" },
   tours: [                              // price: "IDR 150.000 p.p." or "" for "price on WhatsApp"
-    { id:"rice",    hours:"3",  start:"08:00", level:"easy",  price:"IDR 150K", photo:"" },
-    { id:"water",   hours:"5",  start:"08:00", level:"mod",   price:"IDR 250K", photo:"" },
-    { id:"classic", hours:"7",  start:"07:30", level:"mod",   price:"IDR 400K", photo:"" },
-    { id:"rinjani", hours:"2D1N / 3D2N", start:"", level:"hard", price:"", photo:"" }
+    { id:"rice",    hours:"3",  start:"08:00", level:"easy",  price:"IDR 150K", idr:150000, photo:"img/rice.jpg" },
+    { id:"water",   hours:"5",  start:"08:00", level:"mod",   price:"IDR 250K", idr:250000, photo:"img/water.jpg" },
+    { id:"classic", hours:"7",  start:"07:30", level:"mod",   price:"IDR 400K", idr:400000, photo:"img/monkeys.jpg" },
+    { id:"rinjani", hours:"2D1N / 3D2N", start:"", level:"hard", price:"", photo:"img/rinjani.jpg" }
   ]
 };
 /* =================================================================== */
@@ -368,6 +382,7 @@ en:{
   "Cooking class",
   "Sunset at Pergasingan Hill"
  ],
+ "gallery_title": "On the trail",
  "photo_rizz": "Photo of Rizz",
  "about_eyebrow": "Meet Rizz",
  "about_1": "Hi, I'm Rizz. I'm 20 and I live and work in Tetebatu, between the rice fields and the volcano.",
@@ -518,6 +533,7 @@ nl:{
   "Kookles",
   "Zonsondergang op Pergasingan Hill"
  ],
+ "gallery_title": "Onderweg",
  "photo_rizz": "Foto van Rizz",
  "about_eyebrow": "Maak kennis met Rizz",
  "about_1": "Hoi, ik ben Rizz. Ik ben 20 en ik woon en werk in Tetebatu, tussen de rijstvelden en de vulkaan.",
@@ -668,6 +684,7 @@ de:{
   "Kochkurs",
   "Sonnenuntergang am Pergasingan Hill"
  ],
+ "gallery_title": "Unterwegs",
  "photo_rizz": "Foto von Rizz",
  "about_eyebrow": "Das ist Rizz",
  "about_1": "Hi, ich bin Rizz. Ich bin 20 und lebe und arbeite in Tetebatu, zwischen den Reisfeldern und dem Vulkan.",
@@ -818,6 +835,7 @@ ar:{
   "درس طبخ",
   "غروب الشمس في Pergasingan Hill"
  ],
+ "gallery_title": "على الطريق",
  "photo_rizz": "صورة Rizz",
  "about_eyebrow": "تعرّف على Rizz",
  "about_1": "مرحبًا، أنا Rizz. عمري 20 سنة وأعيش وأعمل في Tetebatu، بين حقول الأرز والبركان.",
@@ -968,6 +986,7 @@ cs:{
   "Kurz vaření",
   "Západ slunce na Pergasingan Hill"
  ],
+ "gallery_title": "Na cestě",
  "photo_rizz": "Fotka Rizze",
  "about_eyebrow": "Poznej Rizze",
  "about_1": "Ahoj, jsem Rizz. Je mi 20 a žiju a pracuju v Tetebatu, mezi rýžovými poli a sopkou.",
@@ -1118,6 +1137,7 @@ da:{
   "Madlavningskursus",
   "Solnedgang ved Pergasingan Hill"
  ],
+ "gallery_title": "Undervejs",
  "photo_rizz": "Foto af Rizz",
  "about_eyebrow": "Mød Rizz",
  "about_1": "Hej, jeg hedder Rizz. Jeg er 20 og bor og arbejder i Tetebatu, mellem rismarkerne og vulkanen.",
@@ -1268,6 +1288,7 @@ es:{
   "Clase de cocina",
   "Atardecer en Pergasingan Hill"
  ],
+ "gallery_title": "En el camino",
  "photo_rizz": "Foto de Rizz",
  "about_eyebrow": "Conoce a Rizz",
  "about_1": "Hola, soy Rizz. Tengo 20 años y vivo y trabajo en Tetebatu, entre los arrozales y el volcán.",
@@ -1418,6 +1439,7 @@ fi:{
   "Ruoanlaittokurssi",
   "Auringonlasku Pergasingan Hillillä"
  ],
+ "gallery_title": "Matkalla",
  "photo_rizz": "Kuva Rizzistä",
  "about_eyebrow": "Tapaa Rizz",
  "about_1": "Hei, olen Rizz. Olen 20-vuotias ja asun ja työskentelen Tetebatussa, riisipeltojen ja tulivuoren välissä.",
@@ -1568,6 +1590,7 @@ fr:{
   "Cours de cuisine",
   "Coucher de soleil à Pergasingan Hill"
  ],
+ "gallery_title": "En chemin",
  "photo_rizz": "Photo de Rizz",
  "about_eyebrow": "Rencontre Rizz",
  "about_1": "Salut, moi c'est Rizz. J'ai 20 ans et je vis et travaille à Tetebatu, entre les rizières et le volcan.",
@@ -1718,6 +1741,7 @@ he:{
   "שיעור בישול",
   "שקיעה ב-Pergasingan Hill"
  ],
+ "gallery_title": "בדרך",
  "photo_rizz": "תמונה של Rizz",
  "about_eyebrow": "הכירו את Rizz",
  "about_1": "היי, אני Rizz. אני בן 20 וגר ועובד ב-Tetebatu, בין שדות האורז להר הגעש.",
@@ -1868,6 +1892,7 @@ hi:{
   "कुकिंग क्लास",
   "Pergasingan Hill पर सूर्यास्त"
  ],
+ "gallery_title": "रास्ते में",
  "photo_rizz": "Rizz की फ़ोटो",
  "about_eyebrow": "Rizz से मिलिए",
  "about_1": "नमस्ते, मैं Rizz हूँ। मैं 20 साल का हूँ और धान के खेतों और ज्वालामुखी के बीच Tetebatu में रहता और काम करता हूँ।",
@@ -2018,6 +2043,7 @@ hu:{
   "Főzőtanfolyam",
   "Naplemente a Pergasingan Hillen"
  ],
+ "gallery_title": "Útközben",
  "photo_rizz": "Rizz fotója",
  "about_eyebrow": "Ismerd meg Rizzt",
  "about_1": "Szia, Rizz vagyok. 20 éves vagyok, és Tetebatuban élek és dolgozom, a rizsföldek és a vulkán között.",
@@ -2168,6 +2194,7 @@ id:{
   "Kelas memasak",
   "Matahari terbenam di Pergasingan Hill"
  ],
+ "gallery_title": "Di perjalanan",
  "photo_rizz": "Foto Rizz",
  "about_eyebrow": "Kenalan dengan Rizz",
  "about_1": "Hai, aku Rizz. Umurku 20 tahun, tinggal dan bekerja di Tetebatu, di antara sawah dan gunung berapi.",
@@ -2318,6 +2345,7 @@ it:{
   "Corso di cucina",
   "Tramonto a Pergasingan Hill"
  ],
+ "gallery_title": "Lungo il sentiero",
  "photo_rizz": "Foto di Rizz",
  "about_eyebrow": "Conosci Rizz",
  "about_1": "Ciao, sono Rizz. Ho 20 anni e vivo e lavoro a Tetebatu, tra le risaie e il vulcano.",
@@ -2468,6 +2496,7 @@ ja:{
   "料理教室",
   "Pergasingan Hillで夕日"
  ],
+ "gallery_title": "道の途中で",
  "photo_rizz": "Rizzの写真",
  "about_eyebrow": "Rizzについて",
  "about_1": "こんにちは、Rizzです。20歳で、田んぼと火山にはさまれたTetebatuで暮らして働いています。",
@@ -2618,6 +2647,7 @@ ko:{
   "요리 수업",
   "Pergasingan Hill 일몰"
  ],
+ "gallery_title": "길 위에서",
  "photo_rizz": "Rizz 사진",
  "about_eyebrow": "Rizz를 소개해요",
  "about_1": "안녕하세요, Rizz예요. 스무 살이고, 논과 화산 사이에 있는 Tetebatu에서 살며 일하고 있어요.",
@@ -2768,6 +2798,7 @@ ms:{
   "Kelas memasak",
   "Matahari terbenam di Pergasingan Hill"
  ],
+ "gallery_title": "Dalam perjalanan",
  "photo_rizz": "Foto Rizz",
  "about_eyebrow": "Kenali Rizz",
  "about_1": "Hai, saya Rizz. Saya berumur 20 tahun dan tinggal serta bekerja di Tetebatu, di antara sawah padi dan gunung berapi.",
@@ -2918,6 +2949,7 @@ nb:{
   "Matlagingskurs",
   "Solnedgang ved Pergasingan Hill"
  ],
+ "gallery_title": "Underveis",
  "photo_rizz": "Bilde av Rizz",
  "about_eyebrow": "Møt Rizz",
  "about_1": "Hei, jeg heter Rizz. Jeg er 20 og bor og jobber i Tetebatu, mellom rismarkene og vulkanen.",
@@ -3068,6 +3100,7 @@ pl:{
   "Warsztaty kulinarne",
   "Zachód słońca na Pergasingan Hill"
  ],
+ "gallery_title": "W drodze",
  "photo_rizz": "Zdjęcie Rizza",
  "about_eyebrow": "Poznaj Rizza",
  "about_1": "Cześć, jestem Rizz. Mam 20 lat i mieszkam oraz pracuję w Tetebatu, między polami ryżowymi a wulkanem.",
@@ -3218,6 +3251,7 @@ pt:{
   "Aula de culinária",
   "Pôr do sol em Pergasingan Hill"
  ],
+ "gallery_title": "Pelo caminho",
  "photo_rizz": "Foto do Rizz",
  "about_eyebrow": "Conhece o Rizz",
  "about_1": "Olá, sou o Rizz. Tenho 20 anos e vivo e trabalho em Tetebatu, entre os arrozais e o vulcão.",
@@ -3368,6 +3402,7 @@ ro:{
   "Curs de gătit",
   "Apus de soare la Pergasingan Hill"
  ],
+ "gallery_title": "Pe drum",
  "photo_rizz": "Poză cu Rizz",
  "about_eyebrow": "Fă cunoștință cu Rizz",
  "about_1": "Salut, sunt Rizz. Am 20 de ani și locuiesc și lucrez în Tetebatu, între câmpurile de orez și vulcan.",
@@ -3518,6 +3553,7 @@ ru:{
   "Кулинарный мастер-класс",
   "Закат на Pergasingan Hill"
  ],
+ "gallery_title": "В пути",
  "photo_rizz": "Фото Rizz",
  "about_eyebrow": "Знакомься, Rizz",
  "about_1": "Привет, я Rizz. Мне 20, я живу и работаю в Tetebatu, между рисовыми полями и вулканом.",
@@ -3668,6 +3704,7 @@ sv:{
   "Matlagningskurs",
   "Solnedgång vid Pergasingan Hill"
  ],
+ "gallery_title": "På vägen",
  "photo_rizz": "Foto av Rizz",
  "about_eyebrow": "Möt Rizz",
  "about_1": "Hej, jag heter Rizz. Jag är 20 och bor och arbetar i Tetebatu, mellan risfälten och vulkanen.",
@@ -3818,6 +3855,7 @@ th:{
   "คลาสสอนทำอาหาร",
   "ชมพระอาทิตย์ตกที่ Pergasingan Hill"
  ],
+ "gallery_title": "ระหว่างทาง",
  "photo_rizz": "ภาพของ Rizz",
  "about_eyebrow": "รู้จัก Rizz",
  "about_1": "สวัสดีครับ ผม Rizz อายุ 20 ปี อยู่และทำงานที่ Tetebatu ระหว่างนาข้าวกับภูเขาไฟ",
@@ -3968,6 +4006,7 @@ tr:{
   "Yemek kursu",
   "Pergasingan Hill'de gün batımı"
  ],
+ "gallery_title": "Yolda",
  "photo_rizz": "Rizz'in fotoğrafı",
  "about_eyebrow": "Rizz ile tanışın",
  "about_1": "Merhaba, ben Rizz. 20 yaşındayım, pirinç tarlalarıyla yanardağın arasındaki Tetebatu'da yaşıyor ve çalışıyorum.",
@@ -4118,6 +4157,7 @@ uk:{
   "Кулінарний майстер-клас",
   "Захід сонця на Pergasingan Hill"
  ],
+ "gallery_title": "У дорозі",
  "photo_rizz": "Фото Rizz",
  "about_eyebrow": "Знайомся, Rizz",
  "about_1": "Привіт, я Rizz. Мені 20, я живу і працюю в Tetebatu, між рисовими полями і вулканом.",
@@ -4268,6 +4308,7 @@ vi:{
   "Lớp nấu ăn",
   "Hoàng hôn ở Pergasingan Hill"
  ],
+ "gallery_title": "Trên đường đi",
  "photo_rizz": "Ảnh của Rizz",
  "about_eyebrow": "Gặp Rizz",
  "about_1": "Xin chào, mình là Rizz. Mình 20 tuổi, sống và làm việc ở Tetebatu, giữa ruộng lúa và ngọn núi lửa.",
@@ -4418,6 +4459,7 @@ zh:{
   "烹饪课",
   "Pergasingan Hill 看日落"
  ],
+ "gallery_title": "在路上",
  "photo_rizz": "Rizz 的照片",
  "about_eyebrow": "认识 Rizz",
  "about_1": "你好，我是 Rizz，今年 20 岁，在稻田和火山之间的 Tetebatu 生活和工作。",
@@ -4493,6 +4535,59 @@ const RTL = ["ar","he"];
 const PP = {en:"per person",nl:"per persoon",de:"pro Person",fr:"par personne",es:"por persona",it:"a persona",pt:"por pessoa",id:"per orang",ms:"seorang",
   zh:"每人",ja:"1人あたり",ko:"1인당",th:"ต่อคน",vi:"mỗi người",hi:"प्रति व्यक्ति",ru:"с человека",uk:"з особи",pl:"za osobę",cs:"za osobu",hu:"/ fő",ro:"de persoană",
   sv:"per person",da:"per person",nb:"per person",fi:"/ hlö",tr:"kişi başı",ar:"للشخص",he:"לאדם"};
+/* Approximate price in the visitor's own currency. Rizz is paid in cash in IDR; this is only a guide.
+   Rates refresh daily from a free source; the table below is the fallback (23 Nov 2026). */
+const RATES_FALLBACK = {EUR:4.996e-5,USD:5.496e-5,GBP:4.186e-5,AUD:8.272e-5,CAD:7.869e-5,NZD:1.0033e-4,CHF:4.609e-5,SGD:7.086e-5,
+  MYR:2.265e-4,CNY:3.665e-4,JPY:8.737e-3,KRW:7.387e-2,THB:1.870e-3,VND:1.4187,INR:5.101e-3,RUB:4.468e-3,UAH:2.470e-3,PLN:2.224e-4,
+  CZK:1.222e-3,HUF:1.858e-2,RON:2.673e-4,SEK:5.602e-4,DKK:3.734e-4,NOK:5.344e-4,TRY:2.781e-3,ILS:1.829e-4,SAR:2.061e-4,AED:2.018e-4,
+  BRL:3.272e-4,HKD:4.308e-4,TWD:1.808e-3,PHP:3.508e-3};
+let RATES = RATES_FALLBACK;
+const CUR_LANG = {en:"USD",nl:"EUR",de:"EUR",fr:"EUR",es:"EUR",it:"EUR",pt:"EUR",fi:"EUR",ms:"MYR",zh:"CNY",ja:"JPY",ko:"KRW",th:"THB",
+  vi:"VND",hi:"INR",ru:"RUB",uk:"UAH",pl:"PLN",cs:"CZK",hu:"HUF",ro:"RON",sv:"SEK",da:"DKK",nb:"NOK",tr:"TRY",ar:"USD",he:"ILS"};
+const EURO = "AT BE CY DE EE ES FI FR GR HR IE IT LT LU LV MT NL PT SI SK".split(" ");
+const CUR_REGION = {US:"USD",GB:"GBP",AU:"AUD",CA:"CAD",NZ:"NZD",CH:"CHF",SG:"SGD",MY:"MYR",CN:"CNY",JP:"JPY",KR:"KRW",TH:"THB",VN:"VND",
+  IN:"INR",RU:"RUB",UA:"UAH",PL:"PLN",CZ:"CZK",HU:"HUF",RO:"RON",SE:"SEK",DK:"DKK",NO:"NOK",TR:"TRY",IL:"ILS",SA:"SAR",AE:"AED",BR:"BRL",
+  HK:"HKD",TW:"TWD",PH:"PHP",ID:""};
+function currencyFor(lang){
+  const prefs = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ""]);
+  for (const p of prefs){
+    const parts = String(p).split("-"); const base = ALIAS[parts[0].toLowerCase()] || parts[0].toLowerCase();
+    const region = (parts.find((x,i) => i > 0 && /^[A-Za-z]{2}$/.test(x)) || "").toUpperCase();
+    if (base === lang && region){
+      if (EURO.includes(region)) return "EUR";
+      if (region in CUR_REGION) return CUR_REGION[region];
+    }
+  }
+  return CUR_LANG[lang] || "";
+}
+function approx(idr, lang){
+  const cur = currencyFor(lang); const rate = RATES[cur];
+  if (!cur || !rate || !idr) return "";
+  let v = idr * rate;
+  v = v < 100 ? Math.round(v) : Number(v.toPrecision(2));
+  try{ return "≈ " + new Intl.NumberFormat(lang, {style:"currency", currency:cur, maximumFractionDigits:0, minimumFractionDigits:0}).format(v); }
+  catch(e){ return "≈ " + v + " " + cur; }
+}
+function loadRates(){
+  try{
+    const c = JSON.parse(localStorage.getItem("rizz-rates") || "null");
+    if (c && c.rates) RATES = Object.assign({}, RATES_FALLBACK, c.rates);
+    if (c && c.day === new Date().toISOString().slice(0,10)) return;
+  }catch(e){}
+  const urls = ["https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/idr.json",
+                "https://latest.currency-api.pages.dev/v1/currencies/idr.json"];
+  (function next(i){
+    if (i >= urls.length) return;
+    fetch(urls[i]).then(r => r.ok ? r.json() : Promise.reject()).then(d => {
+      const fresh = {};
+      Object.keys(RATES_FALLBACK).forEach(k => { const v = d && d.idr && d.idr[k.toLowerCase()]; if (typeof v === "number" && v > 0) fresh[k] = v; });
+      if (!Object.keys(fresh).length) return next(i + 1);
+      RATES = Object.assign({}, RATES_FALLBACK, fresh);
+      try{ localStorage.setItem("rizz-rates", JSON.stringify({day:new Date().toISOString().slice(0,10), rates:fresh})); }catch(e){}
+      render(document.getElementById("langSel").value || pickLang());
+    }).catch(() => next(i + 1));
+  })(0);
+}
 const RIZZ_READS = ["en","nl","de","fr","id","ms"];   /* WhatsApp messages go to Rizz in a language he reads */
 const ALIAS = {no:"nb",nn:"nb",iw:"he",in:"id",fil:"en"};
 function pickLang(){
@@ -4520,7 +4615,8 @@ function render(lang){
     const k = "tour_" + tour.id + "_";
     const hours = /^\d+$/.test(tour.hours) ? tour.hours + " " + t.hours : tour.hours;
     const price = tour.price ? esc(tour.price) + " <small>" + esc(PP[lang] || PP.en) + "</small>" : esc(t.ask_price);
-    const photo = tour.photo ? '<img src="' + esc(tour.photo) + '" alt="' + esc(t[k+"t"]) + '">' : esc(t.photo);
+    const conv = tour.price ? approx(tour.idr, lang) : "";
+    const photo = tour.photo ? '<img src="' + esc(tour.photo) + '" width="1200" height="900" loading="lazy" alt="' + esc(t[k+"t"]) + '">' : esc(t.photo);
     const note = t[k+"n"] ? '<p class="note">' + esc(t[k+"n"]) + '</p>' : "";
     const facts = [
       tour.start ? [t.l_start, tour.start] : null,
@@ -4529,7 +4625,7 @@ function render(lang){
       tour.id !== "rinjani" ? [t.l_bring, t.bring_walk] : null
     ].filter(Boolean).map(([a,b]) => "<dt>" + esc(a) + "</dt><dd>" + esc(b) + "</dd>").join("");
     return '<article class="tour"><div class="photo">' + photo + '</div><div class="body">' +
-      '<div class="meta"><span>' + esc(hours) + '</span><span class="price">' + price + '</span></div>' +
+      '<div class="meta"><span>' + esc(hours) + '</span><span class="price">' + price + '</span>' + (conv ? '<span class="conv">' + esc(conv) + '</span>' : '') + '</div>' +
       '<h3>' + esc(t[k+"t"]) + '</h3><p>' + esc(t[k+"p"]) + '</p>' +
       '<ul>' + t[k+"i"].map(i => '<li>' + esc(i) + '</li>').join("") + '</ul>' +
       '<dl class="facts">' + facts + '</dl>' + note +
@@ -4539,7 +4635,7 @@ function render(lang){
   document.getElementById("moreList").innerHTML = t.more.map(m => '<span class="chip">' + esc(m) + '</span>').join("");
   document.getElementById("plants").innerHTML = t.plants.map(p => "<span>" + esc(p) + "</span>").join("");
   document.getElementById("faq").innerHTML = t.faq.map(([q,a]) => "<details><summary>" + esc(q) + "</summary><p>" + esc(a) + "</p></details>").join("");
-  if (CONFIG.photos.about) document.getElementById("aboutPhoto").innerHTML = '<img src="' + esc(CONFIG.photos.about) + '" alt="Rizz">';
+  if (CONFIG.photos.about) document.getElementById("aboutPhoto").innerHTML = '<img src="' + esc(CONFIG.photos.about) + '" width="880" height="1100" loading="lazy" alt="Rizz">';
 }
 function setup(){
   const maps = CONFIG.googleMapsUrl || "https://www.google.com/maps/search/Rizz+Tetebatu";
@@ -4557,6 +4653,7 @@ function setup(){
     render(sel.value);
   });
   render(pickLang());
+  loadRates();
 }
 setup();
 </script>
