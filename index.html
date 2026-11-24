@@ -144,7 +144,6 @@ footer a{text-decoration:none;font-weight:700;color:var(--ink)}
 </style>
 </head>
 <body>
-
 <header class="bar">
   <div class="wrap">
     <a class="logo" href="#top" aria-label="Rizz Tetebatu"><span class="r">rizz<i>.</i></span><span class="t">Tetebatu</span></a>
@@ -253,6 +252,7 @@ footer a{text-decoration:none;font-weight:700;color:var(--ink)}
     <div><span class="logo"><span class="r">rizz<i>.</i></span><span class="t">Tetebatu</span></span><p style="margin-top:12px" data-i18n="foot_where"></p></div>
     <div style="display:grid;gap:6px">
       <a class="js-wa" href="#" target="_blank" rel="noopener">WhatsApp <span id="waNum"></span></a>
+      <a id="mailLink" href="#">Email</a>
       <a id="igLink" href="#" target="_blank" rel="noopener">Instagram</a>
       <a id="mapsLink" href="#" target="_blank" rel="noopener">Google Maps</a>
     </div>
@@ -265,6 +265,7 @@ footer a{text-decoration:none;font-weight:700;color:var(--ink)}
 const CONFIG = {
   whatsapp: "62XXXXXXXXXX",            // number with country code, no + or spaces
   instagram: "rizztetebatu",
+  email: "rizztetebatu@gmail.com",
   googleMapsUrl: "",                    // link to the Google Maps profile
   googleReviewUrl: "",                  // the "write a review" link from Google Business Profile
   photos: { about: "" },                // e.g. "img/rizz.jpg"
@@ -482,6 +483,8 @@ function setup(){
   const maps = CONFIG.googleMapsUrl || "https://www.google.com/maps/search/Rizz+Tetebatu";
   document.getElementById("waNum").textContent = "+" + CONFIG.whatsapp;
   document.getElementById("igLink").href = "https://instagram.com/" + CONFIG.instagram;
+  document.getElementById("mailLink").href = "mailto:" + CONFIG.email;
+  document.getElementById("mailLink").textContent = CONFIG.email;
   document.getElementById("mapsLink").href = maps;
   document.getElementById("revRead").href = maps;
   document.getElementById("revWrite").href = CONFIG.googleReviewUrl || maps;
@@ -493,6 +496,5 @@ function setup(){
 }
 setup();
 </script>
-
 </body>
 </html>
