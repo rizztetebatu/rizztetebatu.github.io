@@ -51,10 +51,12 @@ section{padding-block:72px}
 /* bar */
 .bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .bar .wrap{display:flex;align-items:center;gap:12px;padding-block:10px}
-.langs{margin-left:auto;display:flex;gap:2px;background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:3px}
-.langs button{border:0;background:none;color:var(--muted);font:700 13px/1 var(--body);padding:7px 10px;border-radius:99px;cursor:pointer}
-.langs button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
-.btn{display:inline-flex;align-items:center;gap:10px;background:var(--lava);color:var(--lava-ink);text-decoration:none;font:700 16px/1 var(--body);padding:15px 22px;border-radius:99px;border:0;cursor:pointer;white-space:nowrap}
+.langs{margin-inline-start:auto;position:relative;display:flex;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:99px}
+.langs svg{position:absolute;inset-inline-start:10px;width:16px;height:16px;color:var(--muted);pointer-events:none}
+.langs select{appearance:none;-webkit-appearance:none;border:0;background:none;color:var(--ink);font:700 13px/1 var(--body);padding:9px 12px;padding-inline-start:32px;border-radius:99px;cursor:pointer;max-width:9.5em}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--lava);color:var(--lava-ink);text-decoration:none;font:700 16px/1.2 var(--body);padding:15px 22px;border-radius:99px;border:0;cursor:pointer;max-width:100%}
+.btn.small,.float{white-space:nowrap}
+h1,h2,h3{overflow-wrap:break-word}
 .btn:hover{filter:brightness(1.07)}
 .btn.small{padding:10px 14px;font-size:14px}
 .btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink)}
@@ -72,7 +74,7 @@ section{padding-block:72px}
 .chip{font:700 13px/1 var(--body);padding:8px 12px;border-radius:99px;background:var(--surface);border:1px solid var(--line)}
 .scene{width:100%;max-width:100%;height:auto;display:block}
 .alt{display:flex;justify-content:space-between;font:700 12px/1 var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border-top:2px solid var(--ink);padding-top:10px;margin-top:8px;font-variant-numeric:tabular-nums}
-@media (max-width:820px){.hero-grid{grid-template-columns:1fr}.hero{padding-top:36px}}
+@media (max-width:820px){.hero-grid{grid-template-columns:minmax(0,1fr)}.hero{padding-top:36px}}
 
 /* promises */
 .promises{padding-block:40px 0}
@@ -94,11 +96,11 @@ section{padding-block:72px}
 .meta{display:flex;flex-wrap:wrap;gap:8px}
 .meta span{font:700 13px/1 var(--body);padding:7px 10px;border-radius:8px;background:var(--bg);font-variant-numeric:tabular-nums}
 .meta .price{background:var(--shoot);color:#132018}
-.tour ul{margin:0;padding-left:18px}
+.tour ul{margin:0;padding-inline-start:18px}
 .facts{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:15px;margin:0}
 .facts dt{font-weight:700}
 .facts dd{margin:0;color:var(--muted)}
-.tour .note{font-size:14px;color:var(--muted);border-left:3px solid var(--lava);padding-left:10px}
+.tour .note{font-size:14px;color:var(--muted);border-inline-start:3px solid var(--lava);padding-inline-start:10px}
 .tour .btn{margin-top:auto;align-self:flex-start}
 .more{margin-top:18px;border:1px dashed var(--line);border-radius:var(--r);padding:20px;display:grid;gap:12px}
 .more .list{display:flex;flex-wrap:wrap;gap:8px}
@@ -139,7 +141,7 @@ details p{color:var(--muted);margin-top:10px;max-width:65ch}
 footer{border-top:1px solid var(--line);padding-block:40px 110px;color:var(--muted);font-size:15px}
 footer .wrap{display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between}
 footer a{text-decoration:none;font-weight:700;color:var(--ink)}
-.float{position:fixed;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:8;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+.float{position:fixed;inset-inline-end:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:8;box-shadow:0 8px 24px rgba(0,0,0,.18)}
 @media (prefers-reduced-motion:no-preference){.scene .sun{animation:rise 2.4s ease-out both}@keyframes rise{from{transform:translateY(30px)}to{transform:none}}}
 </style>
 </head>
@@ -147,11 +149,7 @@ footer a{text-decoration:none;font-weight:700;color:var(--ink)}
 <header class="bar">
   <div class="wrap">
     <a class="logo" href="#top" aria-label="Rizz Tetebatu"><span class="r">rizz<i>.</i></span><span class="t">Tetebatu</span></a>
-    <div class="langs" role="group" aria-label="Language">
-      <button type="button" data-lang="en">EN</button>
-      <button type="button" data-lang="nl">NL</button>
-      <button type="button" data-lang="de">DE</button>
-    </div>
+    <label class="langs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 2.5 15.3 0 18M12 3c-2.5 2.7-2.5 15.3 0 18"/></svg><select id="langSel" aria-label="Language"></select></label>
     <a class="btn small js-wa" href="#" target="_blank" rel="noopener"><svg class="wa" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg><span class="t" data-i18n="bar_cta"></span></a>
   </div>
 </header>
@@ -280,178 +278,4236 @@ const CONFIG = {
 
 const T = {
 en:{
- bar_cta:"WhatsApp Rizz", float:"Ask Rizz",
- hero_eyebrow:"Local guide · Tetebatu, Lombok",
- hero_title:"Walk Tetebatu with a local who knows <em>every plant</em>.",
- hero_lede:"Rice terraces, jungle waterfalls, black monkeys and the crops that grow here. Small groups, your own pace, and fixed prices with nothing hidden.",
- hero_cta:"Plan your walk on WhatsApp", hero_cta2:"See the tours",
- promises:[["Pay on the day","No prepayment, cash in rupiah."],["Free cancellation","Up to 24 hours before."],["All-in prices","Entrance fees and water included."],["Pickup in Tetebatu","At your homestay, on time."]],
- tours_eyebrow:"Tours", tours_title:"Pick your walk", tours_sub:"Every tour starts at your homestay in Tetebatu. Tell Rizz your pace and he adjusts the route.",
- hours:"hours", ask_price:"Price on WhatsApp", book:"Book on WhatsApp", photo:"Photo coming soon",
- l_start:"Start", l_level:"Level", l_incl:"Included", l_bring:"Bring",
- level:{easy:"Easy", mod:"Moderate, some slippery parts", hard:"Hard, real mountain climb"},
- bring_walk:"Water shoes or shoes with grip, sun cream, swimwear",
- tour_rice_t:"Rice fields & spice garden walk", tour_rice_p:"The heart of Tetebatu. Walk the terraces and small Sasak villages and learn how rice grows, from seed to harvest. Smell and taste the crops along the way.",
- tour_rice_i:["How rice is planted, grown and harvested","Coffee, cacao, vanilla and cloves on the tree","Fresh fruit tasting"],
- tour_rice_inc:"Guide, water, fruit",
- tour_water_t:"Rice fields & waterfall", tour_water_p:"Through the rice fields to the Tetebatu waterfall, over the bamboo bridge instead of the slippery stairs. Time for a swim before you walk back.",
- tour_water_i:["Rice terraces and plants explained","Tetebatu waterfall with swim stop","Safe route over the bamboo bridge"],
- tour_water_inc:"Guide, entrance fee, water, fruit",
- tour_classic_t:"Classic Tetebatu day", tour_classic_p:"The full picture in one day. The monkey forest early in the morning when the monkeys are active, rice fields and spice gardens, a local Sasak lunch and a waterfall to cool off.",
- tour_classic_i:["Monkey forest in the morning","Rice fields and spice gardens","Sasak lunch","Waterfall swim"],
- tour_classic_inc:"Guide, entrance fees, lunch, water, fruit",
- tour_classic_n:"Black monkeys live wild in the forest, so we often see them but can't promise.",
- tour_rinjani_t:"Mount Rinjani trek", tour_rinjani_p:"Climb the volcano with Rizz as your guide or porter. Treks run with a licensed trekking organizer and the official eRinjani permit, as the national park requires.",
- tour_rinjani_i:["Sunrise on the crater rim","Permit and registration arranged","Guide and porter support"],
- tour_rinjani_inc:"Depends on the trek, ask Rizz",
- tour_rinjani_n:"Rinjani has fixed season dates and group rules. Ask Rizz for the current dates.",
- more_title:"More from Tetebatu", more_p:"Want something else? Rizz can plan a day to these places too. Ask on WhatsApp.",
- more:["Jukut waterfall","Benang Kelambu & Benang Stokel","Sarang Walet & Tibu Bunter","Weaving village Pringgasela","Cooking class","Sunset at Pergasingan Hill"],
- photo_rizz:"Photo of Rizz", about_eyebrow:"Meet Rizz",
- about_1:"Hi, I'm Rizz. I'm 20 and I live and work in Tetebatu, between the rice fields and the volcano.",
- about_2:"I take care of my mother and my little sister, and I save for my dream: my own guesthouse on my family's land here in Tetebatu.",
- about_3:"On a walk with me you learn which leaf helps against what, how rice really grows, and where the monkeys hide. And I take the best photos of you along the way.",
- plants:["Rice","Coffee","Cacao","Vanilla","Cloves","Coconut","Durian"],
- how_eyebrow:"How it works", how_title:"Booking takes one message",
- s1_t:"Send a WhatsApp", s1_p:"Tell Rizz which tour, which day, how many people and where you stay.",
- s2_t:"Get a clear answer", s2_p:"He confirms the price, the start time and the pickup at your homestay.",
- s3_t:"Go walk", s3_p:"Bring water shoes and curiosity. You pay Rizz in cash at the end of the day.",
- rev_eyebrow:"Reviews", rev_title:"What guests say", rev_p:"Every review helps Rizz get closer to his own guesthouse. Walked with him? Leave a few words on Google.",
- rev_read:"Read reviews on Google", rev_write:"Write a review",
- faq_title:"Good to know",
- faq:[
-  ["Is there an ATM in Tetebatu?","No. There is no ATM and no pharmacy in the village. Bring enough cash in rupiah when you come to Tetebatu."],
-  ["How do I get to Tetebatu?","About 1.5 hours from Lombok airport and 2 to 3 hours from Kuta or Senggigi. There is no Grab here. Ask Rizz and he can help you find a driver."],
-  ["Do I need to be fit?","The rice field walk is easy for most people. The waterfall routes have slippery parts after rain. Rinjani is a real mountain climb: ask Rizz if it suits you."],
-  ["When is the best time?","June to September is dry. December to March is the rainy season: everything is very green, but paths are muddy, so bring shoes with grip."],
-  ["Someone at the waterfall says I need a guide. Is that true?","When you walk with Rizz, entrance fees are already included and you pay nothing extra at the gate."],
-  ["Can I cancel?","Yes, for free until 24 hours before. You only pay on the day itself."],
-  ["Can you organize Rinjani?","Yes. Rizz guides and carries on Rinjani treks run by a licensed trekking organizer, with permits through the official eRinjani system."]
+ "bar_cta": "WhatsApp Rizz",
+ "float": "Ask Rizz",
+ "hero_eyebrow": "Local guide · Tetebatu, Lombok",
+ "hero_title": "Walk Tetebatu with a local who knows <em>every plant</em>.",
+ "hero_lede": "Rice terraces, jungle waterfalls, black monkeys and the crops that grow here. Small groups, your own pace, and fixed prices with nothing hidden.",
+ "hero_cta": "Plan your walk on WhatsApp",
+ "hero_cta2": "See the tours",
+ "promises": [
+  [
+   "Pay on the day",
+   "No prepayment, cash in rupiah."
+  ],
+  [
+   "Free cancellation",
+   "Up to 24 hours before."
+  ],
+  [
+   "All-in prices",
+   "Entrance fees and water included."
+  ],
+  [
+   "Pickup in Tetebatu",
+   "At your homestay, on time."
+  ]
  ],
- foot_where:"Tetebatu, East Lombok, Indonesia",
- wa_general:"Hi Rizz! I found your website and want to plan a walk.", wa_tour:"Hi Rizz! I'd like to book: "
+ "tours_eyebrow": "Tours",
+ "tours_title": "Pick your walk",
+ "tours_sub": "Every tour starts at your homestay in Tetebatu. Tell Rizz your pace and he adjusts the route.",
+ "hours": "hours",
+ "ask_price": "Price on WhatsApp",
+ "book": "Book on WhatsApp",
+ "photo": "Photo coming soon",
+ "l_start": "Start",
+ "l_level": "Level",
+ "l_incl": "Included",
+ "l_bring": "Bring",
+ "level": {
+  "easy": "Easy",
+  "mod": "Moderate, some slippery parts",
+  "hard": "Hard, real mountain climb"
+ },
+ "bring_walk": "Water shoes or shoes with grip, sun cream, swimwear",
+ "tour_rice_t": "Rice fields & spice garden walk",
+ "tour_rice_p": "The heart of Tetebatu. Walk the terraces and small Sasak villages and learn how rice grows, from seed to harvest. Smell and taste the crops along the way.",
+ "tour_rice_i": [
+  "How rice is planted, grown and harvested",
+  "Coffee, cacao, vanilla and cloves on the tree",
+  "Fresh fruit tasting"
+ ],
+ "tour_rice_inc": "Guide, water, fruit",
+ "tour_water_t": "Rice fields & waterfall",
+ "tour_water_p": "Through the rice fields to the Tetebatu waterfall, over the bamboo bridge instead of the slippery stairs. Time for a swim before you walk back.",
+ "tour_water_i": [
+  "Rice terraces and plants explained",
+  "Tetebatu waterfall with swim stop",
+  "Safe route over the bamboo bridge"
+ ],
+ "tour_water_inc": "Guide, entrance fee, water, fruit",
+ "tour_classic_t": "Classic Tetebatu day",
+ "tour_classic_p": "The full picture in one day. The monkey forest early in the morning when the monkeys are active, rice fields and spice gardens, a local Sasak lunch and a waterfall to cool off.",
+ "tour_classic_i": [
+  "Monkey forest in the morning",
+  "Rice fields and spice gardens",
+  "Sasak lunch",
+  "Waterfall swim"
+ ],
+ "tour_classic_inc": "Guide, entrance fees, lunch, water, fruit",
+ "tour_classic_n": "Black monkeys live wild in the forest, so we often see them but can't promise.",
+ "tour_rinjani_t": "Mount Rinjani trek",
+ "tour_rinjani_p": "Climb the volcano with Rizz as your guide or porter. Treks run with a licensed trekking organizer and the official eRinjani permit, as the national park requires.",
+ "tour_rinjani_i": [
+  "Sunrise on the crater rim",
+  "Permit and registration arranged",
+  "Guide and porter support"
+ ],
+ "tour_rinjani_inc": "Depends on the trek, ask Rizz",
+ "tour_rinjani_n": "Rinjani has fixed season dates and group rules. Ask Rizz for the current dates.",
+ "more_title": "More from Tetebatu",
+ "more_p": "Want something else? Rizz can plan a day to these places too. Ask on WhatsApp.",
+ "more": [
+  "Jukut waterfall",
+  "Benang Kelambu & Benang Stokel",
+  "Sarang Walet & Tibu Bunter",
+  "Weaving village Pringgasela",
+  "Cooking class",
+  "Sunset at Pergasingan Hill"
+ ],
+ "photo_rizz": "Photo of Rizz",
+ "about_eyebrow": "Meet Rizz",
+ "about_1": "Hi, I'm Rizz. I'm 20 and I live and work in Tetebatu, between the rice fields and the volcano.",
+ "about_2": "I take care of my mother and my little sister, and I save for my dream: my own guesthouse on my family's land here in Tetebatu.",
+ "about_3": "On a walk with me you learn which leaf helps against what, how rice really grows, and where the monkeys hide. And I take the best photos of you along the way.",
+ "plants": [
+  "Rice",
+  "Coffee",
+  "Cacao",
+  "Vanilla",
+  "Cloves",
+  "Coconut",
+  "Durian"
+ ],
+ "how_eyebrow": "How it works",
+ "how_title": "Booking takes one message",
+ "s1_t": "Send a WhatsApp",
+ "s1_p": "Tell Rizz which tour, which day, how many people and where you stay.",
+ "s2_t": "Get a clear answer",
+ "s2_p": "He confirms the price, the start time and the pickup at your homestay.",
+ "s3_t": "Go walk",
+ "s3_p": "Bring water shoes and curiosity. You pay Rizz in cash at the end of the day.",
+ "rev_eyebrow": "Reviews",
+ "rev_title": "What guests say",
+ "rev_p": "Every review helps Rizz get closer to his own guesthouse. Walked with him? Leave a few words on Google.",
+ "rev_read": "Read reviews on Google",
+ "rev_write": "Write a review",
+ "faq_title": "Good to know",
+ "faq": [
+  [
+   "Is there an ATM in Tetebatu?",
+   "No. There is no ATM and no pharmacy in the village. Bring enough cash in rupiah when you come to Tetebatu."
+  ],
+  [
+   "How do I get to Tetebatu?",
+   "About 1.5 hours from Lombok airport and 2 to 3 hours from Kuta or Senggigi. There is no Grab here. Ask Rizz and he can help you find a driver."
+  ],
+  [
+   "Do I need to be fit?",
+   "The rice field walk is easy for most people. The waterfall routes have slippery parts after rain. Rinjani is a real mountain climb: ask Rizz if it suits you."
+  ],
+  [
+   "When is the best time?",
+   "June to September is dry. December to March is the rainy season: everything is very green, but paths are muddy, so bring shoes with grip."
+  ],
+  [
+   "Someone at the waterfall says I need a guide. Is that true?",
+   "When you walk with Rizz, entrance fees are already included and you pay nothing extra at the gate."
+  ],
+  [
+   "Can I cancel?",
+   "Yes, for free until 24 hours before. You only pay on the day itself."
+  ],
+  [
+   "Can you organize Rinjani?",
+   "Yes. Rizz guides and carries on Rinjani treks run by a licensed trekking organizer, with permits through the official eRinjani system."
+  ]
+ ],
+ "foot_where": "Tetebatu, East Lombok, Indonesia",
+ "wa_general": "Hi Rizz! I found your website and want to plan a walk.",
+ "wa_tour": "Hi Rizz! I'd like to book: "
 },
 nl:{
- bar_cta:"WhatsApp Rizz", float:"Vraag Rizz",
- hero_eyebrow:"Lokale gids · Tetebatu, Lombok",
- hero_title:"Ontdek Tetebatu met een local die <em>elke plant</em> kent.",
- hero_lede:"Rijstterrassen, watervallen in de jungle, zwarte apen en alles wat hier groeit. Kleine groepen, je eigen tempo en vaste prijzen zonder verrassingen.",
- hero_cta:"Plan je wandeling via WhatsApp", hero_cta2:"Bekijk de tochten",
- promises:[["Betalen op de dag","Niets vooraf, contant in rupiah."],["Gratis annuleren","Tot 24 uur van tevoren."],["Alles inbegrepen","Entree en water zitten in de prijs."],["Ophalen in Tetebatu","Bij je homestay, op tijd."]],
- tours_eyebrow:"Tochten", tours_title:"Kies je wandeling", tours_sub:"Elke tocht begint bij je homestay in Tetebatu. Vertel Rizz je tempo, hij past de route aan.",
- hours:"uur", ask_price:"Prijs via WhatsApp", book:"Boek via WhatsApp", photo:"Foto volgt",
- l_start:"Start", l_level:"Niveau", l_incl:"Inbegrepen", l_bring:"Meenemen",
- level:{easy:"Makkelijk", mod:"Gemiddeld, soms glad", hard:"Zwaar, echte bergtocht"},
- bring_walk:"Waterschoenen of schoenen met grip, zonnebrand, zwemkleding",
- tour_rice_t:"Rijstvelden en specerijentuinen", tour_rice_p:"Het hart van Tetebatu. Wandel door de terrassen en kleine Sasak-dorpjes en leer hoe rijst groeit, van zaadje tot oogst. Ruik en proef onderweg wat er groeit.",
- tour_rice_i:["Hoe rijst geplant, gekweekt en geoogst wordt","Koffie, cacao, vanille en kruidnagel aan de boom","Vers fruit proeven"],
- tour_rice_inc:"Gids, water, fruit",
- tour_water_t:"Rijstvelden en waterval", tour_water_p:"Door de rijstvelden naar de waterval van Tetebatu, over de bamboebrug in plaats van de gladde trap. Tijd om te zwemmen voor je teruggaat.",
- tour_water_i:["Rijstterrassen en planten uitgelegd","Waterval van Tetebatu met zwemstop","Veilige route over de bamboebrug"],
- tour_water_inc:"Gids, entree, water, fruit",
- tour_classic_t:"Klassieke dag Tetebatu", tour_classic_p:"Alles in één dag. Vroeg in de ochtend het apenbos, als de apen actief zijn, dan rijstvelden en specerijentuinen, een Sasak-lunch en een waterval om af te koelen.",
- tour_classic_i:["Apenbos in de ochtend","Rijstvelden en specerijentuinen","Sasak-lunch","Zwemmen bij de waterval"],
- tour_classic_inc:"Gids, entree, lunch, water, fruit",
- tour_classic_n:"De zwarte apen leven in het wild. We zien ze vaak, maar beloven kunnen we het niet.",
- tour_rinjani_t:"Beklimming van de Rinjani", tour_rinjani_p:"Beklim de vulkaan met Rizz als gids of drager. Tochten gaan via een erkend trekkingbureau en de officiële eRinjani-vergunning, zoals het nationale park verplicht.",
- tour_rinjani_i:["Zonsopkomst op de kraterrand","Vergunning en registratie geregeld","Gids en drager"],
- tour_rinjani_inc:"Hangt af van de tocht, vraag Rizz",
- tour_rinjani_n:"De Rinjani heeft vaste seizoensdata en groepsregels. Vraag Rizz naar de actuele data.",
- more_title:"Meer rond Tetebatu", more_p:"Iets anders in gedachten? Rizz plant ook een dag naar deze plekken. Vraag het via WhatsApp.",
- more:["Waterval Jukut","Benang Kelambu en Benang Stokel","Sarang Walet en Tibu Bunter","Weversdorp Pringgasela","Kookles","Zonsondergang op Pergasingan Hill"],
- photo_rizz:"Foto van Rizz", about_eyebrow:"Maak kennis met Rizz",
- about_1:"Hoi, ik ben Rizz. Ik ben 20 en ik woon en werk in Tetebatu, tussen de rijstvelden en de vulkaan.",
- about_2:"Ik zorg voor mijn moeder en mijn zusje, en ik spaar voor mijn droom: een eigen guesthouse op de grond van mijn familie hier in Tetebatu.",
- about_3:"Met mij leer je welk blad waartegen helpt, hoe rijst echt groeit en waar de apen zich verstoppen. En onderweg maak ik de mooiste foto's van jou.",
- plants:["Rijst","Koffie","Cacao","Vanille","Kruidnagel","Kokos","Durian"],
- how_eyebrow:"Zo werkt het", how_title:"Boeken is één berichtje",
- s1_t:"Stuur een WhatsApp", s1_p:"Vertel Rizz welke tocht, welke dag, met hoeveel mensen en waar je slaapt.",
- s2_t:"Duidelijk antwoord", s2_p:"Hij bevestigt de prijs, de starttijd en het ophalen bij je homestay.",
- s3_t:"Op pad", s3_p:"Neem waterschoenen en nieuwsgierigheid mee. Je betaalt Rizz contant aan het eind van de dag.",
- rev_eyebrow:"Reviews", rev_title:"Wat gasten zeggen", rev_p:"Elke review brengt Rizz dichter bij zijn eigen guesthouse. Met hem gelopen? Laat een paar woorden achter op Google.",
- rev_read:"Lees reviews op Google", rev_write:"Schrijf een review",
- faq_title:"Goed om te weten",
- faq:[
-  ["Is er een pinautomaat in Tetebatu?","Nee. Er is geen pinautomaat en geen apotheek in het dorp. Neem genoeg contant geld in rupiah mee naar Tetebatu."],
-  ["Hoe kom ik in Tetebatu?","Ongeveer 1,5 uur van het vliegveld van Lombok en 2 tot 3 uur van Kuta of Senggigi. Grab is er niet. Vraag Rizz, hij helpt je aan een chauffeur."],
-  ["Moet ik fit zijn?","De rijstveldwandeling is voor de meeste mensen makkelijk. De routes naar de watervallen zijn na regen glad. De Rinjani is een echte bergtocht: vraag Rizz of het bij je past."],
-  ["Wanneer kan ik het beste komen?","Juni tot september is droog. December tot maart is het regenseizoen: alles is heel groen, maar de paden zijn modderig, dus neem schoenen met grip mee."],
-  ["Bij de waterval zegt iemand dat ik een gids nodig heb. Klopt dat?","Als je met Rizz loopt, zit de entree al in de prijs en betaal je bij de ingang niets extra."],
-  ["Kan ik annuleren?","Ja, gratis tot 24 uur van tevoren. Je betaalt pas op de dag zelf."],
-  ["Kun je de Rinjani regelen?","Ja. Rizz is gids en drager bij Rinjani-tochten van een erkend trekkingbureau, met vergunning via het officiële eRinjani-systeem."]
+ "bar_cta": "WhatsApp Rizz",
+ "float": "Vraag Rizz",
+ "hero_eyebrow": "Lokale gids · Tetebatu, Lombok",
+ "hero_title": "Ontdek Tetebatu met een local die <em>elke plant</em> kent.",
+ "hero_lede": "Rijstterrassen, watervallen in de jungle, zwarte apen en alles wat hier groeit. Kleine groepen, je eigen tempo en vaste prijzen zonder verrassingen.",
+ "hero_cta": "Plan je wandeling via WhatsApp",
+ "hero_cta2": "Bekijk de tochten",
+ "promises": [
+  [
+   "Betalen op de dag",
+   "Niets vooraf, contant in rupiah."
+  ],
+  [
+   "Gratis annuleren",
+   "Tot 24 uur van tevoren."
+  ],
+  [
+   "Alles inbegrepen",
+   "Entree en water zitten in de prijs."
+  ],
+  [
+   "Ophalen in Tetebatu",
+   "Bij je homestay, op tijd."
+  ]
  ],
- foot_where:"Tetebatu, Oost-Lombok, Indonesië",
- wa_general:"Hoi Rizz! Ik vond je website en wil een wandeling plannen.", wa_tour:"Hoi Rizz! Ik wil graag boeken: "
+ "tours_eyebrow": "Tochten",
+ "tours_title": "Kies je wandeling",
+ "tours_sub": "Elke tocht begint bij je homestay in Tetebatu. Vertel Rizz je tempo, hij past de route aan.",
+ "hours": "uur",
+ "ask_price": "Prijs via WhatsApp",
+ "book": "Boek via WhatsApp",
+ "photo": "Foto volgt",
+ "l_start": "Start",
+ "l_level": "Niveau",
+ "l_incl": "Inbegrepen",
+ "l_bring": "Meenemen",
+ "level": {
+  "easy": "Makkelijk",
+  "mod": "Gemiddeld, soms glad",
+  "hard": "Zwaar, echte bergtocht"
+ },
+ "bring_walk": "Waterschoenen of schoenen met grip, zonnebrand, zwemkleding",
+ "tour_rice_t": "Rijstvelden en specerijentuinen",
+ "tour_rice_p": "Het hart van Tetebatu. Wandel door de terrassen en kleine Sasak-dorpjes en leer hoe rijst groeit, van zaadje tot oogst. Ruik en proef onderweg wat er groeit.",
+ "tour_rice_i": [
+  "Hoe rijst geplant, gekweekt en geoogst wordt",
+  "Koffie, cacao, vanille en kruidnagel aan de boom",
+  "Vers fruit proeven"
+ ],
+ "tour_rice_inc": "Gids, water, fruit",
+ "tour_water_t": "Rijstvelden en waterval",
+ "tour_water_p": "Door de rijstvelden naar de waterval van Tetebatu, over de bamboebrug in plaats van de gladde trap. Tijd om te zwemmen voor je teruggaat.",
+ "tour_water_i": [
+  "Rijstterrassen en planten uitgelegd",
+  "Waterval van Tetebatu met zwemstop",
+  "Veilige route over de bamboebrug"
+ ],
+ "tour_water_inc": "Gids, entree, water, fruit",
+ "tour_classic_t": "Klassieke dag Tetebatu",
+ "tour_classic_p": "Alles in één dag. Vroeg in de ochtend het apenbos, als de apen actief zijn, dan rijstvelden en specerijentuinen, een Sasak-lunch en een waterval om af te koelen.",
+ "tour_classic_i": [
+  "Apenbos in de ochtend",
+  "Rijstvelden en specerijentuinen",
+  "Sasak-lunch",
+  "Zwemmen bij de waterval"
+ ],
+ "tour_classic_inc": "Gids, entree, lunch, water, fruit",
+ "tour_classic_n": "De zwarte apen leven in het wild. We zien ze vaak, maar beloven kunnen we het niet.",
+ "tour_rinjani_t": "Beklimming van de Rinjani",
+ "tour_rinjani_p": "Beklim de vulkaan met Rizz als gids of drager. Tochten gaan via een erkend trekkingbureau en de officiële eRinjani-vergunning, zoals het nationale park verplicht.",
+ "tour_rinjani_i": [
+  "Zonsopkomst op de kraterrand",
+  "Vergunning en registratie geregeld",
+  "Gids en drager"
+ ],
+ "tour_rinjani_inc": "Hangt af van de tocht, vraag Rizz",
+ "tour_rinjani_n": "De Rinjani heeft vaste seizoensdata en groepsregels. Vraag Rizz naar de actuele data.",
+ "more_title": "Meer rond Tetebatu",
+ "more_p": "Iets anders in gedachten? Rizz plant ook een dag naar deze plekken. Vraag het via WhatsApp.",
+ "more": [
+  "Waterval Jukut",
+  "Benang Kelambu en Benang Stokel",
+  "Sarang Walet en Tibu Bunter",
+  "Weversdorp Pringgasela",
+  "Kookles",
+  "Zonsondergang op Pergasingan Hill"
+ ],
+ "photo_rizz": "Foto van Rizz",
+ "about_eyebrow": "Maak kennis met Rizz",
+ "about_1": "Hoi, ik ben Rizz. Ik ben 20 en ik woon en werk in Tetebatu, tussen de rijstvelden en de vulkaan.",
+ "about_2": "Ik zorg voor mijn moeder en mijn zusje, en ik spaar voor mijn droom: een eigen guesthouse op de grond van mijn familie hier in Tetebatu.",
+ "about_3": "Met mij leer je welk blad waartegen helpt, hoe rijst echt groeit en waar de apen zich verstoppen. En onderweg maak ik de mooiste foto's van jou.",
+ "plants": [
+  "Rijst",
+  "Koffie",
+  "Cacao",
+  "Vanille",
+  "Kruidnagel",
+  "Kokos",
+  "Durian"
+ ],
+ "how_eyebrow": "Zo werkt het",
+ "how_title": "Boeken is één berichtje",
+ "s1_t": "Stuur een WhatsApp",
+ "s1_p": "Vertel Rizz welke tocht, welke dag, met hoeveel mensen en waar je slaapt.",
+ "s2_t": "Duidelijk antwoord",
+ "s2_p": "Hij bevestigt de prijs, de starttijd en het ophalen bij je homestay.",
+ "s3_t": "Op pad",
+ "s3_p": "Neem waterschoenen en nieuwsgierigheid mee. Je betaalt Rizz contant aan het eind van de dag.",
+ "rev_eyebrow": "Reviews",
+ "rev_title": "Wat gasten zeggen",
+ "rev_p": "Elke review brengt Rizz dichter bij zijn eigen guesthouse. Met hem gelopen? Laat een paar woorden achter op Google.",
+ "rev_read": "Lees reviews op Google",
+ "rev_write": "Schrijf een review",
+ "faq_title": "Goed om te weten",
+ "faq": [
+  [
+   "Is er een pinautomaat in Tetebatu?",
+   "Nee. Er is geen pinautomaat en geen apotheek in het dorp. Neem genoeg contant geld in rupiah mee naar Tetebatu."
+  ],
+  [
+   "Hoe kom ik in Tetebatu?",
+   "Ongeveer 1,5 uur van het vliegveld van Lombok en 2 tot 3 uur van Kuta of Senggigi. Grab is er niet. Vraag Rizz, hij helpt je aan een chauffeur."
+  ],
+  [
+   "Moet ik fit zijn?",
+   "De rijstveldwandeling is voor de meeste mensen makkelijk. De routes naar de watervallen zijn na regen glad. De Rinjani is een echte bergtocht: vraag Rizz of het bij je past."
+  ],
+  [
+   "Wanneer kan ik het beste komen?",
+   "Juni tot september is droog. December tot maart is het regenseizoen: alles is heel groen, maar de paden zijn modderig, dus neem schoenen met grip mee."
+  ],
+  [
+   "Bij de waterval zegt iemand dat ik een gids nodig heb. Klopt dat?",
+   "Als je met Rizz loopt, zit de entree al in de prijs en betaal je bij de ingang niets extra."
+  ],
+  [
+   "Kan ik annuleren?",
+   "Ja, gratis tot 24 uur van tevoren. Je betaalt pas op de dag zelf."
+  ],
+  [
+   "Kun je de Rinjani regelen?",
+   "Ja. Rizz is gids en drager bij Rinjani-tochten van een erkend trekkingbureau, met vergunning via het officiële eRinjani-systeem."
+  ]
+ ],
+ "foot_where": "Tetebatu, Oost-Lombok, Indonesië",
+ "wa_general": "Hoi Rizz! Ik vond je website en wil een wandeling plannen.",
+ "wa_tour": "Hoi Rizz! Ik wil graag boeken: "
 },
 de:{
- bar_cta:"WhatsApp Rizz", float:"Frag Rizz",
- hero_eyebrow:"Lokaler Guide · Tetebatu, Lombok",
- hero_title:"Entdecke Tetebatu mit einem Local, der <em>jede Pflanze</em> kennt.",
- hero_lede:"Reisterrassen, Wasserfälle im Dschungel, schwarze Affen und alles, was hier wächst. Kleine Gruppen, dein Tempo und feste Preise ohne Überraschungen.",
- hero_cta:"Tour per WhatsApp planen", hero_cta2:"Touren ansehen",
- promises:[["Zahlung am Tag","Keine Vorkasse, bar in Rupiah."],["Kostenlos stornieren","Bis 24 Stunden vorher."],["Alles inklusive","Eintritt und Wasser im Preis."],["Abholung in Tetebatu","An deinem Homestay, pünktlich."]],
- tours_eyebrow:"Touren", tours_title:"Wähle deine Tour", tours_sub:"Jede Tour startet an deinem Homestay in Tetebatu. Sag Rizz dein Tempo, er passt die Route an.",
- hours:"Std.", ask_price:"Preis per WhatsApp", book:"Per WhatsApp buchen", photo:"Foto folgt",
- l_start:"Start", l_level:"Niveau", l_incl:"Inklusive", l_bring:"Mitbringen",
- level:{easy:"Leicht", mod:"Mittel, teils rutschig", hard:"Schwer, echte Bergtour"},
- bring_walk:"Wasserschuhe oder Schuhe mit Profil, Sonnencreme, Badesachen",
- tour_rice_t:"Reisfelder und Gewürzgärten", tour_rice_p:"Das Herz von Tetebatu. Wandere durch die Terrassen und kleinen Sasak-Dörfer und lerne, wie Reis vom Samen bis zur Ernte wächst. Unterwegs riechen und probieren.",
- tour_rice_i:["Wie Reis gepflanzt, angebaut und geerntet wird","Kaffee, Kakao, Vanille und Nelken am Baum","Frisches Obst probieren"],
- tour_rice_inc:"Guide, Wasser, Obst",
- tour_water_t:"Reisfelder und Wasserfall", tour_water_p:"Durch die Reisfelder zum Wasserfall von Tetebatu, über die Bambusbrücke statt der rutschigen Treppe. Zeit zum Schwimmen, bevor es zurückgeht.",
- tour_water_i:["Reisterrassen und Pflanzen erklärt","Wasserfall von Tetebatu mit Badestopp","Sichere Route über die Bambusbrücke"],
- tour_water_inc:"Guide, Eintritt, Wasser, Obst",
- tour_classic_t:"Klassischer Tetebatu-Tag", tour_classic_p:"Alles an einem Tag. Früh morgens der Affenwald, wenn die Affen aktiv sind, dann Reisfelder und Gewürzgärten, ein Sasak-Mittagessen und ein Wasserfall zum Abkühlen.",
- tour_classic_i:["Affenwald am Morgen","Reisfelder und Gewürzgärten","Sasak-Mittagessen","Baden am Wasserfall"],
- tour_classic_inc:"Guide, Eintritt, Mittagessen, Wasser, Obst",
- tour_classic_n:"Die schwarzen Affen leben wild. Wir sehen sie oft, versprechen können wir es nicht.",
- tour_rinjani_t:"Rinjani-Trekking", tour_rinjani_p:"Besteige den Vulkan mit Rizz als Guide oder Träger. Touren laufen über einen lizenzierten Trekking-Veranstalter mit der offiziellen eRinjani-Genehmigung, wie es der Nationalpark verlangt.",
- tour_rinjani_i:["Sonnenaufgang am Kraterrand","Genehmigung und Registrierung erledigt","Guide und Träger"],
- tour_rinjani_inc:"Je nach Tour, frag Rizz",
- tour_rinjani_n:"Der Rinjani hat feste Saisondaten und Gruppenregeln. Frag Rizz nach den aktuellen Terminen.",
- more_title:"Mehr rund um Tetebatu", more_p:"Lust auf etwas anderes? Rizz plant auch einen Tag zu diesen Orten. Frag per WhatsApp.",
- more:["Wasserfall Jukut","Benang Kelambu und Benang Stokel","Sarang Walet und Tibu Bunter","Weberdorf Pringgasela","Kochkurs","Sonnenuntergang am Pergasingan Hill"],
- photo_rizz:"Foto von Rizz", about_eyebrow:"Das ist Rizz",
- about_1:"Hi, ich bin Rizz. Ich bin 20 und lebe und arbeite in Tetebatu, zwischen den Reisfeldern und dem Vulkan.",
- about_2:"Ich sorge für meine Mutter und meine kleine Schwester und spare für meinen Traum: ein eigenes Guesthouse auf dem Land meiner Familie hier in Tetebatu.",
- about_3:"Mit mir lernst du, welches Blatt wogegen hilft, wie Reis wirklich wächst und wo sich die Affen verstecken. Und unterwegs mache ich die schönsten Fotos von dir.",
- plants:["Reis","Kaffee","Kakao","Vanille","Nelken","Kokos","Durian"],
- how_eyebrow:"So geht's", how_title:"Buchen ist eine Nachricht",
- s1_t:"Schick eine WhatsApp", s1_p:"Sag Rizz, welche Tour, welcher Tag, wie viele Personen und wo du wohnst.",
- s2_t:"Klare Antwort", s2_p:"Er bestätigt Preis, Startzeit und Abholung an deinem Homestay.",
- s3_t:"Los geht's", s3_p:"Bring Wasserschuhe und Neugier mit. Du bezahlst Rizz bar am Ende des Tages.",
- rev_eyebrow:"Bewertungen", rev_title:"Was Gäste sagen", rev_p:"Jede Bewertung bringt Rizz seinem eigenen Guesthouse näher. Mit ihm unterwegs gewesen? Schreib ein paar Worte auf Google.",
- rev_read:"Bewertungen auf Google", rev_write:"Bewertung schreiben",
- faq_title:"Gut zu wissen",
- faq:[
-  ["Gibt es einen Geldautomaten in Tetebatu?","Nein. Es gibt keinen Geldautomaten und keine Apotheke im Dorf. Bring genug Bargeld in Rupiah mit nach Tetebatu."],
-  ["Wie komme ich nach Tetebatu?","Etwa 1,5 Stunden vom Flughafen Lombok und 2 bis 3 Stunden von Kuta oder Senggigi. Grab gibt es hier nicht. Frag Rizz, er hilft dir, einen Fahrer zu finden."],
-  ["Muss ich fit sein?","Die Reisfeldtour ist für die meisten leicht. Die Wege zu den Wasserfällen sind nach Regen rutschig. Der Rinjani ist eine echte Bergtour: frag Rizz, ob sie zu dir passt."],
-  ["Wann ist die beste Reisezeit?","Juni bis September ist trocken. Dezember bis März ist Regenzeit: alles ist sehr grün, aber die Wege sind matschig, also Schuhe mit Profil mitbringen."],
-  ["Am Wasserfall sagt jemand, ich brauche einen Guide. Stimmt das?","Wenn du mit Rizz unterwegs bist, ist der Eintritt schon im Preis und du zahlst am Eingang nichts extra."],
-  ["Kann ich stornieren?","Ja, kostenlos bis 24 Stunden vorher. Du bezahlst erst am Tag selbst."],
-  ["Kannst du den Rinjani organisieren?","Ja. Rizz ist Guide und Träger bei Rinjani-Touren eines lizenzierten Veranstalters, mit Genehmigung über das offizielle eRinjani-System."]
+ "bar_cta": "WhatsApp Rizz",
+ "float": "Frag Rizz",
+ "hero_eyebrow": "Lokaler Guide · Tetebatu, Lombok",
+ "hero_title": "Entdecke Tetebatu mit einem Local, der <em>jede Pflanze</em> kennt.",
+ "hero_lede": "Reisterrassen, Wasserfälle im Dschungel, schwarze Affen und alles, was hier wächst. Kleine Gruppen, dein Tempo und feste Preise ohne Überraschungen.",
+ "hero_cta": "Tour per WhatsApp planen",
+ "hero_cta2": "Touren ansehen",
+ "promises": [
+  [
+   "Zahlung am Tag",
+   "Keine Vorkasse, bar in Rupiah."
+  ],
+  [
+   "Kostenlos stornieren",
+   "Bis 24 Stunden vorher."
+  ],
+  [
+   "Alles inklusive",
+   "Eintritt und Wasser im Preis."
+  ],
+  [
+   "Abholung in Tetebatu",
+   "An deinem Homestay, pünktlich."
+  ]
  ],
- foot_where:"Tetebatu, Ost-Lombok, Indonesien",
- wa_general:"Hi Rizz! Ich habe deine Website gefunden und möchte eine Tour planen.", wa_tour:"Hi Rizz! Ich möchte buchen: "
+ "tours_eyebrow": "Touren",
+ "tours_title": "Wähle deine Tour",
+ "tours_sub": "Jede Tour startet an deinem Homestay in Tetebatu. Sag Rizz dein Tempo, er passt die Route an.",
+ "hours": "Std.",
+ "ask_price": "Preis per WhatsApp",
+ "book": "Per WhatsApp buchen",
+ "photo": "Foto folgt",
+ "l_start": "Start",
+ "l_level": "Niveau",
+ "l_incl": "Inklusive",
+ "l_bring": "Mitbringen",
+ "level": {
+  "easy": "Leicht",
+  "mod": "Mittel, teils rutschig",
+  "hard": "Schwer, echte Bergtour"
+ },
+ "bring_walk": "Wasserschuhe oder Schuhe mit Profil, Sonnencreme, Badesachen",
+ "tour_rice_t": "Reisfelder und Gewürzgärten",
+ "tour_rice_p": "Das Herz von Tetebatu. Wandere durch die Terrassen und kleinen Sasak-Dörfer und lerne, wie Reis vom Samen bis zur Ernte wächst. Unterwegs riechen und probieren.",
+ "tour_rice_i": [
+  "Wie Reis gepflanzt, angebaut und geerntet wird",
+  "Kaffee, Kakao, Vanille und Nelken am Baum",
+  "Frisches Obst probieren"
+ ],
+ "tour_rice_inc": "Guide, Wasser, Obst",
+ "tour_water_t": "Reisfelder und Wasserfall",
+ "tour_water_p": "Durch die Reisfelder zum Wasserfall von Tetebatu, über die Bambusbrücke statt der rutschigen Treppe. Zeit zum Schwimmen, bevor es zurückgeht.",
+ "tour_water_i": [
+  "Reisterrassen und Pflanzen erklärt",
+  "Wasserfall von Tetebatu mit Badestopp",
+  "Sichere Route über die Bambusbrücke"
+ ],
+ "tour_water_inc": "Guide, Eintritt, Wasser, Obst",
+ "tour_classic_t": "Klassischer Tetebatu-Tag",
+ "tour_classic_p": "Alles an einem Tag. Früh morgens der Affenwald, wenn die Affen aktiv sind, dann Reisfelder und Gewürzgärten, ein Sasak-Mittagessen und ein Wasserfall zum Abkühlen.",
+ "tour_classic_i": [
+  "Affenwald am Morgen",
+  "Reisfelder und Gewürzgärten",
+  "Sasak-Mittagessen",
+  "Baden am Wasserfall"
+ ],
+ "tour_classic_inc": "Guide, Eintritt, Mittagessen, Wasser, Obst",
+ "tour_classic_n": "Die schwarzen Affen leben wild. Wir sehen sie oft, versprechen können wir es nicht.",
+ "tour_rinjani_t": "Rinjani-Trekking",
+ "tour_rinjani_p": "Besteige den Vulkan mit Rizz als Guide oder Träger. Touren laufen über einen lizenzierten Trekking-Veranstalter mit der offiziellen eRinjani-Genehmigung, wie es der Nationalpark verlangt.",
+ "tour_rinjani_i": [
+  "Sonnenaufgang am Kraterrand",
+  "Genehmigung und Registrierung erledigt",
+  "Guide und Träger"
+ ],
+ "tour_rinjani_inc": "Je nach Tour, frag Rizz",
+ "tour_rinjani_n": "Der Rinjani hat feste Saisondaten und Gruppenregeln. Frag Rizz nach den aktuellen Terminen.",
+ "more_title": "Mehr rund um Tetebatu",
+ "more_p": "Lust auf etwas anderes? Rizz plant auch einen Tag zu diesen Orten. Frag per WhatsApp.",
+ "more": [
+  "Wasserfall Jukut",
+  "Benang Kelambu und Benang Stokel",
+  "Sarang Walet und Tibu Bunter",
+  "Weberdorf Pringgasela",
+  "Kochkurs",
+  "Sonnenuntergang am Pergasingan Hill"
+ ],
+ "photo_rizz": "Foto von Rizz",
+ "about_eyebrow": "Das ist Rizz",
+ "about_1": "Hi, ich bin Rizz. Ich bin 20 und lebe und arbeite in Tetebatu, zwischen den Reisfeldern und dem Vulkan.",
+ "about_2": "Ich sorge für meine Mutter und meine kleine Schwester und spare für meinen Traum: ein eigenes Guesthouse auf dem Land meiner Familie hier in Tetebatu.",
+ "about_3": "Mit mir lernst du, welches Blatt wogegen hilft, wie Reis wirklich wächst und wo sich die Affen verstecken. Und unterwegs mache ich die schönsten Fotos von dir.",
+ "plants": [
+  "Reis",
+  "Kaffee",
+  "Kakao",
+  "Vanille",
+  "Nelken",
+  "Kokos",
+  "Durian"
+ ],
+ "how_eyebrow": "So geht's",
+ "how_title": "Buchen ist eine Nachricht",
+ "s1_t": "Schick eine WhatsApp",
+ "s1_p": "Sag Rizz, welche Tour, welcher Tag, wie viele Personen und wo du wohnst.",
+ "s2_t": "Klare Antwort",
+ "s2_p": "Er bestätigt Preis, Startzeit und Abholung an deinem Homestay.",
+ "s3_t": "Los geht's",
+ "s3_p": "Bring Wasserschuhe und Neugier mit. Du bezahlst Rizz bar am Ende des Tages.",
+ "rev_eyebrow": "Bewertungen",
+ "rev_title": "Was Gäste sagen",
+ "rev_p": "Jede Bewertung bringt Rizz seinem eigenen Guesthouse näher. Mit ihm unterwegs gewesen? Schreib ein paar Worte auf Google.",
+ "rev_read": "Bewertungen auf Google",
+ "rev_write": "Bewertung schreiben",
+ "faq_title": "Gut zu wissen",
+ "faq": [
+  [
+   "Gibt es einen Geldautomaten in Tetebatu?",
+   "Nein. Es gibt keinen Geldautomaten und keine Apotheke im Dorf. Bring genug Bargeld in Rupiah mit nach Tetebatu."
+  ],
+  [
+   "Wie komme ich nach Tetebatu?",
+   "Etwa 1,5 Stunden vom Flughafen Lombok und 2 bis 3 Stunden von Kuta oder Senggigi. Grab gibt es hier nicht. Frag Rizz, er hilft dir, einen Fahrer zu finden."
+  ],
+  [
+   "Muss ich fit sein?",
+   "Die Reisfeldtour ist für die meisten leicht. Die Wege zu den Wasserfällen sind nach Regen rutschig. Der Rinjani ist eine echte Bergtour: frag Rizz, ob sie zu dir passt."
+  ],
+  [
+   "Wann ist die beste Reisezeit?",
+   "Juni bis September ist trocken. Dezember bis März ist Regenzeit: alles ist sehr grün, aber die Wege sind matschig, also Schuhe mit Profil mitbringen."
+  ],
+  [
+   "Am Wasserfall sagt jemand, ich brauche einen Guide. Stimmt das?",
+   "Wenn du mit Rizz unterwegs bist, ist der Eintritt schon im Preis und du zahlst am Eingang nichts extra."
+  ],
+  [
+   "Kann ich stornieren?",
+   "Ja, kostenlos bis 24 Stunden vorher. Du bezahlst erst am Tag selbst."
+  ],
+  [
+   "Kannst du den Rinjani organisieren?",
+   "Ja. Rizz ist Guide und Träger bei Rinjani-Touren eines lizenzierten Veranstalters, mit Genehmigung über das offizielle eRinjani-System."
+  ]
+ ],
+ "foot_where": "Tetebatu, Ost-Lombok, Indonesien",
+ "wa_general": "Hi Rizz! Ich habe deine Website gefunden und möchte eine Tour planen.",
+ "wa_tour": "Hi Rizz! Ich möchte buchen: "
+},
+ar:{
+ "bar_cta": "WhatsApp Rizz",
+ "float": "اسأل Rizz",
+ "hero_eyebrow": "مرشد محلي · Tetebatu، Lombok",
+ "hero_title": "تجوّل في Tetebatu مع مرشد محلي يعرف <em>كل نبتة</em>.",
+ "hero_lede": "مدرجات الأرز، شلالات الغابة، القرود السوداء والمحاصيل التي تنمو هنا. مجموعات صغيرة، وإيقاعك أنت، وأسعار ثابتة بلا أي رسوم مخفية.",
+ "hero_cta": "خطّط لجولتك عبر WhatsApp",
+ "hero_cta2": "شاهد الجولات",
+ "promises": [
+  [
+   "الدفع في يوم الجولة",
+   "بلا دفع مسبق، نقدًا بالروبية."
+  ],
+  [
+   "إلغاء مجاني",
+   "حتى 24 ساعة قبل الموعد."
+  ],
+  [
+   "أسعار شاملة",
+   "رسوم الدخول والماء مشمولة."
+  ],
+  [
+   "استقبال في Tetebatu",
+   "من مكان إقامتك، في الوقت المحدد."
+  ]
+ ],
+ "tours_eyebrow": "الجولات",
+ "tours_title": "اختر جولتك",
+ "tours_sub": "كل جولة تبدأ من مكان إقامتك في Tetebatu. أخبر Rizz بإيقاعك وهو يعدّل المسار.",
+ "hours": "ساعات",
+ "ask_price": "السعر عبر WhatsApp",
+ "book": "احجز عبر WhatsApp",
+ "photo": "الصورة قريبًا",
+ "l_start": "البداية",
+ "l_level": "المستوى",
+ "l_incl": "مشمول",
+ "l_bring": "أحضر معك",
+ "level": {
+  "easy": "سهل",
+  "mod": "متوسط، مع بعض الأجزاء الزلقة",
+  "hard": "صعب، تسلّق جبل حقيقي"
+ },
+ "bring_walk": "حذاء مائي أو حذاء بقبضة جيدة، واقي شمس، ملابس سباحة",
+ "tour_rice_t": "جولة حقول الأرز وحديقة التوابل",
+ "tour_rice_p": "قلب Tetebatu. امشِ بين المدرجات وقرى Sasak الصغيرة وتعلّم كيف ينمو الأرز من البذرة إلى الحصاد. شمّ المحاصيل وتذوّقها في الطريق.",
+ "tour_rice_i": [
+  "كيف يُزرع الأرز وينمو ويُحصد",
+  "القهوة والكاكاو والفانيليا والقرنفل على الشجرة",
+  "تذوّق فاكهة طازجة"
+ ],
+ "tour_rice_inc": "المرشد، الماء، الفاكهة",
+ "tour_water_t": "حقول الأرز والشلال",
+ "tour_water_p": "عبر حقول الأرز إلى شلال Tetebatu، فوق جسر الخيزران بدل الدرج الزلق. وقت للسباحة قبل العودة.",
+ "tour_water_i": [
+  "شرح مدرجات الأرز والنباتات",
+  "شلال Tetebatu مع استراحة سباحة",
+  "مسار آمن فوق جسر الخيزران"
+ ],
+ "tour_water_inc": "المرشد، رسوم الدخول، الماء، الفاكهة",
+ "tour_classic_t": "يوم Tetebatu الكلاسيكي",
+ "tour_classic_p": "الصورة الكاملة في يوم واحد. غابة القرود في الصباح الباكر حين تكون القرود نشيطة، حقول الأرز وحدائق التوابل، غداء Sasak محلي وشلال للانتعاش.",
+ "tour_classic_i": [
+  "غابة القرود في الصباح",
+  "حقول الأرز وحدائق التوابل",
+  "غداء Sasak",
+  "سباحة في الشلال"
+ ],
+ "tour_classic_inc": "المرشد، رسوم الدخول، الغداء، الماء، الفاكهة",
+ "tour_classic_n": "القرود السوداء تعيش برية في الغابة، لذلك نراها غالبًا لكن لا نستطيع الوعد بذلك.",
+ "tour_rinjani_t": "رحلة جبل Rinjani",
+ "tour_rinjani_p": "اصعد البركان مع Rizz كمرشد أو حامل أمتعة. تُنظَّم الرحلات مع منظّم رحلات مرخّص وتصريح eRinjani الرسمي، كما تشترط الحديقة الوطنية.",
+ "tour_rinjani_i": [
+  "شروق الشمس على حافة الفوهة",
+  "ترتيب التصريح والتسجيل",
+  "مرشد ودعم حمل الأمتعة"
+ ],
+ "tour_rinjani_inc": "يعتمد على الرحلة، اسأل Rizz",
+ "tour_rinjani_n": "لـ Rinjani مواعيد موسم ثابتة وقواعد للمجموعات. اسأل Rizz عن المواعيد الحالية.",
+ "more_title": "المزيد من Tetebatu",
+ "more_p": "تريد شيئًا آخر؟ يستطيع Rizz تخطيط يوم إلى هذه الأماكن أيضًا. اسأله عبر WhatsApp.",
+ "more": [
+  "شلال Jukut",
+  "Benang Kelambu و Benang Stokel",
+  "Sarang Walet و Tibu Bunter",
+  "قرية النسيج Pringgasela",
+  "درس طبخ",
+  "غروب الشمس في Pergasingan Hill"
+ ],
+ "photo_rizz": "صورة Rizz",
+ "about_eyebrow": "تعرّف على Rizz",
+ "about_1": "مرحبًا، أنا Rizz. عمري 20 سنة وأعيش وأعمل في Tetebatu، بين حقول الأرز والبركان.",
+ "about_2": "أعتني بأمي وأختي الصغيرة، وأدّخر لحلمي: بيت ضيافة خاص بي على أرض عائلتي هنا في Tetebatu.",
+ "about_3": "في جولة معي ستتعلّم أي ورقة تنفع لأي شيء، وكيف ينمو الأرز فعلًا، وأين تختبئ القرود. وسألتقط لك أجمل الصور في الطريق.",
+ "plants": [
+  "الأرز",
+  "القهوة",
+  "الكاكاو",
+  "الفانيليا",
+  "القرنفل",
+  "جوز الهند",
+  "الدوريان"
+ ],
+ "how_eyebrow": "كيف يعمل",
+ "how_title": "الحجز برسالة واحدة",
+ "s1_t": "أرسل رسالة WhatsApp",
+ "s1_p": "أخبر Rizz أي جولة، وأي يوم، وكم شخصًا، وأين تقيم.",
+ "s2_t": "احصل على ردّ واضح",
+ "s2_p": "يؤكد لك السعر ووقت البداية والاستقبال من مكان إقامتك.",
+ "s3_t": "هيا نمشِ",
+ "s3_p": "أحضر حذاءً مائيًا وفضولك. تدفع لـ Rizz نقدًا في نهاية اليوم.",
+ "rev_eyebrow": "التقييمات",
+ "rev_title": "ماذا يقول الضيوف",
+ "rev_p": "كل تقييم يقرّب Rizz من بيت الضيافة الخاص به. مشيت معه؟ اترك بضع كلمات على Google.",
+ "rev_read": "اقرأ التقييمات على Google",
+ "rev_write": "اكتب تقييمًا",
+ "faq_title": "من الجيد أن تعرف",
+ "faq": [
+  [
+   "هل يوجد صراف آلي في Tetebatu؟",
+   "لا. لا يوجد صراف آلي ولا صيدلية في القرية. أحضر معك نقدًا كافيًا بالروبية عند قدومك إلى Tetebatu."
+  ],
+  [
+   "كيف أصل إلى Tetebatu؟",
+   "حوالي 1.5 ساعة من مطار Lombok و2 إلى 3 ساعات من Kuta أو Senggigi. لا يوجد Grab هنا. اسأل Rizz وسيساعدك في إيجاد سائق."
+  ],
+  [
+   "هل أحتاج إلى لياقة بدنية؟",
+   "جولة حقول الأرز سهلة لمعظم الناس. مسارات الشلالات فيها أجزاء زلقة بعد المطر. Rinjani تسلّق جبل حقيقي: اسأل Rizz إن كان يناسبك."
+  ],
+  [
+   "ما أفضل وقت للزيارة؟",
+   "من يونيو إلى سبتمبر موسم جاف. من ديسمبر إلى مارس موسم الأمطار: كل شيء أخضر جدًا، لكن الطرق موحلة، فأحضر حذاءً بقبضة جيدة."
+  ],
+  [
+   "قال لي أحدهم عند الشلال إنني بحاجة إلى مرشد. هل هذا صحيح؟",
+   "عندما تمشي مع Rizz، تكون رسوم الدخول مشمولة أصلًا ولا تدفع شيئًا إضافيًا عند البوابة."
+  ],
+  [
+   "هل يمكنني الإلغاء؟",
+   "نعم، مجانًا حتى 24 ساعة قبل الموعد. تدفع فقط في يوم الجولة نفسه."
+  ],
+  [
+   "هل يمكنكم تنظيم رحلة Rinjani؟",
+   "نعم. يرشد Rizz ويحمل الأمتعة في رحلات Rinjani التي ينظّمها منظّم رحلات مرخّص، مع تصاريح عبر نظام eRinjani الرسمي."
+  ]
+ ],
+ "foot_where": "Tetebatu، شرق Lombok، إندونيسيا",
+ "wa_general": "مرحبًا Rizz! وجدت موقعك وأريد تخطيط جولة.",
+ "wa_tour": "مرحبًا Rizz! أودّ حجز: "
+},
+cs:{
+ "bar_cta": "WhatsApp Rizz",
+ "float": "Zeptej se Rizze",
+ "hero_eyebrow": "Místní průvodce · Tetebatu, Lombok",
+ "hero_title": "Projdi Tetebatu s místním, který zná <em>každou rostlinu</em>.",
+ "hero_lede": "Rýžové terasy, vodopády v džungli, černé opice a vše, co tu roste. Malé skupiny, tvoje tempo a pevné ceny bez skrytých poplatků.",
+ "hero_cta": "Naplánuj procházku přes WhatsApp",
+ "hero_cta2": "Zobrazit túry",
+ "promises": [
+  [
+   "Platba na místě",
+   "Žádná záloha, hotově v rupiích."
+  ],
+  [
+   "Storno zdarma",
+   "Až 24 hodin předem."
+  ],
+  [
+   "Vše v ceně",
+   "Vstupné a voda v ceně."
+  ],
+  [
+   "Vyzvednutí v Tetebatu",
+   "U tvého homestay, včas."
+  ]
+ ],
+ "tours_eyebrow": "Túry",
+ "tours_title": "Vyber si svou procházku",
+ "tours_sub": "Každá túra začíná u tvého homestay v Tetebatu. Řekni Rizzovi, jaké máš tempo, a on trasu přizpůsobí.",
+ "hours": "hod.",
+ "ask_price": "Cena přes WhatsApp",
+ "book": "Rezervovat přes WhatsApp",
+ "photo": "Fotka brzy",
+ "l_start": "Start",
+ "l_level": "Náročnost",
+ "l_incl": "V ceně",
+ "l_bring": "Vezmi si s sebou",
+ "level": {
+  "easy": "Lehká",
+  "mod": "Střední, místy kluzko",
+  "hard": "Těžká, opravdové horské stoupání"
+ },
+ "bring_walk": "Boty do vody nebo s dobrým vzorkem, opalovací krém, plavky",
+ "tour_rice_t": "Rýžová pole a zahrada s kořením",
+ "tour_rice_p": "Srdce Tetebatu. Projdi se terasami a malými vesnicemi Sasak a uvidíš, jak roste rýže, od semínka po sklizeň. Cestou si můžeš místní plodiny přivonět a ochutnat.",
+ "tour_rice_i": [
+  "Jak se rýže sází, pěstuje a sklízí",
+  "Káva, kakao, vanilka a hřebíček přímo na stromě",
+  "Ochutnávka čerstvého ovoce"
+ ],
+ "tour_rice_inc": "Průvodce, voda, ovoce",
+ "tour_water_t": "Rýžová pole a vodopád",
+ "tour_water_p": "Přes rýžová pole k vodopádu Tetebatu, po bambusovém mostě místo kluzkých schodů. Před cestou zpět zbyde čas na koupání.",
+ "tour_water_i": [
+  "Rýžové terasy a rostliny s výkladem",
+  "Vodopád Tetebatu se zastávkou na koupání",
+  "Bezpečná trasa po bambusovém mostě"
+ ],
+ "tour_water_inc": "Průvodce, vstupné, voda, ovoce",
+ "tour_classic_t": "Klasický den v Tetebatu",
+ "tour_classic_p": "Všechno za jeden den. Opičí les brzy ráno, když jsou opice aktivní, rýžová pole a zahrady s kořením, sasacký oběd a vodopád na osvěžení.",
+ "tour_classic_i": [
+  "Opičí les ráno",
+  "Rýžová pole a zahrady s kořením",
+  "Sasacký oběd",
+  "Koupání u vodopádu"
+ ],
+ "tour_classic_inc": "Průvodce, vstupné, oběd, voda, ovoce",
+ "tour_classic_n": "Černé opice žijí v lese ve volné přírodě, takže je často vidíme, ale slíbit to nemůžeme.",
+ "tour_rinjani_t": "Trek na Rinjani",
+ "tour_rinjani_p": "Vystup na sopku s Rizzem jako průvodcem nebo nosičem. Treky probíhají s licencovaným organizátorem a oficiálním povolením eRinjani, jak vyžaduje národní park.",
+ "tour_rinjani_i": [
+  "Východ slunce na okraji kráteru",
+  "Povolení a registrace vyřízeny",
+  "Průvodce a pomoc nosičů"
+ ],
+ "tour_rinjani_inc": "Podle treku, zeptej se Rizze",
+ "tour_rinjani_n": "Rinjani má pevné termíny sezony a pravidla pro skupiny. Zeptej se Rizze na aktuální termíny.",
+ "more_title": "Další místa kolem Tetebatu",
+ "more_p": "Chceš něco jiného? Rizz naplánuje den i do těchto míst. Napiš mu na WhatsApp.",
+ "more": [
+  "Vodopád Jukut",
+  "Benang Kelambu a Benang Stokel",
+  "Sarang Walet a Tibu Bunter",
+  "Tkalcovská vesnice Pringgasela",
+  "Kurz vaření",
+  "Západ slunce na Pergasingan Hill"
+ ],
+ "photo_rizz": "Fotka Rizze",
+ "about_eyebrow": "Poznej Rizze",
+ "about_1": "Ahoj, jsem Rizz. Je mi 20 a žiju a pracuju v Tetebatu, mezi rýžovými poli a sopkou.",
+ "about_2": "Starám se o maminku a mladší sestru a spořím na svůj sen: vlastní guesthouse na pozemku mé rodiny tady v Tetebatu.",
+ "about_3": "Při procházce se mnou zjistíš, který list na co pomáhá, jak rýže doopravdy roste a kde se schovávají opice. A cestou ti udělám ty nejlepší fotky.",
+ "plants": [
+  "Rýže",
+  "Káva",
+  "Kakao",
+  "Vanilka",
+  "Hřebíček",
+  "Kokos",
+  "Durian"
+ ],
+ "how_eyebrow": "Jak to funguje",
+ "how_title": "Rezervace je jedna zpráva",
+ "s1_t": "Napiš na WhatsApp",
+ "s1_p": "Řekni Rizzovi, jakou túru, který den, kolik vás bude a kde bydlíš.",
+ "s2_t": "Dostaneš jasnou odpověď",
+ "s2_p": "Potvrdí cenu, čas startu a vyzvednutí u tvého homestay.",
+ "s3_t": "Vyraz na procházku",
+ "s3_p": "Vezmi si boty do vody a zvědavost. Rizzovi platíš hotově na konci dne.",
+ "rev_eyebrow": "Recenze",
+ "rev_title": "Co říkají hosté",
+ "rev_p": "Každá recenze přibližuje Rizze k jeho vlastnímu guesthouse. Šel jsi s ním? Napiš pár slov na Google.",
+ "rev_read": "Číst recenze na Google",
+ "rev_write": "Napsat recenzi",
+ "faq_title": "Dobré vědět",
+ "faq": [
+  [
+   "Je v Tetebatu bankomat?",
+   "Ne. Ve vesnici není bankomat ani lékárna. Vezmi si s sebou dost hotovosti v rupiích."
+  ],
+  [
+   "Jak se dostanu do Tetebatu?",
+   "Asi 1,5 hodiny od letiště na Lomboku a 2 až 3 hodiny od Kuty nebo Senggigi. Grab tu nejezdí. Zeptej se Rizze, pomůže ti sehnat řidiče."
+  ],
+  [
+   "Musím být v kondici?",
+   "Procházka po rýžových polích je pro většinu lidí lehká. Cesty k vodopádům jsou po dešti kluzké. Rinjani je opravdové horské stoupání: zeptej se Rizze, jestli je pro tebe."
+  ],
+  [
+   "Kdy je nejlepší čas?",
+   "Od června do září je sucho. Od prosince do března je období dešťů: všechno je krásně zelené, ale cesty jsou blátivé, vezmi si proto boty s dobrým vzorkem."
+  ],
+  [
+   "U vodopádu mi někdo říká, že potřebuju průvodce. Je to pravda?",
+   "Když jdeš s Rizzem, vstupné je už v ceně a u vstupu nic navíc neplatíš."
+  ],
+  [
+   "Můžu rezervaci zrušit?",
+   "Ano, zdarma až 24 hodin předem. Platíš až v den túry."
+  ],
+  [
+   "Zvládneš zorganizovat Rinjani?",
+   "Ano. Rizz chodí na Rinjani jako průvodce a nosič s licencovaným organizátorem a povolení se vyřizují přes oficiální systém eRinjani."
+  ]
+ ],
+ "foot_where": "Tetebatu, východní Lombok, Indonésie",
+ "wa_general": "Ahoj Rizz! Našel jsem tvůj web a chci naplánovat procházku.",
+ "wa_tour": "Ahoj Rizz! Chtěl bych si zarezervovat: "
+},
+da:{
+ "bar_cta": "WhatsApp Rizz",
+ "float": "Spørg Rizz",
+ "hero_eyebrow": "Lokal guide · Tetebatu, Lombok",
+ "hero_title": "Oplev Tetebatu med en lokal, der kender <em>hver eneste plante</em>.",
+ "hero_lede": "Risterrasser, vandfald i junglen, sorte aber og alt det, der gror her. Små grupper, din egen fart og faste priser uden overraskelser.",
+ "hero_cta": "Planlæg din tur på WhatsApp",
+ "hero_cta2": "Se turene",
+ "promises": [
+  [
+   "Betal på dagen",
+   "Intet på forhånd, kontant i rupiah."
+  ],
+  [
+   "Gratis afbestilling",
+   "Op til 24 timer før."
+  ],
+  [
+   "Alt inklusive",
+   "Entré og vand er med i prisen."
+  ],
+  [
+   "Afhentning i Tetebatu",
+   "Ved dit homestay, til tiden."
+  ]
+ ],
+ "tours_eyebrow": "Ture",
+ "tours_title": "Vælg din tur",
+ "tours_sub": "Hver tur starter ved dit homestay i Tetebatu. Fortæl Rizz, hvilket tempo du går i, så tilpasser han ruten.",
+ "hours": "timer",
+ "ask_price": "Pris på WhatsApp",
+ "book": "Book på WhatsApp",
+ "photo": "Foto kommer snart",
+ "l_start": "Start",
+ "l_level": "Niveau",
+ "l_incl": "Inkluderet",
+ "l_bring": "Tag med",
+ "level": {
+  "easy": "Let",
+  "mod": "Middel, nogle glatte steder",
+  "hard": "Svær, rigtig bjergtur"
+ },
+ "bring_walk": "Vandsko eller sko med godt greb, solcreme, badetøj",
+ "tour_rice_t": "Rismarker og krydderihave",
+ "tour_rice_p": "Tetebatus hjerte. Gå gennem terrasserne og små Sasak-landsbyer, og lær hvordan ris gror, fra frø til høst. Duft og smag på afgrøderne undervejs.",
+ "tour_rice_i": [
+  "Hvordan ris plantes, dyrkes og høstes",
+  "Kaffe, kakao, vanilje og nelliker på træet",
+  "Smagsprøver på frisk frugt"
+ ],
+ "tour_rice_inc": "Guide, vand, frugt",
+ "tour_water_t": "Rismarker og vandfald",
+ "tour_water_p": "Gennem rismarkerne til Tetebatu-vandfaldet, over bambusbroen i stedet for de glatte trapper. Tid til en svømmetur, før vi går tilbage.",
+ "tour_water_i": [
+  "Risterrasser og planter forklaret",
+  "Tetebatu-vandfaldet med svømmestop",
+  "Sikker rute over bambusbroen"
+ ],
+ "tour_water_inc": "Guide, entré, vand, frugt",
+ "tour_classic_t": "Klassisk Tetebatu-dag",
+ "tour_classic_p": "Det hele på én dag. Abeskoven tidligt om morgenen, når aberne er aktive, rismarker og krydderihaver, en lokal Sasak-frokost og et vandfald at køle af i.",
+ "tour_classic_i": [
+  "Abeskov om morgenen",
+  "Rismarker og krydderihaver",
+  "Sasak-frokost",
+  "Svømmetur i vandfaldet"
+ ],
+ "tour_classic_inc": "Guide, entré, frokost, vand, frugt",
+ "tour_classic_n": "De sorte aber lever vildt i skoven, så vi ser dem tit, men kan ikke love det.",
+ "tour_rinjani_t": "Bestigning af Rinjani",
+ "tour_rinjani_p": "Bestig vulkanen med Rizz som guide eller bærer. Turene kører med en autoriseret trekkingarrangør og den officielle eRinjani-tilladelse, som nationalparken kræver.",
+ "tour_rinjani_i": [
+  "Solopgang på kraterkanten",
+  "Tilladelse og registrering ordnes",
+  "Guide og hjælp til at bære"
+ ],
+ "tour_rinjani_inc": "Afhænger af turen, spørg Rizz",
+ "tour_rinjani_n": "Rinjani har faste sæsondatoer og grupperegler. Spørg Rizz om de aktuelle datoer.",
+ "more_title": "Mere fra Tetebatu",
+ "more_p": "Vil du noget andet? Rizz kan også planlægge en dag til disse steder. Spørg på WhatsApp.",
+ "more": [
+  "Jukut-vandfaldet",
+  "Benang Kelambu & Benang Stokel",
+  "Sarang Walet & Tibu Bunter",
+  "Væverlandsbyen Pringgasela",
+  "Madlavningskursus",
+  "Solnedgang ved Pergasingan Hill"
+ ],
+ "photo_rizz": "Foto af Rizz",
+ "about_eyebrow": "Mød Rizz",
+ "about_1": "Hej, jeg hedder Rizz. Jeg er 20 og bor og arbejder i Tetebatu, mellem rismarkerne og vulkanen.",
+ "about_2": "Jeg passer min mor og min lillesøster, og jeg sparer op til min drøm: mit eget gæstehus på min families jord her i Tetebatu.",
+ "about_3": "På en tur med mig lærer du, hvilket blad der hjælper mod hvad, hvordan ris egentlig gror, og hvor aberne gemmer sig. Og jeg tager de bedste billeder af dig undervejs.",
+ "plants": [
+  "Ris",
+  "Kaffe",
+  "Kakao",
+  "Vanilje",
+  "Nelliker",
+  "Kokos",
+  "Durian"
+ ],
+ "how_eyebrow": "Sådan virker det",
+ "how_title": "Det tager én besked at booke",
+ "s1_t": "Send en WhatsApp",
+ "s1_p": "Fortæl Rizz, hvilken tur, hvilken dag, hvor mange I er, og hvor du bor.",
+ "s2_t": "Få et klart svar",
+ "s2_p": "Han bekræfter prisen, starttidspunktet og afhentningen ved dit homestay.",
+ "s3_t": "Gå en tur",
+ "s3_p": "Tag vandsko og nysgerrighed med. Du betaler Rizz kontant i slutningen af dagen.",
+ "rev_eyebrow": "Anmeldelser",
+ "rev_title": "Hvad gæsterne siger",
+ "rev_p": "Hver anmeldelse hjælper Rizz tættere på hans eget gæstehus. Har du gået med ham? Skriv et par ord på Google.",
+ "rev_read": "Læs anmeldelser på Google",
+ "rev_write": "Skriv en anmeldelse",
+ "faq_title": "Godt at vide",
+ "faq": [
+  [
+   "Er der en hæveautomat i Tetebatu?",
+   "Nej. Der er hverken hæveautomat eller apotek i landsbyen. Tag nok kontanter i rupiah med, når du kommer til Tetebatu."
+  ],
+  [
+   "Hvordan kommer jeg til Tetebatu?",
+   "Cirka 1,5 time fra Lomboks lufthavn og 2 til 3 timer fra Kuta eller Senggigi. Der er ingen Grab her. Spørg Rizz, så hjælper han dig med at finde en chauffør."
+  ],
+  [
+   "Skal jeg være i god form?",
+   "Turen gennem rismarkerne er let for de fleste. Vandfaldsruterne har glatte steder efter regn. Rinjani er en rigtig bjergtur: spørg Rizz, om den passer til dig."
+  ],
+  [
+   "Hvornår er den bedste tid?",
+   "Juni til september er tørt. December til marts er regntid: alt er meget grønt, men stierne er mudrede, så tag sko med godt greb med."
+  ],
+  [
+   "Nogen ved vandfaldet siger, at jeg skal have en guide. Passer det?",
+   "Når du går med Rizz, er entréen allerede med, og du betaler ikke noget ekstra ved porten."
+  ],
+  [
+   "Kan jeg afbestille?",
+   "Ja, gratis indtil 24 timer før. Du betaler først selve dagen."
+  ],
+  [
+   "Kan du ordne Rinjani?",
+   "Ja. Rizz guider og bærer på Rinjani-ture, der køres af en autoriseret trekkingarrangør, med tilladelser gennem det officielle eRinjani-system."
+  ]
+ ],
+ "foot_where": "Tetebatu, Østlombok, Indonesien",
+ "wa_general": "Hej Rizz! Jeg har fundet din hjemmeside og vil gerne planlægge en tur.",
+ "wa_tour": "Hej Rizz! Jeg vil gerne booke: "
+},
+es:{
+ "bar_cta": "WhatsApp Rizz",
+ "float": "Pregunta a Rizz",
+ "hero_eyebrow": "Guía local · Tetebatu, Lombok",
+ "hero_title": "Recorre Tetebatu con un local que conoce <em>cada planta</em>.",
+ "hero_lede": "Arrozales en terrazas, cascadas en la selva, monos negros y todos los cultivos de aquí. Grupos pequeños, tu propio ritmo y precios fijos sin sorpresas.",
+ "hero_cta": "Planea tu caminata por WhatsApp",
+ "hero_cta2": "Ver las rutas",
+ "promises": [
+  [
+   "Pagas el mismo día",
+   "Sin pago anticipado, en efectivo, en rupias."
+  ],
+  [
+   "Cancelación gratis",
+   "Hasta 24 horas antes."
+  ],
+  [
+   "Todo incluido",
+   "Entradas y agua incluidas."
+  ],
+  [
+   "Recogida en Tetebatu",
+   "En tu homestay, puntual."
+  ]
+ ],
+ "tours_eyebrow": "Rutas",
+ "tours_title": "Elige tu caminata",
+ "tours_sub": "Cada ruta empieza en tu homestay en Tetebatu. Dile a Rizz tu ritmo y él ajusta el recorrido.",
+ "hours": "horas",
+ "ask_price": "Precio por WhatsApp",
+ "book": "Reservar por WhatsApp",
+ "photo": "Foto próximamente",
+ "l_start": "Salida",
+ "l_level": "Nivel",
+ "l_incl": "Incluido",
+ "l_bring": "Lleva",
+ "level": {
+  "easy": "Fácil",
+  "mod": "Moderado, algunos tramos resbaladizos",
+  "hard": "Difícil, subida de montaña de verdad"
+ },
+ "bring_walk": "Zapatos de agua o con buen agarre, protector solar, bañador",
+ "tour_rice_t": "Arrozales y jardín de especias",
+ "tour_rice_p": "El corazón de Tetebatu. Camina por las terrazas y los pequeños pueblos sasak y descubre cómo crece el arroz, de la semilla a la cosecha. Huele y prueba los cultivos por el camino.",
+ "tour_rice_i": [
+  "Cómo se planta, se cultiva y se cosecha el arroz",
+  "Café, cacao, vainilla y clavo en el árbol",
+  "Degustación de fruta fresca"
+ ],
+ "tour_rice_inc": "Guía, agua, fruta",
+ "tour_water_t": "Arrozales y cascada",
+ "tour_water_p": "Por los arrozales hasta la cascada de Tetebatu, cruzando el puente de bambú en lugar de las escaleras resbaladizas. Hay tiempo para bañarte antes de volver.",
+ "tour_water_i": [
+  "Terrazas de arroz y plantas explicadas",
+  "Cascada de Tetebatu con parada para bañarse",
+  "Ruta segura por el puente de bambú"
+ ],
+ "tour_water_inc": "Guía, entrada, agua, fruta",
+ "tour_classic_t": "Día clásico en Tetebatu",
+ "tour_classic_p": "Todo en un solo día. El bosque de los monos temprano por la mañana, cuando están activos, arrozales y jardines de especias, una comida sasak y una cascada para refrescarte.",
+ "tour_classic_i": [
+  "Bosque de los monos por la mañana",
+  "Arrozales y jardines de especias",
+  "Comida sasak",
+  "Baño en la cascada"
+ ],
+ "tour_classic_inc": "Guía, entradas, comida, agua, fruta",
+ "tour_classic_n": "Los monos negros viven en libertad en el bosque. Los vemos a menudo, pero no podemos prometerlo.",
+ "tour_rinjani_t": "Trekking al monte Rinjani",
+ "tour_rinjani_p": "Sube al volcán con Rizz como guía o porteador. Los treks se hacen con un organizador autorizado y el permiso oficial eRinjani, como exige el parque nacional.",
+ "tour_rinjani_i": [
+  "Amanecer en el borde del cráter",
+  "Permiso y registro gestionados",
+  "Guía y porteador"
+ ],
+ "tour_rinjani_inc": "Depende del trek, pregunta a Rizz",
+ "tour_rinjani_n": "El Rinjani tiene fechas de temporada fijas y normas de grupo. Pregunta a Rizz por las fechas actuales.",
+ "more_title": "Más desde Tetebatu",
+ "more_p": "¿Quieres algo distinto? Rizz también puede preparar un día a estos sitios. Pregunta por WhatsApp.",
+ "more": [
+  "Cascada de Jukut",
+  "Benang Kelambu y Benang Stokel",
+  "Sarang Walet y Tibu Bunter",
+  "Pueblo de tejedores de Pringgasela",
+  "Clase de cocina",
+  "Atardecer en Pergasingan Hill"
+ ],
+ "photo_rizz": "Foto de Rizz",
+ "about_eyebrow": "Conoce a Rizz",
+ "about_1": "Hola, soy Rizz. Tengo 20 años y vivo y trabajo en Tetebatu, entre los arrozales y el volcán.",
+ "about_2": "Cuido de mi madre y de mi hermana pequeña, y ahorro para mi sueño: mi propia casa de huéspedes en el terreno de mi familia, aquí en Tetebatu.",
+ "about_3": "Caminando conmigo aprendes qué hoja sirve para qué, cómo crece de verdad el arroz y dónde se esconden los monos. Y por el camino te hago las mejores fotos.",
+ "plants": [
+  "Arroz",
+  "Café",
+  "Cacao",
+  "Vainilla",
+  "Clavo",
+  "Coco",
+  "Durian"
+ ],
+ "how_eyebrow": "Cómo funciona",
+ "how_title": "Reservar es un solo mensaje",
+ "s1_t": "Manda un WhatsApp",
+ "s1_p": "Dile a Rizz qué ruta, qué día, cuántas personas sois y dónde te alojas.",
+ "s2_t": "Recibe una respuesta clara",
+ "s2_p": "Él confirma el precio, la hora de salida y la recogida en tu homestay.",
+ "s3_t": "A caminar",
+ "s3_p": "Trae zapatos de agua y curiosidad. Pagas a Rizz en efectivo al final del día.",
+ "rev_eyebrow": "Reseñas",
+ "rev_title": "Lo que dicen los viajeros",
+ "rev_p": "Cada reseña acerca a Rizz a su propia casa de huéspedes. ¿Has caminado con él? Deja unas palabras en Google.",
+ "rev_read": "Leer reseñas en Google",
+ "rev_write": "Escribir una reseña",
+ "faq_title": "Bueno saber",
+ "faq": [
+  [
+   "¿Hay cajero automático en Tetebatu?",
+   "No. En el pueblo no hay cajero ni farmacia. Trae suficiente efectivo en rupias cuando vengas a Tetebatu."
+  ],
+  [
+   "¿Cómo llego a Tetebatu?",
+   "A unas 1,5 horas del aeropuerto de Lombok y a 2 o 3 horas de Kuta o Senggigi. Aquí no hay Grab. Pregunta a Rizz y te ayuda a encontrar conductor."
+  ],
+  [
+   "¿Tengo que estar en forma?",
+   "La caminata por los arrozales es fácil para casi todos. Las rutas de cascada tienen tramos resbaladizos después de la lluvia. El Rinjani es una subida de montaña de verdad: pregunta a Rizz si es para ti."
+  ],
+  [
+   "¿Cuál es la mejor época?",
+   "De junio a septiembre es la estación seca. De diciembre a marzo es la época de lluvias: todo está muy verde, pero los caminos tienen barro, así que lleva zapatos con buen agarre."
+  ],
+  [
+   "Alguien en la cascada dice que necesito guía. ¿Es verdad?",
+   "Cuando caminas con Rizz, las entradas ya están incluidas y no pagas nada más en la puerta."
+  ],
+  [
+   "¿Puedo cancelar?",
+   "Sí, gratis hasta 24 horas antes. Solo pagas el mismo día."
+  ],
+  [
+   "¿Puedes organizar el Rinjani?",
+   "Sí. Rizz guía y carga en los treks al Rinjani de un organizador autorizado, con permisos a través del sistema oficial eRinjani."
+  ]
+ ],
+ "foot_where": "Tetebatu, Lombok Oriental, Indonesia",
+ "wa_general": "¡Hola Rizz! Encontré tu web y quiero planear una caminata.",
+ "wa_tour": "¡Hola Rizz! Me gustaría reservar: "
+},
+fi:{
+ "bar_cta": "WhatsApp Rizz",
+ "float": "Kysy Rizziltä",
+ "hero_eyebrow": "Paikallinen opas · Tetebatu, Lombok",
+ "hero_title": "Kävele Tetebatussa paikallisen kanssa, joka tuntee <em>jokaisen kasvin</em>.",
+ "hero_lede": "Riisiterassit, viidakon vesiputoukset, mustat apinat ja kaikki, mikä täällä kasvaa. Pienet ryhmät, oma tahtisi ja kiinteät hinnat ilman yllätyksiä.",
+ "hero_cta": "Suunnittele retkesi WhatsAppissa",
+ "hero_cta2": "Katso retket",
+ "promises": [
+  [
+   "Maksu paikan päällä",
+   "Ei ennakkomaksua, käteisellä rupioina."
+  ],
+  [
+   "Ilmainen peruutus",
+   "Jopa 24 tuntia ennen."
+  ],
+  [
+   "Kaikki hinnassa",
+   "Pääsymaksut ja vesi kuuluvat hintaan."
+  ],
+  [
+   "Nouto Tetebatussa",
+   "Majoituspaikastasi, ajallaan."
+  ]
+ ],
+ "tours_eyebrow": "Retket",
+ "tours_title": "Valitse retkesi",
+ "tours_sub": "Jokainen retki alkaa majoituspaikastasi Tetebatussa. Kerro Rizzille vauhtisi, niin hän sovittaa reitin sinulle.",
+ "hours": "tuntia",
+ "ask_price": "Hinta WhatsAppissa",
+ "book": "Varaa WhatsAppissa",
+ "photo": "Kuva tulossa",
+ "l_start": "Lähtö",
+ "l_level": "Taso",
+ "l_incl": "Hintaan kuuluu",
+ "l_bring": "Ota mukaan",
+ "level": {
+  "easy": "Helppo",
+  "mod": "Keskitaso, osa reitistä liukasta",
+  "hard": "Vaativa, oikea vuorikiipeily"
+ },
+ "bring_walk": "Vesikengät tai kengät, joissa on hyvä pito, aurinkovoide, uimavaatteet",
+ "tour_rice_t": "Riisipellot ja mausteiden puutarha",
+ "tour_rice_p": "Tetebatun sydän. Kävele terasseilla ja pienissä Sasak-kylissä ja opi, miten riisi kasvaa siemenestä satoon. Haistele ja maistele viljelykasveja matkan varrella.",
+ "tour_rice_i": [
+  "Miten riisi istutetaan, kasvatetaan ja korjataan",
+  "Kahvia, kaakaota, vaniljaa ja neilikkaa puussa",
+  "Tuoreiden hedelmien maistelu"
+ ],
+ "tour_rice_inc": "Opas, vesi, hedelmät",
+ "tour_water_t": "Riisipellot ja vesiputous",
+ "tour_water_p": "Riisipeltojen halki Tetebatun vesiputoukselle, bambusillan yli liukkaiden portaiden sijaan. Ehdit uida ennen paluumatkaa.",
+ "tour_water_i": [
+  "Riisiterassit ja kasvit selitettyinä",
+  "Tetebatun vesiputous uintitauolla",
+  "Turvallinen reitti bambusillan yli"
+ ],
+ "tour_water_inc": "Opas, pääsymaksu, vesi, hedelmät",
+ "tour_classic_t": "Klassinen Tetebatu-päivä",
+ "tour_classic_p": "Koko kuva yhdessä päivässä. Apinametsä aikaisin aamulla, kun apinat ovat vilkkaimmillaan, riisipellot ja mausteiden puutarhat, paikallinen Sasak-lounas ja vesiputous virkistäytymiseen.",
+ "tour_classic_i": [
+  "Apinametsä aamulla",
+  "Riisipellot ja mausteiden puutarhat",
+  "Sasak-lounas",
+  "Uinti vesiputouksessa"
+ ],
+ "tour_classic_inc": "Opas, pääsymaksut, lounas, vesi, hedelmät",
+ "tour_classic_n": "Mustat apinat elävät metsässä luonnonvaraisina, joten näemme ne usein, mutta emme voi luvata.",
+ "tour_rinjani_t": "Rinjani-vuoren vaellus",
+ "tour_rinjani_p": "Kiipeä tulivuorelle Rizzin johdolla tai kantajana. Vaellukset järjestää lisensoitu vaellusjärjestäjä ja virallinen eRinjani-lupa, kuten kansallispuisto vaatii.",
+ "tour_rinjani_i": [
+  "Auringonnousu kraatterin reunalla",
+  "Luvat ja ilmoittautuminen hoidetaan",
+  "Opas ja kantajan apu"
+ ],
+ "tour_rinjani_inc": "Riippuu vaelluksesta, kysy Rizziltä",
+ "tour_rinjani_n": "Rinjanilla on kiinteät kausipäivät ja ryhmäsäännöt. Kysy Rizziltä ajankohtaiset päivät.",
+ "more_title": "Lisää Tetebatusta",
+ "more_p": "Haluatko jotain muuta? Rizz voi suunnitella päivän myös näihin paikkoihin. Kysy WhatsAppissa.",
+ "more": [
+  "Jukutin vesiputous",
+  "Benang Kelambu & Benang Stokel",
+  "Sarang Walet & Tibu Bunter",
+  "Kudontakylä Pringgasela",
+  "Ruoanlaittokurssi",
+  "Auringonlasku Pergasingan Hillillä"
+ ],
+ "photo_rizz": "Kuva Rizzistä",
+ "about_eyebrow": "Tapaa Rizz",
+ "about_1": "Hei, olen Rizz. Olen 20-vuotias ja asun ja työskentelen Tetebatussa, riisipeltojen ja tulivuoren välissä.",
+ "about_2": "Huolehdin äidistäni ja pikkusiskostani, ja säästän unelmaani varten: omaan majataloon perheeni maalle täällä Tetebatussa.",
+ "about_3": "Kanssani kävellessäsi opit, mikä lehti auttaa mihinkin, miten riisi oikeasti kasvaa ja missä apinat piileskelevät. Otan sinusta myös parhaat kuvat matkan varrella.",
+ "plants": [
+  "Riisi",
+  "Kahvi",
+  "Kaakao",
+  "Vanilja",
+  "Neilikka",
+  "Kookos",
+  "Durian"
+ ],
+ "how_eyebrow": "Näin se toimii",
+ "how_title": "Varaus onnistuu yhdellä viestillä",
+ "s1_t": "Lähetä WhatsApp-viesti",
+ "s1_p": "Kerro Rizzille, mikä retki, mikä päivä, kuinka monta olette ja missä majoitut.",
+ "s2_t": "Saat selvän vastauksen",
+ "s2_p": "Hän vahvistaa hinnan, lähtöajan ja noudon majoituspaikastasi.",
+ "s3_t": "Lähde kävelemään",
+ "s3_p": "Ota mukaan vesikengät ja uteliaisuus. Maksat Rizzille käteisellä päivän päätteeksi.",
+ "rev_eyebrow": "Arvostelut",
+ "rev_title": "Mitä vieraat sanovat",
+ "rev_p": "Jokainen arvostelu vie Rizziä lähemmäs omaa majataloa. Kävitkö hänen kanssaan? Kirjoita muutama sana Googleen.",
+ "rev_read": "Lue arvostelut Googlessa",
+ "rev_write": "Kirjoita arvostelu",
+ "faq_title": "Hyvä tietää",
+ "faq": [
+  [
+   "Onko Tetebatussa pankkiautomaattia?",
+   "Ei. Kylässä ei ole pankkiautomaattia eikä apteekkia. Ota mukaan tarpeeksi käteistä rupioina, kun tulet Tetebatuun."
+  ],
+  [
+   "Miten pääsen Tetebatuun?",
+   "Lombokin lentokentältä noin 1,5 tuntia ja Kutasta tai Senggigistä 2 tai 3 tuntia. Täällä ei ole Grabia. Kysy Rizziltä, niin hän auttaa löytämään kuljettajan."
+  ],
+  [
+   "Tarvitseeko minun olla hyvässä kunnossa?",
+   "Riisipeltoretki on helppo useimmille. Vesiputousreiteillä on sateen jälkeen liukkaita kohtia. Rinjani on oikea vuorikiipeily: kysy Rizziltä, sopiiko se sinulle."
+  ],
+  [
+   "Milloin on paras aika?",
+   "Kesäkuusta syyskuuhun on kuivaa. Joulukuusta maaliskuuhun on sadekausi: kaikki on tosi vihreää, mutta polut ovat mutaisia, joten ota kengät, joissa on hyvä pito."
+  ],
+  [
+   "Joku vesiputouksella sanoo, että tarvitsen oppaan. Onko se totta?",
+   "Kun kävelet Rizzin kanssa, pääsymaksut on jo maksettu, etkä maksa portilla mitään ylimääräistä."
+  ],
+  [
+   "Voinko peruuttaa?",
+   "Kyllä, ilmaiseksi 24 tuntia ennen. Maksat vasta itse päivänä."
+  ],
+  [
+   "Voitko järjestää Rinjanin?",
+   "Kyllä. Rizz toimii oppaana ja kantajana Rinjani-vaelluksilla, joita lisensoitu vaellusjärjestäjä pyörittää, ja luvat hoidetaan virallisen eRinjani-järjestelmän kautta."
+  ]
+ ],
+ "foot_where": "Tetebatu, Itä-Lombok, Indonesia",
+ "wa_general": "Hei Rizz! Löysin sivustosi ja haluaisin suunnitella retken.",
+ "wa_tour": "Hei Rizz! Haluaisin varata: "
+},
+fr:{
+ "bar_cta": "WhatsApp Rizz",
+ "float": "Demande à Rizz",
+ "hero_eyebrow": "Guide local · Tetebatu, Lombok",
+ "hero_title": "Découvre Tetebatu avec un local qui connaît <em>chaque plante</em>.",
+ "hero_lede": "Rizières en terrasses, cascades dans la jungle, singes noirs et toutes les cultures d'ici. Petits groupes, ton rythme, et des prix fixes sans surprise.",
+ "hero_cta": "Prépare ta balade sur WhatsApp",
+ "hero_cta2": "Voir les balades",
+ "promises": [
+  [
+   "Paiement sur place",
+   "Rien à l'avance, en espèces, en roupies."
+  ],
+  [
+   "Annulation gratuite",
+   "Jusqu'à 24 heures avant."
+  ],
+  [
+   "Tout compris",
+   "Entrées et eau incluses."
+  ],
+  [
+   "Départ de Tetebatu",
+   "Depuis ton homestay, à l'heure."
+  ]
+ ],
+ "tours_eyebrow": "Balades",
+ "tours_title": "Choisis ta balade",
+ "tours_sub": "Chaque balade commence à ton homestay à Tetebatu. Dis à Rizz ton rythme et il adapte le parcours.",
+ "hours": "heures",
+ "ask_price": "Prix sur WhatsApp",
+ "book": "Réserver sur WhatsApp",
+ "photo": "Photo bientôt",
+ "l_start": "Départ",
+ "l_level": "Niveau",
+ "l_incl": "Inclus",
+ "l_bring": "À apporter",
+ "level": {
+  "easy": "Facile",
+  "mod": "Moyen, quelques passages glissants",
+  "hard": "Difficile, vraie ascension de montagne"
+ },
+ "bring_walk": "Chaussures d'eau ou chaussures qui accrochent, crème solaire, maillot de bain",
+ "tour_rice_t": "Rizières et jardin d'épices",
+ "tour_rice_p": "Le cœur de Tetebatu. Marche dans les terrasses et les petits villages sasak, et découvre comment pousse le riz, de la graine à la récolte. Sens et goûte les cultures en chemin.",
+ "tour_rice_i": [
+  "Comment le riz est planté, cultivé et récolté",
+  "Café, cacao, vanille et clous de girofle sur l'arbre",
+  "Dégustation de fruits frais"
+ ],
+ "tour_rice_inc": "Guide, eau, fruits",
+ "tour_water_t": "Rizières et cascade",
+ "tour_water_p": "À travers les rizières jusqu'à la cascade de Tetebatu, par le pont de bambou plutôt que les escaliers glissants. Le temps de te baigner avant le retour.",
+ "tour_water_i": [
+  "Rizières en terrasses et plantes expliquées",
+  "Cascade de Tetebatu avec baignade",
+  "Parcours sûr par le pont de bambou"
+ ],
+ "tour_water_inc": "Guide, entrée, eau, fruits",
+ "tour_classic_t": "Journée classique à Tetebatu",
+ "tour_classic_p": "Tout en une journée. La forêt des singes tôt le matin, quand ils sont actifs, les rizières et les jardins d'épices, un déjeuner sasak et une cascade pour se rafraîchir.",
+ "tour_classic_i": [
+  "Forêt des singes le matin",
+  "Rizières et jardins d'épices",
+  "Déjeuner sasak",
+  "Baignade à la cascade"
+ ],
+ "tour_classic_inc": "Guide, entrées, déjeuner, eau, fruits",
+ "tour_classic_n": "Les singes noirs vivent à l'état sauvage dans la forêt. On les voit souvent, mais on ne peut pas le promettre.",
+ "tour_rinjani_t": "Trek du mont Rinjani",
+ "tour_rinjani_p": "Gravis le volcan avec Rizz comme guide ou porteur. Les treks se font avec un organisateur agréé et le permis officiel eRinjani, comme l'exige le parc national.",
+ "tour_rinjani_i": [
+  "Lever du soleil sur le bord du cratère",
+  "Permis et inscription gérés",
+  "Guide et porteur"
+ ],
+ "tour_rinjani_inc": "Selon le trek, demande à Rizz",
+ "tour_rinjani_n": "Le Rinjani a des dates de saison fixes et des règles de groupe. Demande à Rizz les dates actuelles.",
+ "more_title": "Plus autour de Tetebatu",
+ "more_p": "Envie d'autre chose ? Rizz peut aussi organiser une journée vers ces endroits. Demande sur WhatsApp.",
+ "more": [
+  "Cascade de Jukut",
+  "Benang Kelambu & Benang Stokel",
+  "Sarang Walet & Tibu Bunter",
+  "Village de tisserands de Pringgasela",
+  "Cours de cuisine",
+  "Coucher de soleil à Pergasingan Hill"
+ ],
+ "photo_rizz": "Photo de Rizz",
+ "about_eyebrow": "Rencontre Rizz",
+ "about_1": "Salut, moi c'est Rizz. J'ai 20 ans et je vis et travaille à Tetebatu, entre les rizières et le volcan.",
+ "about_2": "Je m'occupe de ma mère et de ma petite sœur, et j'économise pour mon rêve : ma propre maison d'hôtes sur le terrain de ma famille, ici à Tetebatu.",
+ "about_3": "En balade avec moi, tu apprends quelle feuille soigne quoi, comment le riz pousse vraiment, et où se cachent les singes. Et je prends les plus belles photos de toi en chemin.",
+ "plants": [
+  "Riz",
+  "Café",
+  "Cacao",
+  "Vanille",
+  "Clou de girofle",
+  "Noix de coco",
+  "Durian"
+ ],
+ "how_eyebrow": "Comment ça marche",
+ "how_title": "Réserver, c'est un seul message",
+ "s1_t": "Envoie un WhatsApp",
+ "s1_p": "Dis à Rizz quelle balade, quel jour, combien de personnes et où tu dors.",
+ "s2_t": "Reçois une réponse claire",
+ "s2_p": "Il confirme le prix, l'heure de départ et le rendez-vous à ton homestay.",
+ "s3_t": "Va marcher",
+ "s3_p": "Apporte des chaussures d'eau et de la curiosité. Tu paies Rizz en espèces à la fin de la journée.",
+ "rev_eyebrow": "Avis",
+ "rev_title": "Ce que disent les voyageurs",
+ "rev_p": "Chaque avis rapproche Rizz de sa propre maison d'hôtes. Tu as marché avec lui ? Laisse quelques mots sur Google.",
+ "rev_read": "Lire les avis sur Google",
+ "rev_write": "Écrire un avis",
+ "faq_title": "Bon à savoir",
+ "faq": [
+  [
+   "Y a-t-il un distributeur à Tetebatu ?",
+   "Non. Il n'y a ni distributeur ni pharmacie dans le village. Apporte assez d'espèces en roupies en venant à Tetebatu."
+  ],
+  [
+   "Comment aller à Tetebatu ?",
+   "À environ 1,5 heure de l'aéroport de Lombok et à 2 à 3 heures de Kuta ou Senggigi. Il n'y a pas de Grab ici. Demande à Rizz, il peut t'aider à trouver un chauffeur."
+  ],
+  [
+   "Faut-il être en forme ?",
+   "La balade dans les rizières est facile pour la plupart des gens. Les parcours de cascade ont des passages glissants après la pluie. Le Rinjani est une vraie ascension : demande à Rizz si c'est pour toi."
+  ],
+  [
+   "Quelle est la meilleure période ?",
+   "De juin à septembre, c'est la saison sèche. De décembre à mars, c'est la saison des pluies : tout est très vert, mais les chemins sont boueux, alors prends des chaussures qui accrochent."
+  ],
+  [
+   "Quelqu'un à la cascade dit qu'il me faut un guide. C'est vrai ?",
+   "Quand tu marches avec Rizz, les entrées sont déjà comprises et tu ne paies rien de plus à l'entrée."
+  ],
+  [
+   "Puis-je annuler ?",
+   "Oui, gratuitement jusqu'à 24 heures avant. Tu ne paies que le jour même."
+  ],
+  [
+   "Peux-tu organiser le Rinjani ?",
+   "Oui. Rizz guide et porte sur les treks du Rinjani menés par un organisateur agréé, avec les permis via le système officiel eRinjani."
+  ]
+ ],
+ "foot_where": "Tetebatu, Est de Lombok, Indonésie",
+ "wa_general": "Salut Rizz ! J'ai trouvé ton site et je voudrais organiser une balade.",
+ "wa_tour": "Salut Rizz ! Je voudrais réserver : "
+},
+he:{
+ "bar_cta": "WhatsApp Rizz",
+ "float": "שאלו את Rizz",
+ "hero_eyebrow": "מדריך מקומי · Tetebatu, Lombok",
+ "hero_title": "טיול ב-Tetebatu עם מקומי שמכיר <em>כל צמח</em>.",
+ "hero_lede": "מרפסות אורז, מפלים בג'ונגל, קופים שחורים והגידולים שצומחים כאן. קבוצות קטנות, בקצב שלכם, ומחירים קבועים בלי עלויות נסתרות.",
+ "hero_cta": "תכננו את הטיול ב-WhatsApp",
+ "hero_cta2": "לראות את הטיולים",
+ "promises": [
+  [
+   "משלמים ביום עצמו",
+   "בלי תשלום מראש, במזומן ברופיות."
+  ],
+  [
+   "ביטול חינם",
+   "עד 24 שעות לפני."
+  ],
+  [
+   "מחירים הכל כלול",
+   "דמי כניסה ומים כלולים."
+  ],
+  [
+   "איסוף ב-Tetebatu",
+   "מההוםסטיי שלכם, בזמן."
+  ]
+ ],
+ "tours_eyebrow": "טיולים",
+ "tours_title": "בחרו את הטיול שלכם",
+ "tours_sub": "כל טיול מתחיל בהוםסטיי שלכם ב-Tetebatu. ספרו ל-Rizz מה הקצב שלכם והוא יתאים את המסלול.",
+ "hours": "שעות",
+ "ask_price": "מחיר ב-WhatsApp",
+ "book": "הזמינו ב-WhatsApp",
+ "photo": "תמונה בקרוב",
+ "l_start": "התחלה",
+ "l_level": "רמה",
+ "l_incl": "כלול",
+ "l_bring": "להביא",
+ "level": {
+  "easy": "קל",
+  "mod": "בינוני, יש קטעים חלקלקים",
+  "hard": "קשה, טיפוס הר אמיתי"
+ },
+ "bring_walk": "נעלי מים או נעליים עם אחיזה, קרם הגנה, בגד ים",
+ "tour_rice_t": "הליכה בשדות אורז ובגן תבלינים",
+ "tour_rice_p": "הלב של Tetebatu. הולכים בין המרפסות וכפרי ה-Sasak הקטנים ולומדים איך אורז גדל, מזרע ועד קציר. מריחים וטועמים את הגידולים בדרך.",
+ "tour_rice_i": [
+  "איך אורז נזרע, גדל ונקצר",
+  "קפה, קקאו, וניל וציפורן על העץ",
+  "טעימות פירות טריים"
+ ],
+ "tour_rice_inc": "מדריך, מים, פירות",
+ "tour_water_t": "שדות אורז ומפל",
+ "tour_water_p": "דרך שדות האורז למפל Tetebatu, מעל גשר הבמבוק במקום המדרגות החלקלקות. יש זמן לשחות לפני שחוזרים.",
+ "tour_water_i": [
+  "הסבר על מרפסות האורז והצמחים",
+  "מפל Tetebatu עם עצירת שחייה",
+  "מסלול בטוח מעל גשר הבמבוק"
+ ],
+ "tour_water_inc": "מדריך, דמי כניסה, מים, פירות",
+ "tour_classic_t": "יום Tetebatu הקלאסי",
+ "tour_classic_p": "התמונה המלאה ביום אחד. יער הקופים מוקדם בבוקר כשהקופים פעילים, שדות אורז וגני תבלינים, ארוחת צהריים מקומית של Sasak ומפל להתרעננות.",
+ "tour_classic_i": [
+  "יער הקופים בבוקר",
+  "שדות אורז וגני תבלינים",
+  "ארוחת צהריים של Sasak",
+  "שחייה במפל"
+ ],
+ "tour_classic_inc": "מדריך, דמי כניסה, ארוחת צהריים, מים, פירות",
+ "tour_classic_n": "הקופים השחורים חיים בטבע ביער, אז לרוב נראה אותם, אבל אי אפשר להבטיח.",
+ "tour_rinjani_t": "טרק להר Rinjani",
+ "tour_rinjani_p": "מטפסים על הר הגעש עם Rizz כמדריך או כסבל. הטרקים יוצאים עם מארגן טרקים מורשה ועם אישור eRinjani הרשמי, כפי שהפארק הלאומי דורש.",
+ "tour_rinjani_i": [
+  "זריחה על שפת המכתש",
+  "אישור והרשמה מסודרים",
+  "מדריך ותמיכת סבלים"
+ ],
+ "tour_rinjani_inc": "תלוי בטרק, שאלו את Rizz",
+ "tour_rinjani_n": "ל-Rinjani יש תאריכי עונה קבועים וכללים לקבוצות. שאלו את Rizz מה התאריכים העדכניים.",
+ "more_title": "עוד מ-Tetebatu",
+ "more_p": "רוצים משהו אחר? Rizz יכול לתכנן יום גם למקומות האלה. שאלו ב-WhatsApp.",
+ "more": [
+  "מפל Jukut",
+  "Benang Kelambu ו-Benang Stokel",
+  "Sarang Walet ו-Tibu Bunter",
+  "כפר האריגה Pringgasela",
+  "שיעור בישול",
+  "שקיעה ב-Pergasingan Hill"
+ ],
+ "photo_rizz": "תמונה של Rizz",
+ "about_eyebrow": "הכירו את Rizz",
+ "about_1": "היי, אני Rizz. אני בן 20 וגר ועובד ב-Tetebatu, בין שדות האורז להר הגעש.",
+ "about_2": "אני דואג לאמא שלי ולאחות הקטנה שלי, וחוסך לחלום שלי: בית הארחה משלי על האדמה של המשפחה כאן ב-Tetebatu.",
+ "about_3": "בהליכה איתי תלמדו איזה עלה עוזר למה, איך אורז באמת גדל, ואיפה הקופים מתחבאים. ובדרך אצלם לכם את התמונות הכי יפות.",
+ "plants": [
+  "אורז",
+  "קפה",
+  "קקאו",
+  "וניל",
+  "ציפורן",
+  "קוקוס",
+  "דוריאן"
+ ],
+ "how_eyebrow": "איך זה עובד",
+ "how_title": "הזמנה לוקחת הודעה אחת",
+ "s1_t": "שלחו הודעת WhatsApp",
+ "s1_p": "ספרו ל-Rizz איזה טיול, באיזה יום, כמה אנשים ואיפה אתם נשארים.",
+ "s2_t": "מקבלים תשובה ברורה",
+ "s2_p": "הוא מאשר את המחיר, את שעת ההתחלה ואת האיסוף מההוםסטיי שלכם.",
+ "s3_t": "יוצאים לטייל",
+ "s3_p": "תביאו נעלי מים וסקרנות. משלמים ל-Rizz במזומן בסוף היום.",
+ "rev_eyebrow": "ביקורות",
+ "rev_title": "מה האורחים אומרים",
+ "rev_p": "כל ביקורת עוזרת ל-Rizz להתקרב לבית ההארחה שלו. טיילתם איתו? השאירו כמה מילים ב-Google.",
+ "rev_read": "לקרוא ביקורות ב-Google",
+ "rev_write": "לכתוב ביקורת",
+ "faq_title": "טוב לדעת",
+ "faq": [
+  [
+   "יש כספומט ב-Tetebatu?",
+   "לא. אין כספומט ואין בית מרקחת בכפר. תביאו מספיק מזומן ברופיות כשאתם מגיעים ל-Tetebatu."
+  ],
+  [
+   "איך מגיעים ל-Tetebatu?",
+   "בערך 1.5 שעות משדה התעופה של Lombok ו-2 עד 3 שעות מ-Kuta או מ-Senggigi. אין כאן Grab. שאלו את Rizz והוא יעזור לכם למצוא נהג."
+  ],
+  [
+   "צריך להיות בכושר?",
+   "ההליכה בשדות האורז קלה לרוב האנשים. במסלולי המפלים יש קטעים חלקלקים אחרי גשם. Rinjani הוא טיפוס הר אמיתי: שאלו את Rizz אם זה מתאים לכם."
+  ],
+  [
+   "מתי הזמן הכי טוב?",
+   "יוני עד ספטמבר הם החודשים היבשים. דצמבר עד מרץ זו עונת הגשמים: הכל ירוק מאוד, אבל השבילים בוציים, אז תביאו נעליים עם אחיזה."
+  ],
+  [
+   "מישהו במפל אומר שאני חייב מדריך. זה נכון?",
+   "כשאתם הולכים עם Rizz, דמי הכניסה כבר כלולים ואתם לא משלמים שום דבר נוסף בשער."
+  ],
+  [
+   "אפשר לבטל?",
+   "כן, בחינם עד 24 שעות לפני. משלמים רק ביום עצמו."
+  ],
+  [
+   "אתם יכולים לארגן את Rinjani?",
+   "כן. Rizz מדריך ונושא ציוד בטרקים ל-Rinjani שמופעלים על ידי מארגן טרקים מורשה, עם אישורים דרך מערכת eRinjani הרשמית."
+  ]
+ ],
+ "foot_where": "Tetebatu, מזרח Lombok, אינדונזיה",
+ "wa_general": "היי Rizz! מצאתי את האתר שלך ואני רוצה לתכנן טיול.",
+ "wa_tour": "היי Rizz! אני רוצה להזמין: "
+},
+hi:{
+ "bar_cta": "WhatsApp Rizz",
+ "float": "Rizz से पूछें",
+ "hero_eyebrow": "लोकल गाइड · Tetebatu, Lombok",
+ "hero_title": "Tetebatu घूमिए एक ऐसे लोकल के साथ जो <em>हर पौधे</em> को जानता है।",
+ "hero_lede": "धान की सीढ़ीदार खेती, जंगल के झरने, काले बंदर और यहाँ उगने वाली फसलें। छोटे ग्रुप, आपकी अपनी रफ़्तार, और बिना किसी छिपे खर्च के तय दाम।",
+ "hero_cta": "WhatsApp पर अपनी वॉक प्लान करें",
+ "hero_cta2": "टूर देखें",
+ "promises": [
+  [
+   "पैसे उसी दिन दें",
+   "पहले से कोई पेमेंट नहीं, रुपये में नकद।"
+  ],
+  [
+   "मुफ़्त कैंसिलेशन",
+   "24 घंटे पहले तक।"
+  ],
+  [
+   "सब कुछ शामिल दाम",
+   "एंट्री फ़ीस और पानी शामिल।"
+  ],
+  [
+   "Tetebatu में पिकअप",
+   "आपके homestay से, समय पर।"
+  ]
+ ],
+ "tours_eyebrow": "टूर",
+ "tours_title": "अपनी वॉक चुनें",
+ "tours_sub": "हर टूर Tetebatu में आपके homestay से शुरू होता है। अपनी रफ़्तार Rizz को बताइए, वह रूट उसी हिसाब से बदल देगा।",
+ "hours": "घंटे",
+ "ask_price": "दाम WhatsApp पर",
+ "book": "WhatsApp पर बुक करें",
+ "photo": "फ़ोटो जल्द आ रही है",
+ "l_start": "शुरुआत",
+ "l_level": "मुश्किल स्तर",
+ "l_incl": "शामिल",
+ "l_bring": "साथ लाएँ",
+ "level": {
+  "easy": "आसान",
+  "mod": "मध्यम, कुछ जगह फिसलन",
+  "hard": "कठिन, असली पहाड़ की चढ़ाई"
+ },
+ "bring_walk": "वॉटर शूज़ या अच्छी पकड़ वाले जूते, सनक्रीम, स्विमवियर",
+ "tour_rice_t": "धान के खेत और मसालों के बगीचे की वॉक",
+ "tour_rice_p": "Tetebatu का दिल। सीढ़ीदार खेतों और छोटे Sasak गाँवों में घूमिए और जानिए कि धान बीज से कटाई तक कैसे उगता है। रास्ते में फसलों को सूँघिए और चखिए।",
+ "tour_rice_i": [
+  "धान कैसे बोया, उगाया और काटा जाता है",
+  "पेड़ पर कॉफ़ी, कोको, वनीला और लौंग",
+  "ताज़े फलों की टेस्टिंग"
+ ],
+ "tour_rice_inc": "गाइड, पानी, फल",
+ "tour_water_t": "धान के खेत और झरना",
+ "tour_water_p": "धान के खेतों से होकर Tetebatu झरने तक, फिसलन वाली सीढ़ियों की जगह बाँस के पुल से। वापस चलने से पहले नहाने का समय भी।",
+ "tour_water_i": [
+  "धान की सीढ़ीदार खेती और पौधों की जानकारी",
+  "नहाने के ब्रेक के साथ Tetebatu झरना",
+  "बाँस के पुल से सुरक्षित रास्ता"
+ ],
+ "tour_water_inc": "गाइड, एंट्री फ़ीस, पानी, फल",
+ "tour_classic_t": "क्लासिक Tetebatu दिन",
+ "tour_classic_p": "पूरी तस्वीर एक दिन में। सुबह-सुबह बंदरों का जंगल जब बंदर सक्रिय होते हैं, धान के खेत और मसालों के बगीचे, Sasak लोकल लंच और ठंडक के लिए एक झरना।",
+ "tour_classic_i": [
+  "सुबह बंदरों का जंगल",
+  "धान के खेत और मसालों के बगीचे",
+  "Sasak लंच",
+  "झरने में नहाना"
+ ],
+ "tour_classic_inc": "गाइड, एंट्री फ़ीस, लंच, पानी, फल",
+ "tour_classic_n": "काले बंदर जंगल में जंगली रहते हैं, इसलिए अक्सर दिख जाते हैं, पर पक्का वादा नहीं कर सकते।",
+ "tour_rinjani_t": "Rinjani पर्वत ट्रेक",
+ "tour_rinjani_p": "ज्वालामुखी पर Rizz के साथ चढ़िए, गाइड या पोर्टर के रूप में। ट्रेक लाइसेंस वाले ट्रेकिंग ऑर्गनाइज़र और आधिकारिक eRinjani परमिट के साथ होते हैं, जैसा नेशनल पार्क ज़रूरी मानता है।",
+ "tour_rinjani_i": [
+  "क्रेटर के किनारे से सूर्योदय",
+  "परमिट और रजिस्ट्रेशन का इंतज़ाम",
+  "गाइड और पोर्टर की मदद"
+ ],
+ "tour_rinjani_inc": "ट्रेक पर निर्भर, Rizz से पूछें",
+ "tour_rinjani_n": "Rinjani की सीज़न तारीख़ें और ग्रुप नियम तय हैं। मौजूदा तारीख़ें Rizz से पूछें।",
+ "more_title": "Tetebatu में और भी",
+ "more_p": "कुछ और चाहिए? Rizz इन जगहों के लिए भी एक दिन प्लान कर सकता है। WhatsApp पर पूछें।",
+ "more": [
+  "Jukut झरना",
+  "Benang Kelambu और Benang Stokel",
+  "Sarang Walet और Tibu Bunter",
+  "बुनकरों का गाँव Pringgasela",
+  "कुकिंग क्लास",
+  "Pergasingan Hill पर सूर्यास्त"
+ ],
+ "photo_rizz": "Rizz की फ़ोटो",
+ "about_eyebrow": "Rizz से मिलिए",
+ "about_1": "नमस्ते, मैं Rizz हूँ। मैं 20 साल का हूँ और धान के खेतों और ज्वालामुखी के बीच Tetebatu में रहता और काम करता हूँ।",
+ "about_2": "मैं अपनी माँ और छोटी बहन का ख़याल रखता हूँ, और अपने सपने के लिए पैसे जोड़ता हूँ: यहाँ Tetebatu में अपने परिवार की ज़मीन पर मेरा अपना गेस्टहाउस।",
+ "about_3": "मेरे साथ वॉक पर आप जानेंगे कि कौन-सा पत्ता किस चीज़ में काम आता है, धान असल में कैसे उगता है, और बंदर कहाँ छिपते हैं। और रास्ते में आपकी सबसे अच्छी फ़ोटो भी मैं खींचूँगा।",
+ "plants": [
+  "धान",
+  "कॉफ़ी",
+  "कोको",
+  "वनीला",
+  "लौंग",
+  "नारियल",
+  "ड्यूरियन"
+ ],
+ "how_eyebrow": "कैसे काम करता है",
+ "how_title": "बुकिंग बस एक मैसेज में",
+ "s1_t": "WhatsApp भेजें",
+ "s1_p": "Rizz को बताइए कौन-सा टूर, कौन-सा दिन, कितने लोग और आप कहाँ ठहरे हैं।",
+ "s2_t": "साफ़ जवाब पाएँ",
+ "s2_p": "वह दाम, शुरू होने का समय और आपके homestay से पिकअप पक्का करता है।",
+ "s3_t": "चलिए, घूमें",
+ "s3_p": "वॉटर शूज़ और जिज्ञासा साथ लाइए। दिन के अंत में Rizz को नकद पैसे दें।",
+ "rev_eyebrow": "रिव्यू",
+ "rev_title": "मेहमान क्या कहते हैं",
+ "rev_p": "हर रिव्यू Rizz को उसके अपने गेस्टहाउस के थोड़ा और क़रीब ले जाता है। उसके साथ घूमे हैं? Google पर कुछ शब्द लिखिए।",
+ "rev_read": "Google पर रिव्यू पढ़ें",
+ "rev_write": "रिव्यू लिखें",
+ "faq_title": "जानने लायक बातें",
+ "faq": [
+  [
+   "क्या Tetebatu में ATM है?",
+   "नहीं। गाँव में न ATM है, न दवा की दुकान। Tetebatu आते समय रुपये में काफ़ी नकद साथ लाइए।"
+  ],
+  [
+   "Tetebatu कैसे पहुँचें?",
+   "Lombok एयरपोर्ट से लगभग 1.5 घंटे और Kuta या Senggigi से 2 से 3 घंटे। यहाँ Grab नहीं चलता। Rizz से पूछिए, वह ड्राइवर ढूँढने में मदद कर देगा।"
+  ],
+  [
+   "क्या मुझे फ़िट होना ज़रूरी है?",
+   "धान के खेतों की वॉक ज़्यादातर लोगों के लिए आसान है। बारिश के बाद झरनों के रास्तों में फिसलन वाली जगहें होती हैं। Rinjani असली पहाड़ की चढ़ाई है: आपके लिए ठीक है या नहीं, Rizz से पूछिए।"
+  ],
+  [
+   "सबसे अच्छा समय कौन-सा है?",
+   "जून से सितंबर सूखा मौसम है। दिसंबर से मार्च बारिश का मौसम है: सब कुछ बहुत हरा होता है, पर रास्ते कीचड़ भरे होते हैं, इसलिए अच्छी पकड़ वाले जूते लाइए।"
+  ],
+  [
+   "झरने पर कोई कहता है कि गाइड ज़रूरी है। क्या यह सच है?",
+   "जब आप Rizz के साथ चलते हैं, तो एंट्री फ़ीस पहले से शामिल है और गेट पर आपको कुछ अलग नहीं देना पड़ता।"
+  ],
+  [
+   "क्या मैं कैंसिल कर सकता हूँ?",
+   "हाँ, 24 घंटे पहले तक मुफ़्त। पैसे सिर्फ़ उसी दिन देने होते हैं।"
+  ],
+  [
+   "क्या आप Rinjani का इंतज़ाम कर सकते हैं?",
+   "हाँ। Rizz लाइसेंस वाले ट्रेकिंग ऑर्गनाइज़र के Rinjani ट्रेक पर गाइड और पोर्टर का काम करता है, और परमिट आधिकारिक eRinjani सिस्टम से बनते हैं।"
+  ]
+ ],
+ "foot_where": "Tetebatu, पूर्वी Lombok, इंडोनेशिया",
+ "wa_general": "नमस्ते Rizz! मुझे आपकी वेबसाइट मिली और मैं एक वॉक प्लान करना चाहता हूँ।",
+ "wa_tour": "नमस्ते Rizz! मैं यह बुक करना चाहता हूँ: "
+},
+hu:{
+ "bar_cta": "WhatsApp Rizz",
+ "float": "Kérdezd Rizzt",
+ "hero_eyebrow": "Helyi vezető · Tetebatu, Lombok",
+ "hero_title": "Fedezd fel Tetebatut egy helyivel, aki <em>minden növényt</em> ismer.",
+ "hero_lede": "Rizsteraszok, dzsungelvízesések, fekete majmok és minden, ami itt terem. Kis csoportok, a te tempód és fix árak, rejtett költségek nélkül.",
+ "hero_cta": "Tervezd meg a túrát WhatsAppon",
+ "hero_cta2": "Túrák megtekintése",
+ "promises": [
+  [
+   "Fizetés a helyszínen",
+   "Előleg nélkül, készpénzben, rúpiában."
+  ],
+  [
+   "Ingyenes lemondás",
+   "24 órával előbb."
+  ],
+  [
+   "Minden benne van az árban",
+   "A belépő és a víz is."
+  ],
+  [
+   "Felvétel Tetebatuban",
+   "A szállásodnál, pontosan."
+  ]
+ ],
+ "tours_eyebrow": "Túrák",
+ "tours_title": "Válaszd ki a túrádat",
+ "tours_sub": "Minden túra a tetebatui szállásodnál indul. Mondd el Rizznek, milyen tempóban szeretnél menni, és ő igazítja az útvonalat.",
+ "hours": "óra",
+ "ask_price": "Ár WhatsAppon",
+ "book": "Foglalás WhatsAppon",
+ "photo": "Fotó hamarosan",
+ "l_start": "Indulás",
+ "l_level": "Nehézség",
+ "l_incl": "Az árban",
+ "l_bring": "Hozz magaddal",
+ "level": {
+  "easy": "Könnyű",
+  "mod": "Közepes, helyenként csúszós",
+  "hard": "Nehéz, igazi hegymászás"
+ },
+ "bring_walk": "Vízi cipő vagy jó talpú cipő, napkrém, fürdőruha",
+ "tour_rice_t": "Rizsföldek és fűszerkert",
+ "tour_rice_p": "Tetebatu szíve. Sétálj végig a teraszokon és a kis sasak falvakon, és tudd meg, hogyan nő a rizs a magtól az aratásig. Útközben megszagolhatod és megkóstolhatod a helyi növényeket.",
+ "tour_rice_i": [
+  "Hogyan ültetik, termesztik és aratják a rizst",
+  "Kávé, kakaó, vanília és szegfűszeg a fán",
+  "Friss gyümölcsök kóstolása"
+ ],
+ "tour_rice_inc": "Vezető, víz, gyümölcs",
+ "tour_water_t": "Rizsföldek és vízesés",
+ "tour_water_p": "Át a rizsföldeken a tetebatui vízeséshez, a csúszós lépcső helyett a bambuszhídon. Marad idő fürdeni, mielőtt visszasétálunk.",
+ "tour_water_i": [
+  "Rizsteraszok és növények magyarázattal",
+  "Tetebatui vízesés fürdőzéssel",
+  "Biztonságos útvonal a bambuszhídon át"
+ ],
+ "tour_water_inc": "Vezető, belépő, víz, gyümölcs",
+ "tour_classic_t": "Klasszikus tetebatui nap",
+ "tour_classic_p": "Minden egy napban. Majomerdő kora reggel, amikor a majmok aktívak, rizsföldek és fűszerkertek, sasak ebéd és egy vízesés a felfrissüléshez.",
+ "tour_classic_i": [
+  "Majomerdő reggel",
+  "Rizsföldek és fűszerkertek",
+  "Sasak ebéd",
+  "Fürdés a vízesésnél"
+ ],
+ "tour_classic_inc": "Vezető, belépők, ebéd, víz, gyümölcs",
+ "tour_classic_n": "A fekete majmok szabadon élnek az erdőben, ezért gyakran látjuk őket, de ígérni nem tudjuk.",
+ "tour_rinjani_t": "Rinjani-trekking",
+ "tour_rinjani_p": "Másszd meg a vulkánt Rizzel, aki vezetőként vagy teherhordóként kísér. A túrák engedéllyel rendelkező szervezővel és a hivatalos eRinjani-engedéllyel zajlanak, ahogy a nemzeti park előírja.",
+ "tour_rinjani_i": [
+  "Napfelkelte a kráter peremén",
+  "Engedély és regisztráció elintézve",
+  "Vezető és teherhordó segítség"
+ ],
+ "tour_rinjani_inc": "Túrától függ, kérdezd Rizzt",
+ "tour_rinjani_n": "A Rinjaninak fix szezonidőpontjai és csoportszabályai vannak. Kérdezd Rizzt az aktuális dátumokról.",
+ "more_title": "Még több Tetebatu környékén",
+ "more_p": "Valami mást szeretnél? Rizz erre a helyekre is megtervez egy napot. Írj neki WhatsAppon.",
+ "more": [
+  "Jukut-vízesés",
+  "Benang Kelambu és Benang Stokel",
+  "Sarang Walet és Tibu Bunter",
+  "Pringgasela szövőfalu",
+  "Főzőtanfolyam",
+  "Naplemente a Pergasingan Hillen"
+ ],
+ "photo_rizz": "Rizz fotója",
+ "about_eyebrow": "Ismerd meg Rizzt",
+ "about_1": "Szia, Rizz vagyok. 20 éves vagyok, és Tetebatuban élek és dolgozom, a rizsföldek és a vulkán között.",
+ "about_2": "Gondoskodom az édesanyámról és a kishúgomról, és az álmomra spórolok: egy saját vendégház a családom földjén, itt Tetebatuban.",
+ "about_3": "Egy sétán velem megtudod, melyik levél mire jó, hogyan nő valójában a rizs, és hol bujkálnak a majmok. Útközben pedig én készítem rólad a legjobb fotókat.",
+ "plants": [
+  "Rizs",
+  "Kávé",
+  "Kakaó",
+  "Vanília",
+  "Szegfűszeg",
+  "Kókusz",
+  "Durián"
+ ],
+ "how_eyebrow": "Hogyan működik",
+ "how_title": "A foglalás egyetlen üzenet",
+ "s1_t": "Írj WhatsAppon",
+ "s1_p": "Mondd el Rizznek, melyik túra, melyik nap, hányan vagytok és hol laktok.",
+ "s2_t": "Tiszta választ kapsz",
+ "s2_p": "Megerősíti az árat, az indulás idejét és a felvételt a szállásodnál.",
+ "s3_t": "Indulhat a séta",
+ "s3_p": "Hozz vízi cipőt és kíváncsiságot. Rizznek a nap végén fizetsz készpénzben.",
+ "rev_eyebrow": "Vélemények",
+ "rev_title": "Mit mondanak a vendégek",
+ "rev_p": "Minden vélemény közelebb viszi Rizzt a saját vendégházához. Voltál vele túrázni? Írj pár szót a Google-on.",
+ "rev_read": "Vélemények a Google-on",
+ "rev_write": "Vélemény írása",
+ "faq_title": "Jó tudni",
+ "faq": [
+  [
+   "Van bankautomata Tetebatuban?",
+   "Nincs. A faluban nincs bankautomata és gyógyszertár sem. Hozz magaddal elég készpénzt rúpiában."
+  ],
+  [
+   "Hogyan jutok el Tetebatuba?",
+   "Körülbelül 1,5 óra a lomboki repülőtértől, és 2-3 óra Kutából vagy Senggigiből. Grab itt nincs. Kérdezd Rizzt, segít sofőrt találni."
+  ],
+  [
+   "Jó erőnlét kell hozzá?",
+   "A rizsföldi séta a legtöbb embernek könnyű. A vízeséshez vezető utak eső után csúszósak. A Rinjani igazi hegymászás: kérdezd Rizzt, hogy neked való-e."
+  ],
+  [
+   "Mikor a legjobb jönni?",
+   "Júniustól szeptemberig száraz idő van. Decembertől márciusig esős évszak: minden nagyon zöld, de az utak sárosak, ezért hozz jó talpú cipőt."
+  ],
+  [
+   "A vízesésnél valaki azt mondja, vezető kell. Igaz ez?",
+   "Ha Rizzel jössz, a belépő már benne van az árban, és a bejáratnál semmit nem fizetsz extra."
+  ],
+  [
+   "Lemondhatom?",
+   "Igen, ingyen, 24 órával korábban. Csak a túra napján fizetsz."
+  ],
+  [
+   "Meg tudod szervezni a Rinjanit?",
+   "Igen. Rizz vezetőként és teherhordóként kísér az engedéllyel rendelkező szervező Rinjani-túráin, az engedélyek a hivatalos eRinjani rendszeren keresztül készülnek."
+  ]
+ ],
+ "foot_where": "Tetebatu, Kelet-Lombok, Indonézia",
+ "wa_general": "Szia Rizz! Megtaláltam a weboldaladat, és szeretnék megtervezni egy túrát.",
+ "wa_tour": "Szia Rizz! Szeretnék foglalni: "
+},
+id:{
+ "bar_cta": "WhatsApp Rizz",
+ "float": "Tanya Rizz",
+ "hero_eyebrow": "Pemandu lokal · Tetebatu, Lombok",
+ "hero_title": "Jelajahi Tetebatu bersama warga lokal yang kenal <em>setiap tanaman</em>.",
+ "hero_lede": "Sawah berundak, air terjun di tengah hutan, monyet hitam, dan semua tanaman yang tumbuh di sini. Grup kecil, sesuai langkahmu, dan harga pasti tanpa biaya tersembunyi.",
+ "hero_cta": "Atur jalan-jalanmu lewat WhatsApp",
+ "hero_cta2": "Lihat tur",
+ "promises": [
+  [
+   "Bayar di hari itu",
+   "Tanpa uang muka, tunai dalam rupiah."
+  ],
+  [
+   "Batal gratis",
+   "Sampai 24 jam sebelumnya."
+  ],
+  [
+   "Harga sudah semua",
+   "Tiket masuk dan air minum termasuk."
+  ],
+  [
+   "Dijemput di Tetebatu",
+   "Di homestay-mu, tepat waktu."
+  ]
+ ],
+ "tours_eyebrow": "Tur",
+ "tours_title": "Pilih jalan-jalanmu",
+ "tours_sub": "Setiap tur mulai dari homestay-mu di Tetebatu. Bilang ke Rizz kecepatanmu, dan dia sesuaikan rutenya.",
+ "hours": "jam",
+ "ask_price": "Harga lewat WhatsApp",
+ "book": "Pesan lewat WhatsApp",
+ "photo": "Foto segera hadir",
+ "l_start": "Mulai",
+ "l_level": "Tingkat",
+ "l_incl": "Termasuk",
+ "l_bring": "Bawa",
+ "level": {
+  "easy": "Mudah",
+  "mod": "Sedang, ada bagian yang licin",
+  "hard": "Sulit, pendakian gunung sungguhan"
+ },
+ "bring_walk": "Sepatu air atau sepatu yang tidak licin, tabir surya, baju renang",
+ "tour_rice_t": "Jalan di sawah dan kebun rempah",
+ "tour_rice_p": "Jantung Tetebatu. Berjalan di sawah berundak dan desa-desa kecil Sasak, lalu pelajari bagaimana padi tumbuh, dari benih sampai panen. Cium dan cicipi tanamannya sepanjang jalan.",
+ "tour_rice_i": [
+  "Cara padi ditanam, dirawat, dan dipanen",
+  "Kopi, kakao, vanili, dan cengkih langsung di pohonnya",
+  "Mencicipi buah segar"
+ ],
+ "tour_rice_inc": "Pemandu, air minum, buah",
+ "tour_water_t": "Sawah dan air terjun",
+ "tour_water_p": "Melewati sawah menuju air terjun Tetebatu, lewat jembatan bambu, bukan tangga yang licin. Ada waktu untuk berenang sebelum jalan pulang.",
+ "tour_water_i": [
+  "Sawah berundak dan tanaman dijelaskan",
+  "Air terjun Tetebatu dengan waktu berenang",
+  "Rute aman lewat jembatan bambu"
+ ],
+ "tour_water_inc": "Pemandu, tiket masuk, air minum, buah",
+ "tour_classic_t": "Sehari penuh di Tetebatu",
+ "tour_classic_p": "Semuanya dalam satu hari. Hutan monyet pagi-pagi saat monyet aktif, sawah dan kebun rempah, makan siang khas Sasak, dan air terjun untuk menyegarkan diri.",
+ "tour_classic_i": [
+  "Hutan monyet di pagi hari",
+  "Sawah dan kebun rempah",
+  "Makan siang khas Sasak",
+  "Berenang di air terjun"
+ ],
+ "tour_classic_inc": "Pemandu, tiket masuk, makan siang, air minum, buah",
+ "tour_classic_n": "Monyet hitam hidup liar di hutan, jadi kami sering melihatnya, tapi tidak bisa menjanjikan.",
+ "tour_rinjani_t": "Pendakian Gunung Rinjani",
+ "tour_rinjani_p": "Daki gunung berapi bersama Rizz sebagai pemandu atau porter. Pendakian dijalankan lewat penyelenggara trekking resmi dan izin eRinjani resmi, sesuai aturan taman nasional.",
+ "tour_rinjani_i": [
+  "Matahari terbit di bibir kawah",
+  "Izin dan pendaftaran diurus",
+  "Pemandu dan porter"
+ ],
+ "tour_rinjani_inc": "Tergantung pendakian, tanya Rizz",
+ "tour_rinjani_n": "Rinjani punya tanggal musim tetap dan aturan grup. Tanya Rizz soal tanggal terbaru.",
+ "more_title": "Lebih banyak dari Tetebatu",
+ "more_p": "Mau yang lain? Rizz juga bisa mengatur sehari ke tempat-tempat ini. Tanya lewat WhatsApp.",
+ "more": [
+  "Air terjun Jukut",
+  "Benang Kelambu & Benang Stokel",
+  "Sarang Walet & Tibu Bunter",
+  "Desa tenun Pringgasela",
+  "Kelas memasak",
+  "Matahari terbenam di Pergasingan Hill"
+ ],
+ "photo_rizz": "Foto Rizz",
+ "about_eyebrow": "Kenalan dengan Rizz",
+ "about_1": "Hai, aku Rizz. Umurku 20 tahun, tinggal dan bekerja di Tetebatu, di antara sawah dan gunung berapi.",
+ "about_2": "Aku merawat ibu dan adik perempuanku, dan menabung untuk mimpiku: penginapan sendiri di tanah keluargaku di sini, di Tetebatu.",
+ "about_3": "Jalan bersamaku, kamu akan tahu daun mana yang bisa mengobati apa, bagaimana padi benar-benar tumbuh, dan di mana monyet bersembunyi. Dan sepanjang jalan aku ambilkan foto terbaikmu.",
+ "plants": [
+  "Padi",
+  "Kopi",
+  "Kakao",
+  "Vanili",
+  "Cengkih",
+  "Kelapa",
+  "Durian"
+ ],
+ "how_eyebrow": "Cara kerjanya",
+ "how_title": "Memesan cukup satu pesan",
+ "s1_t": "Kirim WhatsApp",
+ "s1_p": "Bilang ke Rizz tur apa, hari apa, berapa orang, dan kamu menginap di mana.",
+ "s2_t": "Dapat jawaban yang jelas",
+ "s2_p": "Dia konfirmasi harga, jam mulai, dan penjemputan di homestay-mu.",
+ "s3_t": "Ayo jalan",
+ "s3_p": "Bawa sepatu air dan rasa ingin tahu. Kamu bayar Rizz tunai di akhir hari.",
+ "rev_eyebrow": "Ulasan",
+ "rev_title": "Kata para tamu",
+ "rev_p": "Setiap ulasan membantu Rizz lebih dekat ke penginapan impiannya. Sudah jalan bersamanya? Tulis beberapa kata di Google.",
+ "rev_read": "Baca ulasan di Google",
+ "rev_write": "Tulis ulasan",
+ "faq_title": "Perlu diketahui",
+ "faq": [
+  [
+   "Apakah ada ATM di Tetebatu?",
+   "Tidak. Di desa tidak ada ATM dan tidak ada apotek. Bawa uang tunai rupiah yang cukup saat datang ke Tetebatu."
+  ],
+  [
+   "Bagaimana cara ke Tetebatu?",
+   "Sekitar 1,5 jam dari bandara Lombok dan 2 sampai 3 jam dari Kuta atau Senggigi. Di sini tidak ada Grab. Tanya Rizz, dia bisa bantu mencarikan sopir."
+  ],
+  [
+   "Apakah harus bugar?",
+   "Jalan di sawah mudah untuk kebanyakan orang. Rute air terjun ada bagian licin setelah hujan. Rinjani adalah pendakian gunung sungguhan: tanya Rizz apakah cocok untukmu."
+  ],
+  [
+   "Kapan waktu terbaik?",
+   "Juni sampai September musim kering. Desember sampai Maret musim hujan: semuanya sangat hijau, tapi jalannya berlumpur, jadi bawa sepatu yang tidak licin."
+  ],
+  [
+   "Seseorang di air terjun bilang aku butuh pemandu. Benarkah?",
+   "Kalau kamu jalan bersama Rizz, tiket masuk sudah termasuk dan kamu tidak bayar apa-apa lagi di gerbang."
+  ],
+  [
+   "Bisakah aku membatalkan?",
+   "Bisa, gratis sampai 24 jam sebelumnya. Kamu hanya bayar di hari itu."
+  ],
+  [
+   "Bisakah kamu mengurus Rinjani?",
+   "Bisa. Rizz jadi pemandu dan porter di pendakian Rinjani yang dijalankan penyelenggara trekking resmi, dengan izin lewat sistem resmi eRinjani."
+  ]
+ ],
+ "foot_where": "Tetebatu, Lombok Timur, Indonesia",
+ "wa_general": "Hai Rizz! Aku menemukan websitemu dan ingin mengatur jalan-jalan.",
+ "wa_tour": "Hai Rizz! Aku ingin memesan: "
+},
+it:{
+ "bar_cta": "WhatsApp Rizz",
+ "float": "Chiedi a Rizz",
+ "hero_eyebrow": "Guida locale · Tetebatu, Lombok",
+ "hero_title": "Cammina a Tetebatu con un locale che conosce <em>ogni pianta</em>.",
+ "hero_lede": "Risaie a terrazze, cascate nella giungla, scimmie nere e tutte le colture di qui. Piccoli gruppi, il tuo ritmo e prezzi fissi senza sorprese.",
+ "hero_cta": "Organizza la tua camminata su WhatsApp",
+ "hero_cta2": "Vedi i tour",
+ "promises": [
+  [
+   "Paghi sul posto",
+   "Niente anticipo, in contanti, in rupie."
+  ],
+  [
+   "Cancellazione gratuita",
+   "Fino a 24 ore prima."
+  ],
+  [
+   "Tutto incluso",
+   "Ingressi e acqua compresi."
+  ],
+  [
+   "Ritiro a Tetebatu",
+   "Al tuo homestay, puntuale."
+  ]
+ ],
+ "tours_eyebrow": "Tour",
+ "tours_title": "Scegli la tua camminata",
+ "tours_sub": "Ogni tour parte dal tuo homestay a Tetebatu. Di' a Rizz il tuo ritmo e lui adatta il percorso.",
+ "hours": "ore",
+ "ask_price": "Prezzo su WhatsApp",
+ "book": "Prenota su WhatsApp",
+ "photo": "Foto in arrivo",
+ "l_start": "Partenza",
+ "l_level": "Livello",
+ "l_incl": "Incluso",
+ "l_bring": "Porta con te",
+ "level": {
+  "easy": "Facile",
+  "mod": "Medio, qualche tratto scivoloso",
+  "hard": "Difficile, vera salita in montagna"
+ },
+ "bring_walk": "Scarpe da acqua o con buona aderenza, crema solare, costume",
+ "tour_rice_t": "Risaie e giardino di spezie",
+ "tour_rice_p": "Il cuore di Tetebatu. Cammina tra le terrazze e i piccoli villaggi sasak e scopri come cresce il riso, dal seme al raccolto. Annusa e assaggia le colture lungo la strada.",
+ "tour_rice_i": [
+  "Come si pianta, si coltiva e si raccoglie il riso",
+  "Caffè, cacao, vaniglia e chiodi di garofano sull'albero",
+  "Assaggio di frutta fresca"
+ ],
+ "tour_rice_inc": "Guida, acqua, frutta",
+ "tour_water_t": "Risaie e cascata",
+ "tour_water_p": "Tra le risaie fino alla cascata di Tetebatu, sul ponte di bambù invece delle scale scivolose. Il tempo di fare un bagno prima di tornare.",
+ "tour_water_i": [
+  "Terrazze di riso e piante spiegate",
+  "Cascata di Tetebatu con sosta per il bagno",
+  "Percorso sicuro sul ponte di bambù"
+ ],
+ "tour_water_inc": "Guida, ingresso, acqua, frutta",
+ "tour_classic_t": "Giornata classica a Tetebatu",
+ "tour_classic_p": "Tutto in un giorno. La foresta delle scimmie al mattino presto, quando sono attive, risaie e giardini di spezie, un pranzo sasak e una cascata per rinfrescarsi.",
+ "tour_classic_i": [
+  "Foresta delle scimmie al mattino",
+  "Risaie e giardini di spezie",
+  "Pranzo sasak",
+  "Bagno alla cascata"
+ ],
+ "tour_classic_inc": "Guida, ingressi, pranzo, acqua, frutta",
+ "tour_classic_n": "Le scimmie nere vivono libere nella foresta. Le vediamo spesso, ma non possiamo prometterlo.",
+ "tour_rinjani_t": "Trekking sul monte Rinjani",
+ "tour_rinjani_p": "Sali sul vulcano con Rizz come guida o portatore. I trekking si fanno con un organizzatore autorizzato e il permesso ufficiale eRinjani, come richiede il parco nazionale.",
+ "tour_rinjani_i": [
+  "Alba sul bordo del cratere",
+  "Permesso e registrazione gestiti",
+  "Guida e portatore"
+ ],
+ "tour_rinjani_inc": "Dipende dal trekking, chiedi a Rizz",
+ "tour_rinjani_n": "Il Rinjani ha date di stagione fisse e regole per i gruppi. Chiedi a Rizz le date attuali.",
+ "more_title": "Altro da Tetebatu",
+ "more_p": "Vuoi qualcos'altro? Rizz può organizzare una giornata anche in questi posti. Chiedi su WhatsApp.",
+ "more": [
+  "Cascata di Jukut",
+  "Benang Kelambu e Benang Stokel",
+  "Sarang Walet e Tibu Bunter",
+  "Villaggio di tessitori di Pringgasela",
+  "Corso di cucina",
+  "Tramonto a Pergasingan Hill"
+ ],
+ "photo_rizz": "Foto di Rizz",
+ "about_eyebrow": "Conosci Rizz",
+ "about_1": "Ciao, sono Rizz. Ho 20 anni e vivo e lavoro a Tetebatu, tra le risaie e il vulcano.",
+ "about_2": "Mi prendo cura di mia madre e di mia sorella più piccola, e risparmio per il mio sogno: una guesthouse tutta mia sul terreno della mia famiglia, qui a Tetebatu.",
+ "about_3": "Camminando con me impari quale foglia aiuta contro cosa, come cresce davvero il riso e dove si nascondono le scimmie. E lungo la strada ti faccio le foto più belle.",
+ "plants": [
+  "Riso",
+  "Caffè",
+  "Cacao",
+  "Vaniglia",
+  "Chiodi di garofano",
+  "Cocco",
+  "Durian"
+ ],
+ "how_eyebrow": "Come funziona",
+ "how_title": "Prenotare richiede un solo messaggio",
+ "s1_t": "Manda un WhatsApp",
+ "s1_p": "Di' a Rizz quale tour, quale giorno, quante persone siete e dove alloggi.",
+ "s2_t": "Ricevi una risposta chiara",
+ "s2_p": "Lui conferma il prezzo, l'orario di partenza e il ritiro al tuo homestay.",
+ "s3_t": "Vai a camminare",
+ "s3_p": "Porta scarpe da acqua e curiosità. Paghi Rizz in contanti a fine giornata.",
+ "rev_eyebrow": "Recensioni",
+ "rev_title": "Cosa dicono gli ospiti",
+ "rev_p": "Ogni recensione avvicina Rizz alla sua guesthouse. Hai camminato con lui? Lascia due parole su Google.",
+ "rev_read": "Leggi le recensioni su Google",
+ "rev_write": "Scrivi una recensione",
+ "faq_title": "Da sapere",
+ "faq": [
+  [
+   "C'è un bancomat a Tetebatu?",
+   "No. Nel villaggio non ci sono bancomat né farmacie. Porta abbastanza contanti in rupie quando vieni a Tetebatu."
+  ],
+  [
+   "Come arrivo a Tetebatu?",
+   "Circa 1,5 ore dall'aeroporto di Lombok e 2 o 3 ore da Kuta o Senggigi. Qui non c'è Grab. Chiedi a Rizz e ti aiuta a trovare un autista."
+  ],
+  [
+   "Devo essere allenato?",
+   "La camminata tra le risaie è facile per quasi tutti. I percorsi alle cascate hanno tratti scivolosi dopo la pioggia. Il Rinjani è una vera salita in montagna: chiedi a Rizz se fa per te."
+  ],
+  [
+   "Qual è il periodo migliore?",
+   "Da giugno a settembre è la stagione secca. Da dicembre a marzo è la stagione delle piogge: tutto è molto verde, ma i sentieri sono fangosi, quindi porta scarpe con buona aderenza."
+  ],
+  [
+   "Alla cascata qualcuno dice che mi serve una guida. È vero?",
+   "Quando cammini con Rizz, gli ingressi sono già inclusi e al cancello non paghi nulla in più."
+  ],
+  [
+   "Posso cancellare?",
+   "Sì, gratis fino a 24 ore prima. Paghi solo il giorno stesso."
+  ],
+  [
+   "Puoi organizzare il Rinjani?",
+   "Sì. Rizz fa da guida e portatore nei trekking sul Rinjani di un organizzatore autorizzato, con i permessi tramite il sistema ufficiale eRinjani."
+  ]
+ ],
+ "foot_where": "Tetebatu, Lombok orientale, Indonesia",
+ "wa_general": "Ciao Rizz! Ho trovato il tuo sito e vorrei organizzare una camminata.",
+ "wa_tour": "Ciao Rizz! Vorrei prenotare: "
+},
+ja:{
+ "bar_cta": "WhatsApp Rizz",
+ "float": "Rizzに相談",
+ "hero_eyebrow": "地元ガイド · Tetebatu, Lombok",
+ "hero_title": "<em>すべての植物</em>を知る地元ガイドと歩く、Tetebatu。",
+ "hero_lede": "棚田、ジャングルの滝、黒いサル、そしてこの土地で育つ作物たち。少人数で、あなたのペースで。料金は固定で、隠れた費用はありません。",
+ "hero_cta": "WhatsAppでウォーキングを相談する",
+ "hero_cta2": "ツアーを見る",
+ "promises": [
+  [
+   "支払いは当日",
+   "前払いなし、ルピアの現金でお願いします。"
+  ],
+  [
+   "キャンセル無料",
+   "24時間前までOKです。"
+  ],
+  [
+   "全部込みの料金",
+   "入場料と水も含まれています。"
+  ],
+  [
+   "Tetebatuで送迎",
+   "ホームステイまで、時間通りに迎えに行きます。"
+  ]
+ ],
+ "tours_eyebrow": "ツアー",
+ "tours_title": "歩くコースを選ぼう",
+ "tours_sub": "どのツアーも、Tetebatuのあなたのホームステイから出発します。ペースをRizzに伝えれば、ルートを調整します。",
+ "hours": "時間",
+ "ask_price": "料金はWhatsAppで",
+ "book": "WhatsAppで予約",
+ "photo": "写真は準備中です",
+ "l_start": "出発",
+ "l_level": "レベル",
+ "l_incl": "含まれるもの",
+ "l_bring": "持ち物",
+ "level": {
+  "easy": "やさしい",
+  "mod": "ふつう、滑りやすい所あり",
+  "hard": "きつい、本格的な登山"
+ },
+ "bring_walk": "ウォーターシューズか滑りにくい靴、日焼け止め、水着",
+ "tour_rice_t": "田んぼとスパイス園を歩く",
+ "tour_rice_p": "Tetebatuの中心を歩きます。棚田やSasakの小さな村を抜けながら、種まきから収穫まで、お米がどう育つかを学べます。道中、作物の香りを嗅いで味見もできます。",
+ "tour_rice_i": [
+  "お米の植え方、育て方、収穫の仕方",
+  "木になったままのコーヒー、カカオ、バニラ、クローブ",
+  "新鮮なフルーツの試食"
+ ],
+ "tour_rice_inc": "ガイド、水、フルーツ",
+ "tour_water_t": "田んぼと滝",
+ "tour_water_p": "田んぼを抜けてTetebatuの滝へ。滑りやすい階段ではなく、竹の橋を渡ります。帰る前に泳ぐ時間もあります。",
+ "tour_water_i": [
+  "棚田と植物の解説",
+  "Tetebatuの滝で水遊びの時間",
+  "竹の橋を渡る安全なルート"
+ ],
+ "tour_water_inc": "ガイド、入場料、水、フルーツ",
+ "tour_classic_t": "Tetebatuを満喫する1日",
+ "tour_classic_p": "1日でまるごと体験できます。サルが活発な早朝にモンキーフォレストへ。その後は田んぼとスパイス園、地元のSasak料理のランチ、最後は滝でひと休みです。",
+ "tour_classic_i": [
+  "朝のモンキーフォレスト",
+  "田んぼとスパイス園",
+  "Sasak料理のランチ",
+  "滝で水遊び"
+ ],
+ "tour_classic_inc": "ガイド、入場料、ランチ、水、フルーツ",
+ "tour_classic_n": "黒いサルは森で野生に暮らしています。よく会えますが、必ずとは約束できません。",
+ "tour_rinjani_t": "Rinjani山トレッキング",
+ "tour_rinjani_p": "Rizzがガイドやポーターとして一緒に火山に登ります。国立公園の決まりにより、トレッキングは認可を受けた主催会社と公式のeRinjani許可証のもとで行います。",
+ "tour_rinjani_i": [
+  "火口の縁で見る日の出",
+  "許可証と登録の手配つき",
+  "ガイドとポーターのサポート"
+ ],
+ "tour_rinjani_inc": "トレッキングによって異なります。Rizzに聞いてください",
+ "tour_rinjani_n": "Rinjaniには決まった入山期間とグループのルールがあります。最新の日程はRizzに聞いてください。",
+ "more_title": "Tetebatuのほかの見どころ",
+ "more_p": "ほかに行きたい所はありますか？ Rizzはこれらの場所への1日プランも作れます。WhatsAppで聞いてみてください。",
+ "more": [
+  "Jukutの滝",
+  "Benang KelambuとBenang Stokel",
+  "Sarang WaletとTibu Bunter",
+  "織物の村Pringgasela",
+  "料理教室",
+  "Pergasingan Hillで夕日"
+ ],
+ "photo_rizz": "Rizzの写真",
+ "about_eyebrow": "Rizzについて",
+ "about_1": "こんにちは、Rizzです。20歳で、田んぼと火山にはさまれたTetebatuで暮らして働いています。",
+ "about_2": "母と妹の面倒を見ながら、夢のためにお金を貯めています。ここTetebatuの家族の土地に、自分のゲストハウスを建てることです。",
+ "about_3": "僕と歩けば、どの葉っぱが何に効くのか、お米が本当はどう育つのか、サルがどこに隠れているのかが分かります。道中、あなたの写真もいちばんきれいに撮りますよ。",
+ "plants": [
+  "お米",
+  "コーヒー",
+  "カカオ",
+  "バニラ",
+  "クローブ",
+  "ココナッツ",
+  "ドリアン"
+ ],
+ "how_eyebrow": "ご利用の流れ",
+ "how_title": "予約はメッセージ1通で",
+ "s1_t": "WhatsAppを送る",
+ "s1_p": "ツアー、日にち、人数、宿泊先をRizzに伝えてください。",
+ "s2_t": "はっきりした返事",
+ "s2_p": "料金、出発時間、ホームステイへのお迎えを確認してお返事します。",
+ "s3_t": "さあ、歩こう",
+ "s3_p": "ウォーターシューズと好奇心を持ってきてください。お支払いは一日の終わりに、Rizzに現金でお願いします。",
+ "rev_eyebrow": "レビュー",
+ "rev_title": "お客様の声",
+ "rev_p": "レビューが一つ増えるたびに、Rizzは自分のゲストハウスに近づきます。一緒に歩いたら、Googleにひとこといただけるとうれしいです。",
+ "rev_read": "Googleでレビューを読む",
+ "rev_write": "レビューを書く",
+ "faq_title": "知っておくと安心",
+ "faq": [
+  [
+   "TetebatuにはATMがありますか？",
+   "いいえ。村にはATMも薬局もありません。Tetebatuに来るときは、ルピアの現金を十分に持ってきてください。"
+  ],
+  [
+   "Tetebatuへの行き方は？",
+   "Lombok空港から約1.5時間、KutaやSenggigiから2〜3時間です。ここではGrabは使えません。Rizzに聞いてもらえれば、ドライバー探しをお手伝いします。"
+  ],
+  [
+   "体力は必要ですか？",
+   "田んぼのウォーキングは、たいていの方にとって楽なコースです。滝へのルートは、雨の後に滑りやすい所があります。Rinjaniは本格的な登山です。自分に合うか、Rizzに聞いてみてください。"
+  ],
+  [
+   "いつ行くのがベストですか？",
+   "6月から9月は乾季です。12月から3月は雨季で、緑がとてもきれいですが道がぬかるむので、滑りにくい靴を持ってきてください。"
+  ],
+  [
+   "滝で「ガイドが必要」と言われました。本当ですか？",
+   "Rizzと歩く場合は入場料がすでに料金に含まれているので、入口で追加のお支払いは必要ありません。"
+  ],
+  [
+   "キャンセルできますか？",
+   "はい、24時間前まで無料です。お支払いは当日だけです。"
+  ],
+  [
+   "Rinjaniの手配はできますか？",
+   "はい。認可を受けた主催会社のRinjaniトレッキングで、Rizzがガイドとポーターを務めます。許可証は公式のeRinjaniシステムで取得します。"
+  ]
+ ],
+ "foot_where": "インドネシア、東Lombok、Tetebatu",
+ "wa_general": "こんにちは、Rizz！ ウェブサイトを見て、ウォーキングの相談をしたくて連絡しました。",
+ "wa_tour": "こんにちは、Rizz！ 予約したいです: "
+},
+ko:{
+ "bar_cta": "WhatsApp Rizz",
+ "float": "Rizz에게 물어보기",
+ "hero_eyebrow": "현지 가이드 · Tetebatu, Lombok",
+ "hero_title": "<em>모든 식물</em>을 아는 현지인과 함께 걷는 Tetebatu.",
+ "hero_lede": "계단식 논, 정글 속 폭포, 검은 원숭이, 그리고 이곳에서 자라는 작물들. 소규모 그룹으로, 원하는 속도로, 숨은 비용 없는 고정 가격으로 즐기세요.",
+ "hero_cta": "WhatsApp으로 트레킹 계획하기",
+ "hero_cta2": "투어 보기",
+ "promises": [
+  [
+   "당일 결제",
+   "선결제 없이, 루피아 현금으로 내시면 돼요."
+  ],
+  [
+   "무료 취소",
+   "24시간 전까지 가능해요."
+  ],
+  [
+   "모든 비용 포함",
+   "입장료와 물이 포함되어 있어요."
+  ],
+  [
+   "Tetebatu 픽업",
+   "숙소 앞까지 시간에 맞춰 갈게요."
+  ]
+ ],
+ "tours_eyebrow": "투어",
+ "tours_title": "걷고 싶은 코스를 골라보세요",
+ "tours_sub": "모든 투어는 Tetebatu에 있는 숙소에서 시작해요. 걷는 속도를 Rizz에게 알려주면 코스를 맞춰 드려요.",
+ "hours": "시간",
+ "ask_price": "가격은 WhatsApp으로 문의",
+ "book": "WhatsApp으로 예약",
+ "photo": "사진 준비 중",
+ "l_start": "출발",
+ "l_level": "난이도",
+ "l_incl": "포함 사항",
+ "l_bring": "준비물",
+ "level": {
+  "easy": "쉬움",
+  "mod": "보통, 미끄러운 구간 있음",
+  "hard": "어려움, 본격적인 산행"
+ },
+ "bring_walk": "아쿠아슈즈 또는 접지력 좋은 신발, 선크림, 수영복",
+ "tour_rice_t": "논과 향신료 정원 걷기",
+ "tour_rice_p": "Tetebatu의 한가운데를 걷는 코스예요. 계단식 논과 작은 Sasak 마을을 지나며 씨앗부터 수확까지 쌀이 어떻게 자라는지 배워요. 걷는 동안 작물의 향을 맡고 맛도 볼 수 있어요.",
+ "tour_rice_i": [
+  "쌀을 심고 키우고 수확하는 방법",
+  "나무에 달린 커피, 카카오, 바닐라, 정향",
+  "신선한 과일 맛보기"
+ ],
+ "tour_rice_inc": "가이드, 물, 과일",
+ "tour_water_t": "논과 폭포",
+ "tour_water_p": "논길을 지나 Tetebatu 폭포로 가요. 미끄러운 계단 대신 대나무 다리를 건너요. 돌아가기 전에 수영할 시간도 있어요.",
+ "tour_water_i": [
+  "계단식 논과 식물 설명",
+  "수영 시간이 있는 Tetebatu 폭포",
+  "대나무 다리로 가는 안전한 길"
+ ],
+ "tour_water_inc": "가이드, 입장료, 물, 과일",
+ "tour_classic_t": "Tetebatu 클래식 하루 코스",
+ "tour_classic_p": "하루에 모두 볼 수 있는 코스예요. 원숭이가 활발한 이른 아침에는 원숭이 숲, 그다음 논과 향신료 정원, 현지 Sasak식 점심, 마지막으로 폭포에서 더위를 식혀요.",
+ "tour_classic_i": [
+  "아침의 원숭이 숲",
+  "논과 향신료 정원",
+  "Sasak식 점심",
+  "폭포에서 수영"
+ ],
+ "tour_classic_inc": "가이드, 입장료, 점심, 물, 과일",
+ "tour_classic_n": "검은 원숭이는 숲에서 야생으로 살아요. 자주 만나지만 꼭 볼 수 있다고 약속드리지는 못해요.",
+ "tour_rinjani_t": "Rinjani산 트레킹",
+ "tour_rinjani_p": "Rizz가 가이드 또는 포터로 함께 화산에 올라요. 국립공원 규정에 따라 트레킹은 허가받은 트레킹 업체와 공식 eRinjani 허가증으로 진행돼요.",
+ "tour_rinjani_i": [
+  "분화구 능선에서 보는 일출",
+  "허가증과 등록 대행",
+  "가이드와 포터 지원"
+ ],
+ "tour_rinjani_inc": "트레킹에 따라 달라요. Rizz에게 문의하세요",
+ "tour_rinjani_n": "Rinjani는 입산 가능 시즌과 그룹 규정이 정해져 있어요. 최신 일정은 Rizz에게 물어보세요.",
+ "more_title": "Tetebatu의 다른 명소",
+ "more_p": "다른 곳이 궁금하세요? Rizz가 이런 곳으로 가는 하루 일정도 짜 드려요. WhatsApp으로 문의하세요.",
+ "more": [
+  "Jukut 폭포",
+  "Benang Kelambu와 Benang Stokel",
+  "Sarang Walet와 Tibu Bunter",
+  "직물 마을 Pringgasela",
+  "요리 수업",
+  "Pergasingan Hill 일몰"
+ ],
+ "photo_rizz": "Rizz 사진",
+ "about_eyebrow": "Rizz를 소개해요",
+ "about_1": "안녕하세요, Rizz예요. 스무 살이고, 논과 화산 사이에 있는 Tetebatu에서 살며 일하고 있어요.",
+ "about_2": "어머니와 여동생을 돌보면서, 제 꿈을 위해 저축하고 있어요. 이곳 Tetebatu에 있는 가족 땅에 저만의 게스트하우스를 짓는 거예요.",
+ "about_3": "저와 걸으면 어떤 잎이 어디에 좋은지, 쌀이 진짜 어떻게 자라는지, 원숭이들이 어디에 숨는지 알게 돼요. 걷는 동안 제가 제일 예쁜 사진도 찍어 드릴게요.",
+ "plants": [
+  "쌀",
+  "커피",
+  "카카오",
+  "바닐라",
+  "정향",
+  "코코넛",
+  "두리안"
+ ],
+ "how_eyebrow": "이용 방법",
+ "how_title": "예약은 메시지 한 통이면 돼요",
+ "s1_t": "WhatsApp 보내기",
+ "s1_p": "어떤 투어인지, 날짜, 인원, 묵는 곳을 Rizz에게 알려주세요.",
+ "s2_t": "분명한 답장",
+ "s2_p": "가격, 출발 시간, 숙소 픽업까지 확인해서 답해 드려요.",
+ "s3_t": "함께 걸어요",
+ "s3_p": "아쿠아슈즈와 호기심만 챙겨 오세요. 결제는 하루가 끝날 때 Rizz에게 현금으로 하시면 돼요.",
+ "rev_eyebrow": "후기",
+ "rev_title": "여행객들의 이야기",
+ "rev_p": "후기가 하나씩 쌓일 때마다 Rizz는 자기 게스트하우스에 한 걸음 더 가까워져요. 함께 걸으셨다면 Google에 한마디 남겨 주세요.",
+ "rev_read": "Google에서 후기 보기",
+ "rev_write": "후기 쓰기",
+ "faq_title": "알아두면 좋은 것",
+ "faq": [
+  [
+   "Tetebatu에 ATM이 있나요?",
+   "아니요. 마을에는 ATM도 약국도 없어요. Tetebatu에 오실 때 루피아 현금을 넉넉히 가져오세요."
+  ],
+  [
+   "Tetebatu에는 어떻게 가나요?",
+   "Lombok 공항에서 약 1.5시간, Kuta나 Senggigi에서 2~3시간 걸려요. 이곳에서는 Grab을 쓸 수 없어요. Rizz에게 물어보면 기사님 찾는 걸 도와드려요."
+  ],
+  [
+   "체력이 좋아야 하나요?",
+   "논길 걷기는 대부분의 분께 편한 코스예요. 폭포로 가는 길은 비가 온 뒤에 미끄러운 곳이 있어요. Rinjani는 본격적인 산행이에요. 나에게 맞는지 Rizz에게 물어보세요."
+  ],
+  [
+   "언제 가는 게 가장 좋나요?",
+   "6월부터 9월까지는 건기예요. 12월부터 3월까지는 우기라서 온통 초록빛이지만 길이 질척하니, 접지력 좋은 신발을 챙기세요."
+  ],
+  [
+   "폭포에서 누가 가이드가 꼭 필요하다고 하던데, 사실인가요?",
+   "Rizz와 함께 걸으면 입장료가 이미 포함되어 있어서 입구에서 따로 내실 필요가 없어요."
+  ],
+  [
+   "취소할 수 있나요?",
+   "네, 24시간 전까지 무료로 취소할 수 있어요. 결제는 당일에만 하시면 돼요."
+  ],
+  [
+   "Rinjani도 준비해 주실 수 있나요?",
+   "네. 허가받은 트레킹 업체가 운영하는 Rinjani 트레킹에서 Rizz가 가이드와 포터를 맡아요. 허가증은 공식 eRinjani 시스템으로 받아요."
+  ]
+ ],
+ "foot_where": "인도네시아 동부 Lombok, Tetebatu",
+ "wa_general": "안녕하세요 Rizz! 웹사이트를 보고 트레킹을 계획하고 싶어서 연락드려요.",
+ "wa_tour": "안녕하세요 Rizz! 예약하고 싶어요: "
+},
+ms:{
+ "bar_cta": "WhatsApp Rizz",
+ "float": "Tanya Rizz",
+ "hero_eyebrow": "Pemandu tempatan · Tetebatu, Lombok",
+ "hero_title": "Jelajahi Tetebatu bersama orang tempatan yang kenal <em>setiap tumbuhan</em>.",
+ "hero_lede": "Sawah padi berteres, air terjun di hutan, monyet hitam dan tanaman yang tumbuh di sini. Kumpulan kecil, rentak anda sendiri, dan harga tetap tanpa caj tersembunyi.",
+ "hero_cta": "Rancang jalan-jalan anda di WhatsApp",
+ "hero_cta2": "Lihat lawatan",
+ "promises": [
+  [
+   "Bayar pada hari itu",
+   "Tiada bayaran pendahuluan, tunai dalam rupiah."
+  ],
+  [
+   "Batal percuma",
+   "Sehingga 24 jam sebelum itu."
+  ],
+  [
+   "Harga termasuk semua",
+   "Yuran masuk dan air sudah termasuk."
+  ],
+  [
+   "Jemputan di Tetebatu",
+   "Di homestay anda, tepat pada masanya."
+  ]
+ ],
+ "tours_eyebrow": "Lawatan",
+ "tours_title": "Pilih trek anda",
+ "tours_sub": "Setiap lawatan bermula di homestay anda di Tetebatu. Beritahu Rizz rentak anda dan dia akan sesuaikan laluan.",
+ "hours": "jam",
+ "ask_price": "Harga di WhatsApp",
+ "book": "Tempah di WhatsApp",
+ "photo": "Foto akan datang",
+ "l_start": "Mula",
+ "l_level": "Tahap",
+ "l_incl": "Termasuk",
+ "l_bring": "Bawa",
+ "level": {
+  "easy": "Mudah",
+  "mod": "Sederhana, ada bahagian licin",
+  "hard": "Sukar, mendaki gunung sebenar"
+ },
+ "bring_walk": "Kasut air atau kasut bergetah kukuh, krim pelindung matahari, pakaian renang",
+ "tour_rice_t": "Jalan-jalan sawah padi dan kebun rempah",
+ "tour_rice_p": "Jantung Tetebatu. Berjalan di sawah berteres dan kampung Sasak yang kecil, dan ketahui bagaimana padi tumbuh, dari benih hingga musim menuai. Hidu dan rasai tanaman sepanjang jalan.",
+ "tour_rice_i": [
+  "Cara padi ditanam, dijaga dan dituai",
+  "Kopi, koko, vanila dan cengkih di pokoknya",
+  "Rasa buah-buahan segar"
+ ],
+ "tour_rice_inc": "Pemandu, air, buah-buahan",
+ "tour_water_t": "Sawah padi dan air terjun",
+ "tour_water_p": "Melalui sawah padi menuju air terjun Tetebatu, melalui jambatan buluh dan bukannya tangga yang licin. Ada masa untuk berenang sebelum berjalan pulang.",
+ "tour_water_i": [
+  "Sawah berteres dan tumbuhan diterangkan",
+  "Air terjun Tetebatu dengan hentian berenang",
+  "Laluan selamat melalui jambatan buluh"
+ ],
+ "tour_water_inc": "Pemandu, yuran masuk, air, buah-buahan",
+ "tour_classic_t": "Sehari penuh di Tetebatu",
+ "tour_classic_p": "Gambaran lengkap dalam satu hari. Hutan monyet pada awal pagi ketika monyet aktif, sawah padi dan kebun rempah, makan tengah hari Sasak tempatan dan air terjun untuk menyejukkan badan.",
+ "tour_classic_i": [
+  "Hutan monyet pada waktu pagi",
+  "Sawah padi dan kebun rempah",
+  "Makan tengah hari Sasak",
+  "Berenang di air terjun"
+ ],
+ "tour_classic_inc": "Pemandu, yuran masuk, makan tengah hari, air, buah-buahan",
+ "tour_classic_n": "Monyet hitam hidup liar di hutan, jadi kami kerap melihatnya tetapi tidak boleh berjanji.",
+ "tour_rinjani_t": "Pendakian Gunung Rinjani",
+ "tour_rinjani_p": "Daki gunung berapi bersama Rizz sebagai pemandu atau pembawa barang. Pendakian dijalankan bersama penganjur trek berlesen dan permit rasmi eRinjani, seperti yang diwajibkan oleh taman negara.",
+ "tour_rinjani_i": [
+  "Matahari terbit di bibir kawah",
+  "Permit dan pendaftaran diuruskan",
+  "Pemandu dan pembawa barang"
+ ],
+ "tour_rinjani_inc": "Bergantung pada pendakian, tanya Rizz",
+ "tour_rinjani_n": "Rinjani mempunyai tarikh musim tetap dan peraturan kumpulan. Tanya Rizz untuk tarikh terkini.",
+ "more_title": "Lagi dari Tetebatu",
+ "more_p": "Mahu sesuatu yang lain? Rizz boleh merancang sehari ke tempat-tempat ini juga. Tanya di WhatsApp.",
+ "more": [
+  "Air terjun Jukut",
+  "Benang Kelambu dan Benang Stokel",
+  "Sarang Walet dan Tibu Bunter",
+  "Kampung tenunan Pringgasela",
+  "Kelas memasak",
+  "Matahari terbenam di Pergasingan Hill"
+ ],
+ "photo_rizz": "Foto Rizz",
+ "about_eyebrow": "Kenali Rizz",
+ "about_1": "Hai, saya Rizz. Saya berumur 20 tahun dan tinggal serta bekerja di Tetebatu, di antara sawah padi dan gunung berapi.",
+ "about_2": "Saya menjaga ibu dan adik perempuan saya, dan saya menabung untuk impian saya: rumah tumpangan sendiri di tanah keluarga saya di Tetebatu ini.",
+ "about_3": "Bersama saya, anda akan tahu daun mana yang baik untuk apa, bagaimana padi benar-benar tumbuh, dan di mana monyet bersembunyi. Dan sepanjang jalan saya ambil foto anda yang paling cantik.",
+ "plants": [
+  "Padi",
+  "Kopi",
+  "Koko",
+  "Vanila",
+  "Cengkih",
+  "Kelapa",
+  "Durian"
+ ],
+ "how_eyebrow": "Cara ia berfungsi",
+ "how_title": "Tempahan hanya satu mesej",
+ "s1_t": "Hantar WhatsApp",
+ "s1_p": "Beritahu Rizz lawatan mana, hari apa, berapa orang dan di mana anda menginap.",
+ "s2_t": "Dapat jawapan yang jelas",
+ "s2_p": "Dia mengesahkan harga, masa mula dan jemputan di homestay anda.",
+ "s3_t": "Jom berjalan",
+ "s3_p": "Bawa kasut air dan rasa ingin tahu. Anda membayar Rizz secara tunai pada penghujung hari.",
+ "rev_eyebrow": "Ulasan",
+ "rev_title": "Kata para tetamu",
+ "rev_p": "Setiap ulasan membantu Rizz mendekati rumah tumpangannya sendiri. Sudah berjalan bersamanya? Tinggalkan beberapa patah kata di Google.",
+ "rev_read": "Baca ulasan di Google",
+ "rev_write": "Tulis ulasan",
+ "faq_title": "Perlu diketahui",
+ "faq": [
+  [
+   "Adakah ATM di Tetebatu?",
+   "Tidak. Tiada ATM dan tiada farmasi di kampung ini. Bawa tunai rupiah yang mencukupi apabila datang ke Tetebatu."
+  ],
+  [
+   "Bagaimana hendak ke Tetebatu?",
+   "Kira-kira 1.5 jam dari lapangan terbang Lombok dan 2 hingga 3 jam dari Kuta atau Senggigi. Tiada Grab di sini. Tanya Rizz dan dia boleh bantu anda mencari pemandu."
+  ],
+  [
+   "Perlukah saya cergas?",
+   "Jalan-jalan di sawah padi mudah untuk kebanyakan orang. Laluan air terjun ada bahagian licin selepas hujan. Rinjani ialah pendakian gunung sebenar: tanya Rizz sama ada ia sesuai untuk anda."
+  ],
+  [
+   "Bilakah masa terbaik?",
+   "Jun hingga September ialah musim kering. Disember hingga Mac ialah musim hujan: semuanya sangat hijau, tetapi laluan berlumpur, jadi bawa kasut bergetah kukuh."
+  ],
+  [
+   "Seseorang di air terjun kata saya perlu pemandu. Betulkah?",
+   "Apabila anda berjalan bersama Rizz, yuran masuk sudah termasuk dan anda tidak perlu bayar lagi di pintu masuk."
+  ],
+  [
+   "Bolehkah saya membatalkan?",
+   "Boleh, percuma sehingga 24 jam sebelum itu. Anda hanya membayar pada hari itu sendiri."
+  ],
+  [
+   "Bolehkah anda mengaturkan Rinjani?",
+   "Boleh. Rizz memandu dan membawa barang dalam pendakian Rinjani yang dikendalikan oleh penganjur trek berlesen, dengan permit melalui sistem rasmi eRinjani."
+  ]
+ ],
+ "foot_where": "Tetebatu, Lombok Timur, Indonesia",
+ "wa_general": "Hai Rizz! Saya jumpa laman web anda dan mahu merancang satu perjalanan.",
+ "wa_tour": "Hai Rizz! Saya ingin menempah: "
+},
+nb:{
+ "bar_cta": "WhatsApp Rizz",
+ "float": "Spør Rizz",
+ "hero_eyebrow": "Lokal guide · Tetebatu, Lombok",
+ "hero_title": "Opplev Tetebatu med en lokal som kjenner <em>hver eneste plante</em>.",
+ "hero_lede": "Riseterrasser, fossefall i jungelen, svarte aper og alt som vokser her. Små grupper, ditt eget tempo og faste priser uten overraskelser.",
+ "hero_cta": "Planlegg turen din på WhatsApp",
+ "hero_cta2": "Se turene",
+ "promises": [
+  [
+   "Betal på dagen",
+   "Ingenting på forhånd, kontant i rupiah."
+  ],
+  [
+   "Gratis avbestilling",
+   "Opptil 24 timer før."
+  ],
+  [
+   "Alt inkludert",
+   "Inngang og vann er med i prisen."
+  ],
+  [
+   "Henting i Tetebatu",
+   "Ved homestayen din, i tide."
+  ]
+ ],
+ "tours_eyebrow": "Turer",
+ "tours_title": "Velg turen din",
+ "tours_sub": "Hver tur starter ved homestayen din i Tetebatu. Fortell Rizz hvilket tempo du går i, så tilpasser han ruten.",
+ "hours": "timer",
+ "ask_price": "Pris på WhatsApp",
+ "book": "Book på WhatsApp",
+ "photo": "Bilde kommer snart",
+ "l_start": "Start",
+ "l_level": "Nivå",
+ "l_incl": "Inkludert",
+ "l_bring": "Ta med",
+ "level": {
+  "easy": "Lett",
+  "mod": "Middels, noen glatte partier",
+  "hard": "Krevende, ekte fjelltur"
+ },
+ "bring_walk": "Vannsko eller sko med godt grep, solkrem, badetøy",
+ "tour_rice_t": "Rismarker og krydderhage",
+ "tour_rice_p": "Hjertet av Tetebatu. Gå gjennom terrassene og små Sasak-landsbyer, og lær hvordan ris vokser, fra frø til innhøsting. Lukt og smak på plantene underveis.",
+ "tour_rice_i": [
+  "Hvordan ris plantes, dyrkes og høstes",
+  "Kaffe, kakao, vanilje og nellik på treet",
+  "Smaksprøver på fersk frukt"
+ ],
+ "tour_rice_inc": "Guide, vann, frukt",
+ "tour_water_t": "Rismarker og foss",
+ "tour_water_p": "Gjennom rismarkene til Tetebatu-fossen, over bambusbroen i stedet for de glatte trappene. Tid til et bad før vi går tilbake.",
+ "tour_water_i": [
+  "Riseterrasser og planter forklart",
+  "Tetebatu-fossen med badestopp",
+  "Trygg rute over bambusbroen"
+ ],
+ "tour_water_inc": "Guide, inngang, vann, frukt",
+ "tour_classic_t": "Klassisk Tetebatu-dag",
+ "tour_classic_p": "Hele bildet på én dag. Apeskogen tidlig om morgenen når apene er aktive, rismarker og krydderhager, en lokal Sasak-lunsj og en foss å kjøle seg ned i.",
+ "tour_classic_i": [
+  "Apeskog om morgenen",
+  "Rismarker og krydderhager",
+  "Sasak-lunsj",
+  "Bad i fossen"
+ ],
+ "tour_classic_inc": "Guide, inngang, lunsj, vann, frukt",
+ "tour_classic_n": "De svarte apene lever ville i skogen, så vi ser dem ofte, men kan ikke love det.",
+ "tour_rinjani_t": "Tur opp Rinjani",
+ "tour_rinjani_p": "Gå opp vulkanen med Rizz som guide eller bærer. Turene går med en lisensiert trekkingarrangør og den offisielle eRinjani-tillatelsen, slik nasjonalparken krever.",
+ "tour_rinjani_i": [
+  "Soloppgang på kraterkanten",
+  "Tillatelse og registrering ordnes",
+  "Guide og hjelp med bæring"
+ ],
+ "tour_rinjani_inc": "Avhenger av turen, spør Rizz",
+ "tour_rinjani_n": "Rinjani har faste sesongdatoer og grupperegler. Spør Rizz om gjeldende datoer.",
+ "more_title": "Mer fra Tetebatu",
+ "more_p": "Vil du noe annet? Rizz kan også planlegge en dag til disse stedene. Spør på WhatsApp.",
+ "more": [
+  "Jukut-fossen",
+  "Benang Kelambu & Benang Stokel",
+  "Sarang Walet & Tibu Bunter",
+  "Vevelandsbyen Pringgasela",
+  "Matlagingskurs",
+  "Solnedgang ved Pergasingan Hill"
+ ],
+ "photo_rizz": "Bilde av Rizz",
+ "about_eyebrow": "Møt Rizz",
+ "about_1": "Hei, jeg heter Rizz. Jeg er 20 og bor og jobber i Tetebatu, mellom rismarkene og vulkanen.",
+ "about_2": "Jeg tar vare på moren min og lillesøsteren min, og jeg sparer til drømmen min: et eget gjestehus på familiens land her i Tetebatu.",
+ "about_3": "På tur med meg lærer du hvilket blad som hjelper mot hva, hvordan ris egentlig vokser, og hvor apene gjemmer seg. Og jeg tar de beste bildene av deg underveis.",
+ "plants": [
+  "Ris",
+  "Kaffe",
+  "Kakao",
+  "Vanilje",
+  "Nellik",
+  "Kokos",
+  "Durian"
+ ],
+ "how_eyebrow": "Slik fungerer det",
+ "how_title": "Det tar én melding å booke",
+ "s1_t": "Send en WhatsApp",
+ "s1_p": "Fortell Rizz hvilken tur, hvilken dag, hvor mange dere er og hvor du bor.",
+ "s2_t": "Få et tydelig svar",
+ "s2_p": "Han bekrefter prisen, starttidspunktet og hentingen ved homestayen din.",
+ "s3_t": "Gå en tur",
+ "s3_p": "Ta med vannsko og nysgjerrighet. Du betaler Rizz kontant på slutten av dagen.",
+ "rev_eyebrow": "Omtaler",
+ "rev_title": "Hva gjestene sier",
+ "rev_p": "Hver omtale hjelper Rizz nærmere sitt eget gjestehus. Har du gått med ham? Skriv noen ord på Google.",
+ "rev_read": "Les omtaler på Google",
+ "rev_write": "Skriv en omtale",
+ "faq_title": "Greit å vite",
+ "faq": [
+  [
+   "Finnes det en minibank i Tetebatu?",
+   "Nei. Det finnes verken minibank eller apotek i landsbyen. Ta med nok kontanter i rupiah når du kommer til Tetebatu."
+  ],
+  [
+   "Hvordan kommer jeg meg til Tetebatu?",
+   "Omtrent 1,5 time fra flyplassen på Lombok og 2 til 3 timer fra Kuta eller Senggigi. Det finnes ingen Grab her. Spør Rizz, så hjelper han deg med å finne en sjåfør."
+  ],
+  [
+   "Må jeg være i god form?",
+   "Turen gjennom rismarkene er lett for de fleste. Fossrutene har glatte partier etter regn. Rinjani er en ekte fjelltur: spør Rizz om den passer for deg."
+  ],
+  [
+   "Når er beste tid?",
+   "Juni til september er tørt. Desember til mars er regntid: alt er veldig grønt, men stiene er gjørmete, så ta med sko med godt grep."
+  ],
+  [
+   "Noen ved fossen sier at jeg trenger en guide. Stemmer det?",
+   "Når du går med Rizz, er inngangen allerede inkludert, og du betaler ingenting ekstra ved porten."
+  ],
+  [
+   "Kan jeg avbestille?",
+   "Ja, gratis frem til 24 timer før. Du betaler først selve dagen."
+  ],
+  [
+   "Kan du ordne Rinjani?",
+   "Ja. Rizz guider og bærer på Rinjani-turer som drives av en lisensiert trekkingarrangør, med tillatelser gjennom det offisielle eRinjani-systemet."
+  ]
+ ],
+ "foot_where": "Tetebatu, Øst-Lombok, Indonesia",
+ "wa_general": "Hei Rizz! Jeg fant nettsiden din og vil gjerne planlegge en tur.",
+ "wa_tour": "Hei Rizz! Jeg vil gjerne booke: "
+},
+pl:{
+ "bar_cta": "WhatsApp Rizz",
+ "float": "Zapytaj Rizza",
+ "hero_eyebrow": "Lokalny przewodnik · Tetebatu, Lombok",
+ "hero_title": "Poznaj Tetebatu z lokalsem, który zna <em>każdą roślinę</em>.",
+ "hero_lede": "Tarasy ryżowe, wodospady w dżungli, czarne małpy i wszystko, co tu rośnie. Małe grupy, twoje tempo i stałe ceny bez ukrytych opłat.",
+ "hero_cta": "Zaplanuj wycieczkę na WhatsAppie",
+ "hero_cta2": "Zobacz wycieczki",
+ "promises": [
+  [
+   "Płatność na miejscu",
+   "Bez przedpłaty, gotówką w rupiach."
+  ],
+  [
+   "Darmowa rezygnacja",
+   "Do 24 godzin wcześniej."
+  ],
+  [
+   "Wszystko w cenie",
+   "Bilety wstępu i woda wliczone."
+  ],
+  [
+   "Odbiór w Tetebatu",
+   "Z twojego homestayu, punktualnie."
+  ]
+ ],
+ "tours_eyebrow": "Wycieczki",
+ "tours_title": "Wybierz swoją wędrówkę",
+ "tours_sub": "Każda wycieczka zaczyna się przy twoim homestayu w Tetebatu. Powiedz Rizzowi, jakie masz tempo, a on dopasuje trasę.",
+ "hours": "godz.",
+ "ask_price": "Cena na WhatsAppie",
+ "book": "Zarezerwuj na WhatsAppie",
+ "photo": "Zdjęcie wkrótce",
+ "l_start": "Start",
+ "l_level": "Poziom",
+ "l_incl": "W cenie",
+ "l_bring": "Zabierz ze sobą",
+ "level": {
+  "easy": "Łatwy",
+  "mod": "Średni, miejscami ślisko",
+  "hard": "Trudny, prawdziwa górska wspinaczka"
+ },
+ "bring_walk": "Buty do wody lub z dobrym bieżnikiem, krem z filtrem, strój kąpielowy",
+ "tour_rice_t": "Pola ryżowe i ogród przypraw",
+ "tour_rice_p": "Serce Tetebatu. Przejdź się tarasami i małymi wioskami Sasak i zobacz, jak rośnie ryż, od ziarna do zbiorów. Po drodze poczujesz zapach i spróbujesz lokalnych upraw.",
+ "tour_rice_i": [
+  "Jak ryż się sadzi, uprawia i zbiera",
+  "Kawa, kakao, wanilia i goździki prosto z drzewa",
+  "Degustacja świeżych owoców"
+ ],
+ "tour_rice_inc": "Przewodnik, woda, owoce",
+ "tour_water_t": "Pola ryżowe i wodospad",
+ "tour_water_p": "Przez pola ryżowe do wodospadu Tetebatu, bambusowym mostem zamiast śliskich schodów. Jest czas na kąpiel przed powrotem.",
+ "tour_water_i": [
+  "Tarasy ryżowe i rośliny z wyjaśnieniami",
+  "Wodospad Tetebatu z przerwą na kąpiel",
+  "Bezpieczna trasa bambusowym mostem"
+ ],
+ "tour_water_inc": "Przewodnik, bilet wstępu, woda, owoce",
+ "tour_classic_t": "Klasyczny dzień w Tetebatu",
+ "tour_classic_p": "Wszystko w jeden dzień. Las małp wcześnie rano, gdy małpy są aktywne, pola ryżowe i ogrody przypraw, lunch po sasaksku i wodospad na ochłodę.",
+ "tour_classic_i": [
+  "Las małp rano",
+  "Pola ryżowe i ogrody przypraw",
+  "Lunch po sasaksku",
+  "Kąpiel pod wodospadem"
+ ],
+ "tour_classic_inc": "Przewodnik, bilety wstępu, lunch, woda, owoce",
+ "tour_classic_n": "Czarne małpy żyją w lesie na wolności, więc często je widzimy, ale nie możemy tego obiecać.",
+ "tour_rinjani_t": "Trekking na Rinjani",
+ "tour_rinjani_p": "Wejdź na wulkan z Rizzem jako przewodnikiem lub tragarzem. Trekkingi odbywają się z licencjonowanym organizatorem i oficjalnym zezwoleniem eRinjani, zgodnie z wymogami parku narodowego.",
+ "tour_rinjani_i": [
+  "Wschód słońca na krawędzi krateru",
+  "Zezwolenie i rejestracja załatwione",
+  "Przewodnik i wsparcie tragarzy"
+ ],
+ "tour_rinjani_inc": "Zależy od trekkingu, zapytaj Rizza",
+ "tour_rinjani_n": "Rinjani ma stałe terminy sezonu i zasady dla grup. Zapytaj Rizza o aktualne daty.",
+ "more_title": "Więcej z okolic Tetebatu",
+ "more_p": "Masz ochotę na coś innego? Rizz zaplanuje dzień także w te miejsca. Napisz na WhatsAppie.",
+ "more": [
+  "Wodospad Jukut",
+  "Benang Kelambu i Benang Stokel",
+  "Sarang Walet i Tibu Bunter",
+  "Wioska tkaczy Pringgasela",
+  "Warsztaty kulinarne",
+  "Zachód słońca na Pergasingan Hill"
+ ],
+ "photo_rizz": "Zdjęcie Rizza",
+ "about_eyebrow": "Poznaj Rizza",
+ "about_1": "Cześć, jestem Rizz. Mam 20 lat i mieszkam oraz pracuję w Tetebatu, między polami ryżowymi a wulkanem.",
+ "about_2": "Opiekuję się mamą i młodszą siostrą i odkładam na marzenie: własny guesthouse na ziemi mojej rodziny tutaj, w Tetebatu.",
+ "about_3": "Na wycieczce ze mną dowiesz się, który liść na co pomaga, jak naprawdę rośnie ryż i gdzie chowają się małpy. A po drodze zrobię ci najlepsze zdjęcia.",
+ "plants": [
+  "Ryż",
+  "Kawa",
+  "Kakao",
+  "Wanilia",
+  "Goździki",
+  "Kokos",
+  "Durian"
+ ],
+ "how_eyebrow": "Jak to działa",
+ "how_title": "Rezerwacja to jedna wiadomość",
+ "s1_t": "Napisz na WhatsAppie",
+ "s1_p": "Powiedz Rizzowi, jaka wycieczka, w który dzień, ile osób i gdzie nocujesz.",
+ "s2_t": "Dostań jasną odpowiedź",
+ "s2_p": "Potwierdzi cenę, godzinę startu i odbiór z twojego homestayu.",
+ "s3_t": "Ruszaj na wędrówkę",
+ "s3_p": "Weź buty do wody i ciekawość. Rizzowi płacisz gotówką na koniec dnia.",
+ "rev_eyebrow": "Opinie",
+ "rev_title": "Co mówią goście",
+ "rev_p": "Każda opinia przybliża Rizza do własnego guesthouse'u. Byłeś z nim na wycieczce? Zostaw parę słów w Google.",
+ "rev_read": "Czytaj opinie w Google",
+ "rev_write": "Napisz opinię",
+ "faq_title": "Warto wiedzieć",
+ "faq": [
+  [
+   "Czy w Tetebatu jest bankomat?",
+   "Nie. We wsi nie ma ani bankomatu, ani apteki. Zabierz ze sobą wystarczająco dużo gotówki w rupiach."
+  ],
+  [
+   "Jak dojechać do Tetebatu?",
+   "Około 1,5 godziny od lotniska na Lombok i od 2 do 3 godzin od Kuta lub Senggigi. Grab tu nie dojeżdża. Zapytaj Rizza, pomoże ci znaleźć kierowcę."
+  ],
+  [
+   "Czy muszę mieć dobrą kondycję?",
+   "Spacer po polach ryżowych jest dla większości łatwy. Ścieżki do wodospadów po deszczu są śliskie. Rinjani to prawdziwa górska wspinaczka: zapytaj Rizza, czy będzie dla ciebie odpowiednia."
+  ],
+  [
+   "Kiedy jest najlepsza pora?",
+   "Od czerwca do września jest sucho. Od grudnia do marca trwa pora deszczowa: wszystko jest bardzo zielone, ale ścieżki są błotniste, więc weź buty z dobrym bieżnikiem."
+  ],
+  [
+   "Ktoś przy wodospadzie mówi, że potrzebuję przewodnika. Czy to prawda?",
+   "Gdy idziesz z Rizzem, bilety wstępu są już wliczone i przy wejściu nie płacisz nic extra."
+  ],
+  [
+   "Czy mogę zrezygnować?",
+   "Tak, za darmo do 24 godzin wcześniej. Płacisz dopiero w dniu wycieczki."
+  ],
+  [
+   "Czy możesz zorganizować Rinjani?",
+   "Tak. Rizz jest przewodnikiem i tragarzem na trekkingach na Rinjani licencjonowanego organizatora, a zezwolenia załatwia się przez oficjalny system eRinjani."
+  ]
+ ],
+ "foot_where": "Tetebatu, Wschodni Lombok, Indonezja",
+ "wa_general": "Cześć Rizz! Znalazłem twoją stronę i chcę zaplanować wycieczkę.",
+ "wa_tour": "Cześć Rizz! Chciałbym zarezerwować: "
+},
+pt:{
+ "bar_cta": "WhatsApp Rizz",
+ "float": "Pergunta ao Rizz",
+ "hero_eyebrow": "Guia local · Tetebatu, Lombok",
+ "hero_title": "Caminha por Tetebatu com um local que conhece <em>cada planta</em>.",
+ "hero_lede": "Arrozais em socalcos, cascatas na selva, macacos pretos e tudo o que cresce aqui. Grupos pequenos, ao teu ritmo e com preços fixos, sem surpresas.",
+ "hero_cta": "Planeia a tua caminhada no WhatsApp",
+ "hero_cta2": "Ver os passeios",
+ "promises": [
+  [
+   "Pagas no dia",
+   "Sem pagamento antecipado, em dinheiro, em rupias."
+  ],
+  [
+   "Cancelamento grátis",
+   "Até 24 horas antes."
+  ],
+  [
+   "Tudo incluído",
+   "Entradas e água incluídas."
+  ],
+  [
+   "Recolha em Tetebatu",
+   "No teu homestay, a horas."
+  ]
+ ],
+ "tours_eyebrow": "Passeios",
+ "tours_title": "Escolhe a tua caminhada",
+ "tours_sub": "Cada passeio começa no teu homestay em Tetebatu. Diz ao Rizz o teu ritmo e ele ajusta o percurso.",
+ "hours": "horas",
+ "ask_price": "Preço no WhatsApp",
+ "book": "Reservar no WhatsApp",
+ "photo": "Foto em breve",
+ "l_start": "Início",
+ "l_level": "Nível",
+ "l_incl": "Incluído",
+ "l_bring": "Leva",
+ "level": {
+  "easy": "Fácil",
+  "mod": "Moderado, alguns troços escorregadios",
+  "hard": "Difícil, subida a sério"
+ },
+ "bring_walk": "Sapatos de água ou com boa aderência, protetor solar, fato de banho",
+ "tour_rice_t": "Arrozais e jardim de especiarias",
+ "tour_rice_p": "O coração de Tetebatu. Caminha pelos socalcos e pelas pequenas aldeias sasak e descobre como cresce o arroz, da semente à colheita. Cheira e prova as culturas pelo caminho.",
+ "tour_rice_i": [
+  "Como o arroz é plantado, cultivado e colhido",
+  "Café, cacau, baunilha e cravo-da-índia na árvore",
+  "Prova de fruta fresca"
+ ],
+ "tour_rice_inc": "Guia, água, fruta",
+ "tour_water_t": "Arrozais e cascata",
+ "tour_water_p": "Pelos arrozais até à cascata de Tetebatu, pela ponte de bambu em vez das escadas escorregadias. Tempo para um mergulho antes de voltares.",
+ "tour_water_i": [
+  "Socalcos de arroz e plantas explicadas",
+  "Cascata de Tetebatu com paragem para nadar",
+  "Percurso seguro pela ponte de bambu"
+ ],
+ "tour_water_inc": "Guia, entrada, água, fruta",
+ "tour_classic_t": "Dia clássico em Tetebatu",
+ "tour_classic_p": "Tudo num só dia. A floresta dos macacos de manhã cedo, quando estão ativos, arrozais e jardins de especiarias, um almoço sasak e uma cascata para refrescar.",
+ "tour_classic_i": [
+  "Floresta dos macacos de manhã",
+  "Arrozais e jardins de especiarias",
+  "Almoço sasak",
+  "Mergulho na cascata"
+ ],
+ "tour_classic_inc": "Guia, entradas, almoço, água, fruta",
+ "tour_classic_n": "Os macacos pretos vivem em liberdade na floresta. Vemo-los muitas vezes, mas não podemos prometer.",
+ "tour_rinjani_t": "Trekking ao monte Rinjani",
+ "tour_rinjani_p": "Sobe ao vulcão com o Rizz como guia ou carregador. Os treks fazem-se com um organizador licenciado e a licença oficial eRinjani, como o parque nacional exige.",
+ "tour_rinjani_i": [
+  "Nascer do sol na borda da cratera",
+  "Licença e registo tratados",
+  "Guia e carregador"
+ ],
+ "tour_rinjani_inc": "Depende do trek, pergunta ao Rizz",
+ "tour_rinjani_n": "O Rinjani tem datas de época fixas e regras para grupos. Pergunta ao Rizz as datas atuais.",
+ "more_title": "Mais a partir de Tetebatu",
+ "more_p": "Queres outra coisa? O Rizz também pode planear um dia nestes sítios. Pergunta no WhatsApp.",
+ "more": [
+  "Cascata de Jukut",
+  "Benang Kelambu e Benang Stokel",
+  "Sarang Walet e Tibu Bunter",
+  "Aldeia de tecelões de Pringgasela",
+  "Aula de culinária",
+  "Pôr do sol em Pergasingan Hill"
+ ],
+ "photo_rizz": "Foto do Rizz",
+ "about_eyebrow": "Conhece o Rizz",
+ "about_1": "Olá, sou o Rizz. Tenho 20 anos e vivo e trabalho em Tetebatu, entre os arrozais e o vulcão.",
+ "about_2": "Cuido da minha mãe e da minha irmã mais nova, e poupo para o meu sonho: a minha própria casa de hóspedes no terreno da minha família, aqui em Tetebatu.",
+ "about_3": "Numa caminhada comigo aprendes que folha ajuda contra quê, como o arroz cresce de verdade e onde se escondem os macacos. E pelo caminho tiro-te as melhores fotos.",
+ "plants": [
+  "Arroz",
+  "Café",
+  "Cacau",
+  "Baunilha",
+  "Cravo-da-índia",
+  "Coco",
+  "Durian"
+ ],
+ "how_eyebrow": "Como funciona",
+ "how_title": "Reservar é uma só mensagem",
+ "s1_t": "Manda um WhatsApp",
+ "s1_p": "Diz ao Rizz qual o passeio, que dia, quantas pessoas são e onde ficas.",
+ "s2_t": "Recebe uma resposta clara",
+ "s2_p": "Ele confirma o preço, a hora de início e a recolha no teu homestay.",
+ "s3_t": "Vai caminhar",
+ "s3_p": "Leva sapatos de água e curiosidade. Pagas ao Rizz em dinheiro no fim do dia.",
+ "rev_eyebrow": "Avaliações",
+ "rev_title": "O que dizem os visitantes",
+ "rev_p": "Cada avaliação aproxima o Rizz da sua própria casa de hóspedes. Caminhaste com ele? Deixa umas palavras no Google.",
+ "rev_read": "Ler avaliações no Google",
+ "rev_write": "Escrever uma avaliação",
+ "faq_title": "Bom saber",
+ "faq": [
+  [
+   "Há multibanco em Tetebatu?",
+   "Não. Na aldeia não há multibanco nem farmácia. Traz dinheiro suficiente em rupias quando vieres a Tetebatu."
+  ],
+  [
+   "Como chego a Tetebatu?",
+   "A cerca de 1,5 hora do aeroporto de Lombok e a 2 ou 3 horas de Kuta ou Senggigi. Aqui não há Grab. Pergunta ao Rizz e ele ajuda-te a encontrar um motorista."
+  ],
+  [
+   "Preciso de estar em forma?",
+   "A caminhada pelos arrozais é fácil para quase toda a gente. Os percursos das cascatas têm troços escorregadios depois da chuva. O Rinjani é uma subida a sério: pergunta ao Rizz se é para ti."
+  ],
+  [
+   "Qual é a melhor altura?",
+   "De junho a setembro é a época seca. De dezembro a março é a época das chuvas: tudo fica muito verde, mas os caminhos têm lama, por isso leva sapatos com boa aderência."
+  ],
+  [
+   "Alguém na cascata diz que preciso de guia. É verdade?",
+   "Quando caminhas com o Rizz, as entradas já estão incluídas e não pagas mais nada à porta."
+  ],
+  [
+   "Posso cancelar?",
+   "Sim, grátis até 24 horas antes. Só pagas no próprio dia."
+  ],
+  [
+   "Consegues organizar o Rinjani?",
+   "Sim. O Rizz guia e carrega nos treks do Rinjani feitos com um organizador licenciado, com licenças pelo sistema oficial eRinjani."
+  ]
+ ],
+ "foot_where": "Tetebatu, Lombok Oriental, Indonésia",
+ "wa_general": "Olá Rizz! Encontrei o teu site e quero planear uma caminhada.",
+ "wa_tour": "Olá Rizz! Gostava de reservar: "
+},
+ro:{
+ "bar_cta": "WhatsApp Rizz",
+ "float": "Întreabă-l pe Rizz",
+ "hero_eyebrow": "Ghid local · Tetebatu, Lombok",
+ "hero_title": "Descoperă Tetebatu cu un localnic care cunoaște <em>fiecare plantă</em>.",
+ "hero_lede": "Terase de orez, cascade în junglă, maimuțe negre și tot ce crește pe aici. Grupuri mici, ritmul tău și prețuri fixe, fără surprize.",
+ "hero_cta": "Planifică-ți plimbarea pe WhatsApp",
+ "hero_cta2": "Vezi turele",
+ "promises": [
+  [
+   "Plătești în ziua turei",
+   "Nimic în avans, numerar în rupii."
+  ],
+  [
+   "Anulare gratuită",
+   "Până cu 24 de ore înainte."
+  ],
+  [
+   "Totul inclus",
+   "Taxele de intrare și apa sunt în preț."
+  ],
+  [
+   "Preluare în Tetebatu",
+   "De la pensiunea ta, la timp."
+  ]
+ ],
+ "tours_eyebrow": "Ture",
+ "tours_title": "Alege-ți plimbarea",
+ "tours_sub": "Fiecare tură pornește de la pensiunea ta din Tetebatu. Spune-i lui Rizz în ce ritm mergi și el adaptează traseul.",
+ "hours": "ore",
+ "ask_price": "Preț pe WhatsApp",
+ "book": "Rezervă pe WhatsApp",
+ "photo": "Poza vine curând",
+ "l_start": "Plecare",
+ "l_level": "Nivel",
+ "l_incl": "Inclus",
+ "l_bring": "Ia cu tine",
+ "level": {
+  "easy": "Ușor",
+  "mod": "Mediu, pe alocuri alunecos",
+  "hard": "Greu, urcuș adevărat de munte"
+ },
+ "bring_walk": "Pantofi de apă sau încălțăminte cu aderență, cremă de soare, costum de baie",
+ "tour_rice_t": "Câmpuri de orez și grădină de condimente",
+ "tour_rice_p": "Inima din Tetebatu. Mergi prin terase și prin sătucuri Sasak și află cum crește orezul, de la sămânță la recoltă. Miroase și gustă culturile pe drum.",
+ "tour_rice_i": [
+  "Cum se plantează, se crește și se recoltează orezul",
+  "Cafea, cacao, vanilie și cuișoare direct din copac",
+  "Degustare de fructe proaspete"
+ ],
+ "tour_rice_inc": "Ghid, apă, fructe",
+ "tour_water_t": "Câmpuri de orez și cascadă",
+ "tour_water_p": "Prin câmpurile de orez până la cascada Tetebatu, peste podul de bambus în loc de scările alunecoase. Ai timp de înot înainte să ne întoarcem.",
+ "tour_water_i": [
+  "Terase de orez și plante, explicate",
+  "Cascada Tetebatu, cu oprire pentru înot",
+  "Traseu sigur peste podul de bambus"
+ ],
+ "tour_water_inc": "Ghid, taxă de intrare, apă, fructe",
+ "tour_classic_t": "Ziua clasică în Tetebatu",
+ "tour_classic_p": "Imaginea completă într-o singură zi. Pădurea cu maimuțe dis-de-dimineață, când maimuțele sunt active, câmpuri de orez și grădini de condimente, un prânz Sasak local și o cascadă în care să te răcorești.",
+ "tour_classic_i": [
+  "Pădurea cu maimuțe dimineața",
+  "Câmpuri de orez și grădini de condimente",
+  "Prânz Sasak",
+  "Înot la cascadă"
+ ],
+ "tour_classic_inc": "Ghid, taxe de intrare, prânz, apă, fructe",
+ "tour_classic_n": "Maimuțele negre trăiesc libere în pădure, așa că le vedem des, dar nu putem promite.",
+ "tour_rinjani_t": "Drumeție pe Muntele Rinjani",
+ "tour_rinjani_p": "Urcă pe vulcan cu Rizz ca ghid sau cărăuș. Turele se fac printr-un organizator de trekking autorizat, cu permisul oficial eRinjani, așa cum cere parcul național.",
+ "tour_rinjani_i": [
+  "Răsărit pe marginea craterului",
+  "Permis și înregistrare rezolvate",
+  "Ghid și ajutor la căratul bagajelor"
+ ],
+ "tour_rinjani_inc": "Depinde de tură, întreabă-l pe Rizz",
+ "tour_rinjani_n": "Rinjani are date fixe de sezon și reguli pentru grupuri. Cere-i lui Rizz datele actuale.",
+ "more_title": "Mai multe din Tetebatu",
+ "more_p": "Vrei altceva? Rizz poate planifica o zi și la aceste locuri. Întreabă pe WhatsApp.",
+ "more": [
+  "Cascada Jukut",
+  "Benang Kelambu & Benang Stokel",
+  "Sarang Walet & Tibu Bunter",
+  "Satul de țesători Pringgasela",
+  "Curs de gătit",
+  "Apus de soare la Pergasingan Hill"
+ ],
+ "photo_rizz": "Poză cu Rizz",
+ "about_eyebrow": "Fă cunoștință cu Rizz",
+ "about_1": "Salut, sunt Rizz. Am 20 de ani și locuiesc și lucrez în Tetebatu, între câmpurile de orez și vulcan.",
+ "about_2": "Am grijă de mama mea și de sora mea mai mică și economisesc pentru visul meu: o pensiune proprie pe pământul familiei mele, aici în Tetebatu.",
+ "about_3": "La o plimbare cu mine afli ce frunză ajută la ce, cum crește de fapt orezul și unde se ascund maimuțele. Și îți fac cele mai frumoase poze pe drum.",
+ "plants": [
+  "Orez",
+  "Cafea",
+  "Cacao",
+  "Vanilie",
+  "Cuișoare",
+  "Cocos",
+  "Durian"
+ ],
+ "how_eyebrow": "Cum funcționează",
+ "how_title": "Rezervarea durează un mesaj",
+ "s1_t": "Trimite un mesaj pe WhatsApp",
+ "s1_p": "Spune-i lui Rizz ce tură, în ce zi, câți oameni sunteți și unde stai.",
+ "s2_t": "Primești un răspuns clar",
+ "s2_p": "El confirmă prețul, ora de plecare și preluarea de la pensiunea ta.",
+ "s3_t": "Pornește la drum",
+ "s3_p": "Adu pantofi de apă și curiozitate. Îl plătești pe Rizz în numerar la sfârșitul zilei.",
+ "rev_eyebrow": "Recenzii",
+ "rev_title": "Ce spun oaspeții",
+ "rev_p": "Fiecare recenzie îl apropie pe Rizz de propria pensiune. Ai fost la plimbare cu el? Lasă câteva cuvinte pe Google.",
+ "rev_read": "Citește recenziile pe Google",
+ "rev_write": "Scrie o recenzie",
+ "faq_title": "Bine de știut",
+ "faq": [
+  [
+   "Există bancomat în Tetebatu?",
+   "Nu. În sat nu există nici bancomat, nici farmacie. Adu suficient numerar în rupii când vii în Tetebatu."
+  ],
+  [
+   "Cum ajung în Tetebatu?",
+   "La aproximativ 1,5 ore de aeroportul din Lombok și la 2 sau 3 ore de Kuta sau Senggigi. Aici nu există Grab. Întreabă-l pe Rizz și te ajută să găsești un șofer."
+  ],
+  [
+   "Trebuie să fiu în formă?",
+   "Plimbarea prin câmpurile de orez e ușoară pentru majoritatea oamenilor. Traseele spre cascade au porțiuni alunecoase după ploaie. Rinjani e un urcuș adevărat de munte: întreabă-l pe Rizz dacă ți se potrivește."
+  ],
+  [
+   "Când e cel mai bun moment?",
+   "Din iunie până în septembrie e sezonul uscat. Din decembrie până în martie e sezonul ploios: totul e foarte verde, dar potecile sunt noroioase, așa că ia încălțăminte cu aderență."
+  ],
+  [
+   "Cineva de la cascadă spune că am nevoie de ghid. E adevărat?",
+   "Când mergi cu Rizz, taxele de intrare sunt deja incluse și nu plătești nimic în plus la poartă."
+  ],
+  [
+   "Pot anula?",
+   "Da, gratuit până cu 24 de ore înainte. Plătești abia în ziua turei."
+  ],
+  [
+   "Poți organiza Rinjani?",
+   "Da. Rizz ghidează și cară bagaje pe turele din Rinjani organizate de un organizator de trekking autorizat, cu permise prin sistemul oficial eRinjani."
+  ]
+ ],
+ "foot_where": "Tetebatu, Lombok de Est, Indonezia",
+ "wa_general": "Salut, Rizz! Am găsit site-ul tău și vreau să planific o plimbare.",
+ "wa_tour": "Salut, Rizz! Aș vrea să rezerv: "
+},
+ru:{
+ "bar_cta": "WhatsApp Rizz",
+ "float": "Спроси Rizz",
+ "hero_eyebrow": "Местный гид · Tetebatu, Ломбок",
+ "hero_title": "Прогуляйся по Tetebatu с местным, который знает <em>каждое растение</em>.",
+ "hero_lede": "Рисовые террасы, водопады в джунглях, чёрные обезьяны и всё, что здесь растёт. Маленькие группы, твой темп и фиксированные цены без скрытых доплат.",
+ "hero_cta": "Спланировать прогулку в WhatsApp",
+ "hero_cta2": "Смотреть туры",
+ "promises": [
+  [
+   "Оплата в день тура",
+   "Без предоплаты, наличными в рупиях."
+  ],
+  [
+   "Бесплатная отмена",
+   "За 24 часа до начала."
+  ],
+  [
+   "Цена всё включено",
+   "Входные билеты и вода уже в цене."
+  ],
+  [
+   "Встреча в Tetebatu",
+   "У твоего хоумстея, вовремя."
+  ]
+ ],
+ "tours_eyebrow": "Туры",
+ "tours_title": "Выбери свою прогулку",
+ "tours_sub": "Каждый тур начинается у твоего хоумстея в Tetebatu. Скажи Rizz, какой у тебя темп, и он подстроит маршрут.",
+ "hours": "ч",
+ "ask_price": "Цена в WhatsApp",
+ "book": "Забронировать в WhatsApp",
+ "photo": "Фото скоро будет",
+ "l_start": "Старт",
+ "l_level": "Сложность",
+ "l_incl": "Включено",
+ "l_bring": "Взять с собой",
+ "level": {
+  "easy": "Легко",
+  "mod": "Средне, местами скользко",
+  "hard": "Сложно, настоящее горное восхождение"
+ },
+ "bring_walk": "Обувь для воды или с хорошим протектором, солнцезащитный крем, купальник",
+ "tour_rice_t": "Рисовые поля и сад специй",
+ "tour_rice_p": "Сердце Tetebatu. Пройдись по террасам и маленьким деревням Sasak и узнай, как растёт рис, от семени до урожая. По пути можно понюхать и попробовать местные культуры.",
+ "tour_rice_i": [
+  "Как рис сажают, выращивают и собирают",
+  "Кофе, какао, ваниль и гвоздика прямо на дереве",
+  "Дегустация свежих фруктов"
+ ],
+ "tour_rice_inc": "Гид, вода, фрукты",
+ "tour_water_t": "Рисовые поля и водопад",
+ "tour_water_p": "Через рисовые поля к водопаду Tetebatu, по бамбуковому мосту вместо скользкой лестницы. Будет время искупаться перед обратной дорогой.",
+ "tour_water_i": [
+  "Рисовые террасы и растения с объяснениями",
+  "Водопад Tetebatu с остановкой для купания",
+  "Безопасный маршрут по бамбуковому мосту"
+ ],
+ "tour_water_inc": "Гид, входной билет, вода, фрукты",
+ "tour_classic_t": "Классический день в Tetebatu",
+ "tour_classic_p": "Всё самое главное за один день. Лес обезьян рано утром, когда обезьяны активны, рисовые поля и сады специй, обед по-сасакски и водопад, чтобы освежиться.",
+ "tour_classic_i": [
+  "Лес обезьян утром",
+  "Рисовые поля и сады специй",
+  "Обед по-сасакски",
+  "Купание у водопада"
+ ],
+ "tour_classic_inc": "Гид, входные билеты, обед, вода, фрукты",
+ "tour_classic_n": "Чёрные обезьяны живут в лесу на воле, поэтому мы часто их видим, но обещать не можем.",
+ "tour_rinjani_t": "Восхождение на Rinjani",
+ "tour_rinjani_p": "Поднимись на вулкан с Rizz в роли гида или портера. Треки проходят через лицензированного организатора и с официальным разрешением eRinjani, как требует национальный парк.",
+ "tour_rinjani_i": [
+  "Рассвет на краю кратера",
+  "Разрешение и регистрация оформлены",
+  "Гид и помощь портеров"
+ ],
+ "tour_rinjani_inc": "Зависит от трека, спроси Rizz",
+ "tour_rinjani_n": "У Rinjani есть фиксированные даты сезона и правила для групп. Спроси Rizz об актуальных датах.",
+ "more_title": "Ещё из Tetebatu",
+ "more_p": "Хочешь что-то другое? Rizz может спланировать день и в эти места. Напиши в WhatsApp.",
+ "more": [
+  "Водопад Jukut",
+  "Benang Kelambu и Benang Stokel",
+  "Sarang Walet и Tibu Bunter",
+  "Ткацкая деревня Pringgasela",
+  "Кулинарный мастер-класс",
+  "Закат на Pergasingan Hill"
+ ],
+ "photo_rizz": "Фото Rizz",
+ "about_eyebrow": "Знакомься, Rizz",
+ "about_1": "Привет, я Rizz. Мне 20, я живу и работаю в Tetebatu, между рисовыми полями и вулканом.",
+ "about_2": "Я забочусь о маме и младшей сестре и коплю на мечту: собственный гестхаус на земле моей семьи здесь, в Tetebatu.",
+ "about_3": "На прогулке со мной ты узнаешь, какой лист от чего помогает, как на самом деле растёт рис и где прячутся обезьяны. А по пути я сделаю для тебя лучшие фото.",
+ "plants": [
+  "Рис",
+  "Кофе",
+  "Какао",
+  "Ваниль",
+  "Гвоздика",
+  "Кокос",
+  "Дуриан"
+ ],
+ "how_eyebrow": "Как это работает",
+ "how_title": "Бронирование: одно сообщение",
+ "s1_t": "Напиши в WhatsApp",
+ "s1_p": "Скажи Rizz, какой тур, в какой день, сколько вас и где ты живёшь.",
+ "s2_t": "Получи чёткий ответ",
+ "s2_p": "Он подтвердит цену, время начала и встречу у твоего хоумстея.",
+ "s3_t": "Вперёд на прогулку",
+ "s3_p": "Бери обувь для воды и любопытство. Rizz платишь наличными в конце дня.",
+ "rev_eyebrow": "Отзывы",
+ "rev_title": "Что говорят гости",
+ "rev_p": "Каждый отзыв приближает Rizz к собственному гестхаусу. Гулял с ним? Оставь пару слов в Google.",
+ "rev_read": "Читать отзывы в Google",
+ "rev_write": "Написать отзыв",
+ "faq_title": "Полезно знать",
+ "faq": [
+  [
+   "Есть ли в Tetebatu банкомат?",
+   "Нет. В деревне нет ни банкомата, ни аптеки. Привези с собой достаточно наличных в рупиях."
+  ],
+  [
+   "Как добраться до Tetebatu?",
+   "Около 1,5 часа от аэропорта Ломбока и от 2 до 3 часов от Kuta или Senggigi. Grab здесь нет. Спроси Rizz, он поможет найти водителя."
+  ],
+  [
+   "Нужна ли физическая подготовка?",
+   "Прогулка по рисовым полям для большинства лёгкая. Тропы к водопадам после дождя скользкие. Rinjani это настоящее горное восхождение: спроси Rizz, подойдёт ли оно тебе."
+  ],
+  [
+   "Когда лучше приезжать?",
+   "С июня по сентябрь сухо. С декабря по март сезон дождей: всё очень зелёное, но тропы грязные, так что бери обувь с хорошим протектором."
+  ],
+  [
+   "У водопада мне сказали, что нужен гид. Это правда?",
+   "Если ты идёшь с Rizz, входные билеты уже включены, и у входа ты ничего не доплачиваешь."
+  ],
+  [
+   "Можно ли отменить?",
+   "Да, бесплатно за 24 часа до начала. Платишь только в сам день тура."
+  ],
+  [
+   "Можешь организовать Rinjani?",
+   "Да. Rizz работает гидом и портером на треках Rinjani лицензированного организатора, разрешения оформляются через официальную систему eRinjani."
+  ]
+ ],
+ "foot_where": "Tetebatu, Восточный Ломбок, Индонезия",
+ "wa_general": "Привет, Rizz! Я нашёл твой сайт и хочу спланировать прогулку.",
+ "wa_tour": "Привет, Rizz! Хочу забронировать: "
+},
+sv:{
+ "bar_cta": "WhatsApp Rizz",
+ "float": "Fråga Rizz",
+ "hero_eyebrow": "Lokal guide · Tetebatu, Lombok",
+ "hero_title": "Utforska Tetebatu med en lokal som kan <em>varje växt</em>.",
+ "hero_lede": "Risterrasser, vattenfall i djungeln, svarta apor och allt som växer här. Små grupper, ditt eget tempo och fasta priser utan överraskningar.",
+ "hero_cta": "Planera din vandring på WhatsApp",
+ "hero_cta2": "Se turerna",
+ "promises": [
+  [
+   "Betala på dagen",
+   "Inget i förskott, kontant i rupiah."
+  ],
+  [
+   "Gratis avbokning",
+   "Upp till 24 timmar innan."
+  ],
+  [
+   "Allt inkluderat",
+   "Inträde och vatten ingår i priset."
+  ],
+  [
+   "Hämtning i Tetebatu",
+   "Vid ditt homestay, i tid."
+  ]
+ ],
+ "tours_eyebrow": "Turer",
+ "tours_title": "Välj din vandring",
+ "tours_sub": "Varje tur startar vid ditt homestay i Tetebatu. Berätta för Rizz hur du går, så anpassar han rutten.",
+ "hours": "timmar",
+ "ask_price": "Pris på WhatsApp",
+ "book": "Boka på WhatsApp",
+ "photo": "Foto kommer snart",
+ "l_start": "Start",
+ "l_level": "Nivå",
+ "l_incl": "Ingår",
+ "l_bring": "Ta med",
+ "level": {
+  "easy": "Lätt",
+  "mod": "Medel, vissa hala partier",
+  "hard": "Svår, riktig bergsbestigning"
+ },
+ "bring_walk": "Vattenskor eller skor med bra grepp, solkräm, badkläder",
+ "tour_rice_t": "Risfält och kryddträdgård",
+ "tour_rice_p": "Tetebatus hjärta. Vandra genom terrasserna och små Sasak-byar och lär dig hur ris växer, från frö till skörd. Lukta och smaka på grödorna längs vägen.",
+ "tour_rice_i": [
+  "Hur ris planteras, odlas och skördas",
+  "Kaffe, kakao, vanilj och kryddnejlika på trädet",
+  "Smakprov på färsk frukt"
+ ],
+ "tour_rice_inc": "Guide, vatten, frukt",
+ "tour_water_t": "Risfält och vattenfall",
+ "tour_water_p": "Genom risfälten till Tetebatus vattenfall, över bambubron i stället för de hala trapporna. Tid för ett dopp innan vi går tillbaka.",
+ "tour_water_i": [
+  "Risterrasser och växter förklaras",
+  "Tetebatus vattenfall med badstopp",
+  "Säker rutt över bambubron"
+ ],
+ "tour_water_inc": "Guide, inträde, vatten, frukt",
+ "tour_classic_t": "Klassisk Tetebatu-dag",
+ "tour_classic_p": "Hela bilden på en dag. Apskogen tidigt på morgonen när aporna är aktiva, risfält och kryddträdgårdar, en lokal Sasak-lunch och ett vattenfall att svalka sig i.",
+ "tour_classic_i": [
+  "Apskog på morgonen",
+  "Risfält och kryddträdgårdar",
+  "Sasak-lunch",
+  "Dopp i vattenfallet"
+ ],
+ "tour_classic_inc": "Guide, inträde, lunch, vatten, frukt",
+ "tour_classic_n": "De svarta aporna lever vilda i skogen, så vi ser dem ofta men kan inte lova det.",
+ "tour_rinjani_t": "Bestigning av Rinjani",
+ "tour_rinjani_p": "Bestig vulkanen med Rizz som guide eller bärare. Turerna går med en licensierad trekkingarrangör och det officiella eRinjani-tillståndet, som nationalparken kräver.",
+ "tour_rinjani_i": [
+  "Soluppgång på kraterkanten",
+  "Tillstånd och registrering ordnas",
+  "Guide och bärarhjälp"
+ ],
+ "tour_rinjani_inc": "Beror på turen, fråga Rizz",
+ "tour_rinjani_n": "Rinjani har fasta säsongsdatum och gruppregler. Fråga Rizz om aktuella datum.",
+ "more_title": "Mer från Tetebatu",
+ "more_p": "Vill du göra något annat? Rizz kan planera en dag till de här platserna också. Fråga på WhatsApp.",
+ "more": [
+  "Jukut-vattenfallet",
+  "Benang Kelambu & Benang Stokel",
+  "Sarang Walet & Tibu Bunter",
+  "Vävarbyn Pringgasela",
+  "Matlagningskurs",
+  "Solnedgång vid Pergasingan Hill"
+ ],
+ "photo_rizz": "Foto av Rizz",
+ "about_eyebrow": "Möt Rizz",
+ "about_1": "Hej, jag heter Rizz. Jag är 20 och bor och arbetar i Tetebatu, mellan risfälten och vulkanen.",
+ "about_2": "Jag tar hand om min mamma och min lillasyster, och jag sparar till min dröm: ett eget gästhus på min familjs mark här i Tetebatu.",
+ "about_3": "På en vandring med mig lär du dig vilket blad som hjälper mot vad, hur ris egentligen växer och var aporna gömmer sig. Och jag tar de bästa bilderna av dig på vägen.",
+ "plants": [
+  "Ris",
+  "Kaffe",
+  "Kakao",
+  "Vanilj",
+  "Kryddnejlika",
+  "Kokos",
+  "Durian"
+ ],
+ "how_eyebrow": "Så funkar det",
+ "how_title": "Att boka tar ett meddelande",
+ "s1_t": "Skicka ett WhatsApp",
+ "s1_p": "Berätta för Rizz vilken tur, vilken dag, hur många ni är och var du bor.",
+ "s2_t": "Få ett tydligt svar",
+ "s2_p": "Han bekräftar priset, starttiden och hämtningen vid ditt homestay.",
+ "s3_t": "Ge dig ut och vandra",
+ "s3_p": "Ta med vattenskor och nyfikenhet. Du betalar Rizz kontant i slutet av dagen.",
+ "rev_eyebrow": "Omdömen",
+ "rev_title": "Vad gästerna säger",
+ "rev_p": "Varje omdöme hjälper Rizz närmare sitt eget gästhus. Har du vandrat med honom? Skriv några ord på Google.",
+ "rev_read": "Läs omdömen på Google",
+ "rev_write": "Skriv ett omdöme",
+ "faq_title": "Bra att veta",
+ "faq": [
+  [
+   "Finns det en bankomat i Tetebatu?",
+   "Nej. Det finns varken bankomat eller apotek i byn. Ta med tillräckligt med kontanter i rupiah när du kommer till Tetebatu."
+  ],
+  [
+   "Hur tar jag mig till Tetebatu?",
+   "Ungefär 1,5 timmar från Lomboks flygplats och 2 till 3 timmar från Kuta eller Senggigi. Det finns ingen Grab här. Fråga Rizz, så hjälper han dig hitta en förare."
+  ],
+  [
+   "Måste jag vara vältränad?",
+   "Risfältsvandringen är lätt för de flesta. Vattenfallsrutterna har hala partier efter regn. Rinjani är en riktig bergsbestigning: fråga Rizz om den passar dig."
+  ],
+  [
+   "När är bästa tiden?",
+   "Juni till september är torrt. December till mars är regnperiod: allt är supergrönt, men stigarna är leriga, så ta med skor med bra grepp."
+  ],
+  [
+   "Någon vid vattenfallet säger att jag behöver en guide. Stämmer det?",
+   "När du går med Rizz ingår inträdet redan och du betalar inget extra vid grinden."
+  ],
+  [
+   "Kan jag avboka?",
+   "Ja, gratis fram till 24 timmar innan. Du betalar först på själva dagen."
+  ],
+  [
+   "Kan du ordna Rinjani?",
+   "Ja. Rizz guidar och bär på Rinjani-turer som drivs av en licensierad trekkingarrangör, med tillstånd via det officiella eRinjani-systemet."
+  ]
+ ],
+ "foot_where": "Tetebatu, östra Lombok, Indonesien",
+ "wa_general": "Hej Rizz! Jag hittade din webbplats och vill planera en vandring.",
+ "wa_tour": "Hej Rizz! Jag skulle vilja boka: "
+},
+th:{
+ "bar_cta": "WhatsApp Rizz",
+ "float": "ถาม Rizz",
+ "hero_eyebrow": "ไกด์ท้องถิ่น · Tetebatu, Lombok",
+ "hero_title": "เดินเที่ยว Tetebatu กับคนท้องถิ่นที่รู้จัก<em>พืชทุกชนิด</em>",
+ "hero_lede": "นาขั้นบันได น้ำตกกลางป่า ลิงดำ และพืชผลที่ปลูกในพื้นที่นี้ กลุ่มเล็ก ตามจังหวะของคุณเอง ราคาตายตัว ไม่มีค่าใช้จ่ายแอบแฝง",
+ "hero_cta": "วางแผนทริปเดินเที่ยวทาง WhatsApp",
+ "hero_cta2": "ดูทัวร์",
+ "promises": [
+  [
+   "จ่ายในวันเดินทาง",
+   "ไม่ต้องจ่ายล่วงหน้า จ่ายเป็นเงินสดรูเปียห์"
+  ],
+  [
+   "ยกเลิกฟรี",
+   "ได้จนถึง 24 ชั่วโมงก่อนเดินทาง"
+  ],
+  [
+   "ราคารวมทุกอย่าง",
+   "รวมค่าเข้าชมและน้ำดื่มแล้ว"
+  ],
+  [
+   "รับที่ Tetebatu",
+   "รับถึงโฮมสเตย์ ตรงเวลา"
+  ]
+ ],
+ "tours_eyebrow": "ทัวร์",
+ "tours_title": "เลือกเส้นทางเดินของคุณ",
+ "tours_sub": "ทุกทัวร์เริ่มที่โฮมสเตย์ของคุณใน Tetebatu บอก Rizz ว่าคุณเดินจังหวะไหน แล้วเขาจะปรับเส้นทางให้",
+ "hours": "ชั่วโมง",
+ "ask_price": "สอบถามราคาทาง WhatsApp",
+ "book": "จองทาง WhatsApp",
+ "photo": "ภาพกำลังจะมา",
+ "l_start": "เริ่ม",
+ "l_level": "ระดับ",
+ "l_incl": "รวมอยู่ในราคา",
+ "l_bring": "สิ่งที่ควรเตรียมมา",
+ "level": {
+  "easy": "ง่าย",
+  "mod": "ปานกลาง มีบางช่วงลื่น",
+  "hard": "ยาก ปีนเขาจริงจัง"
+ },
+ "bring_walk": "รองเท้าลุยน้ำหรือรองเท้าที่เกาะพื้นดี ครีมกันแดด ชุดว่ายน้ำ",
+ "tour_rice_t": "เดินชมนาข้าวและสวนเครื่องเทศ",
+ "tour_rice_p": "หัวใจของ Tetebatu เดินผ่านนาขั้นบันไดและหมู่บ้าน Sasak เล็กๆ เรียนรู้ว่าข้าวเติบโตอย่างไรตั้งแต่เมล็ดจนถึงวันเก็บเกี่ยว ได้ดมกลิ่นและชิมพืชผลระหว่างทาง",
+ "tour_rice_i": [
+  "วิธีปลูก ดูแล และเก็บเกี่ยวข้าว",
+  "กาแฟ โกโก้ วานิลลา และกานพลูบนต้นจริง",
+  "ชิมผลไม้สดๆ"
+ ],
+ "tour_rice_inc": "ไกด์ น้ำดื่ม ผลไม้",
+ "tour_water_t": "นาข้าวและน้ำตก",
+ "tour_water_p": "เดินผ่านนาข้าวไปยังน้ำตก Tetebatu ข้ามสะพานไม้ไผ่แทนบันไดที่ลื่น มีเวลาว่ายน้ำก่อนเดินกลับ",
+ "tour_water_i": [
+  "อธิบายเรื่องนาขั้นบันไดและพืชต่างๆ",
+  "น้ำตก Tetebatu พร้อมช่วงเวลาว่ายน้ำ",
+  "เส้นทางปลอดภัยผ่านสะพานไม้ไผ่"
+ ],
+ "tour_water_inc": "ไกด์ ค่าเข้าชม น้ำดื่ม ผลไม้",
+ "tour_classic_t": "ทัวร์ Tetebatu แบบคลาสสิกหนึ่งวัน",
+ "tour_classic_p": "เห็นภาพรวมครบในวันเดียว เช้าตรู่ไปป่าลิงตอนลิงกำลังตื่นตัว ต่อด้วยนาข้าวและสวนเครื่องเทศ อาหารกลางวันแบบ Sasak ท้องถิ่น และปิดท้ายด้วยน้ำตกให้ชื่นใจ",
+ "tour_classic_i": [
+  "ป่าลิงตอนเช้า",
+  "นาข้าวและสวนเครื่องเทศ",
+  "อาหารกลางวันแบบ Sasak",
+  "ว่ายน้ำที่น้ำตก"
+ ],
+ "tour_classic_inc": "ไกด์ ค่าเข้าชม อาหารกลางวัน น้ำดื่ม ผลไม้",
+ "tour_classic_n": "ลิงดำอาศัยอยู่ในป่าตามธรรมชาติ เราจึงเจอบ่อย แต่สัญญาให้ไม่ได้ว่าจะเจอแน่นอน",
+ "tour_rinjani_t": "เทรกกิ้งภูเขา Rinjani",
+ "tour_rinjani_p": "ขึ้นภูเขาไฟไปกับ Rizz ในฐานะไกด์หรือลูกหาบ ตามข้อกำหนดของอุทยานแห่งชาติ การเทรกกิ้งจัดผ่านผู้จัดที่ได้รับอนุญาตและใช้ใบอนุญาต eRinjani อย่างเป็นทางการ",
+ "tour_rinjani_i": [
+  "ชมพระอาทิตย์ขึ้นที่ขอบปากปล่อง",
+  "จัดการใบอนุญาตและการลงทะเบียนให้",
+  "มีไกด์และลูกหาบคอยช่วย"
+ ],
+ "tour_rinjani_inc": "ขึ้นอยู่กับทริป สอบถาม Rizz",
+ "tour_rinjani_n": "Rinjani มีช่วงเปิดตามฤดูกาลและกฎของกลุ่มที่กำหนดไว้ สอบถาม Rizz เพื่อดูวันที่ล่าสุด",
+ "more_title": "ที่เที่ยวอื่นๆ ใกล้ Tetebatu",
+ "more_p": "อยากไปที่อื่นไหม Rizz วางแผนวันเที่ยวไปที่เหล่านี้ให้ได้เหมือนกัน สอบถามทาง WhatsApp ได้เลย",
+ "more": [
+  "น้ำตก Jukut",
+  "Benang Kelambu และ Benang Stokel",
+  "Sarang Walet และ Tibu Bunter",
+  "หมู่บ้านทอผ้า Pringgasela",
+  "คลาสสอนทำอาหาร",
+  "ชมพระอาทิตย์ตกที่ Pergasingan Hill"
+ ],
+ "photo_rizz": "ภาพของ Rizz",
+ "about_eyebrow": "รู้จัก Rizz",
+ "about_1": "สวัสดีครับ ผม Rizz อายุ 20 ปี อยู่และทำงานที่ Tetebatu ระหว่างนาข้าวกับภูเขาไฟ",
+ "about_2": "ผมดูแลแม่และน้องสาว และเก็บเงินเพื่อความฝันของผม คือมีเกสต์เฮาส์ของตัวเองบนที่ดินของครอบครัวที่ Tetebatu แห่งนี้",
+ "about_3": "เดินกับผม คุณจะรู้ว่าใบไม้แบบไหนช่วยเรื่องอะไร ข้าวเติบโตจริงๆ อย่างไร และลิงซ่อนตัวอยู่ตรงไหน ระหว่างทางผมจะถ่ายรูปสวยๆ ของคุณให้ด้วย",
+ "plants": [
+  "ข้าว",
+  "กาแฟ",
+  "โกโก้",
+  "วานิลลา",
+  "กานพลู",
+  "มะพร้าว",
+  "ทุเรียน"
+ ],
+ "how_eyebrow": "ขั้นตอนการจอง",
+ "how_title": "จองได้ด้วยข้อความเดียว",
+ "s1_t": "ส่ง WhatsApp",
+ "s1_p": "บอก Rizz ว่าอยากไปทัวร์ไหน วันไหน กี่คน และพักที่ไหน",
+ "s2_t": "ได้คำตอบชัดเจน",
+ "s2_p": "เขาจะยืนยันราคา เวลาเริ่ม และการรับที่โฮมสเตย์ของคุณ",
+ "s3_t": "ไปเดินกัน",
+ "s3_p": "เตรียมรองเท้าลุยน้ำและความอยากรู้อยากเห็นมาด้วย จ่ายเงินสดให้ Rizz ตอนสิ้นวัน",
+ "rev_eyebrow": "รีวิว",
+ "rev_title": "แขกพูดถึงเราว่าอย่างไร",
+ "rev_p": "ทุกรีวิวช่วยให้ Rizz เข้าใกล้เกสต์เฮาส์ของตัวเองมากขึ้น เคยเดินกับเขาแล้วใช่ไหม ฝากข้อความสั้นๆ ไว้บน Google ได้เลย",
+ "rev_read": "อ่านรีวิวบน Google",
+ "rev_write": "เขียนรีวิว",
+ "faq_title": "ข้อมูลที่ควรรู้",
+ "faq": [
+  [
+   "ที่ Tetebatu มีตู้ ATM ไหม",
+   "ไม่มี ในหมู่บ้านไม่มีทั้งตู้ ATM และร้านขายยา กรุณาเตรียมเงินสดรูเปียห์ให้พอก่อนมา Tetebatu"
+  ],
+  [
+   "เดินทางไป Tetebatu อย่างไร",
+   "ประมาณ 1.5 ชั่วโมงจากสนามบิน Lombok และ 2 ถึง 3 ชั่วโมงจาก Kuta หรือ Senggigi ที่นี่ไม่มี Grab ถาม Rizz แล้วเขาช่วยหาคนขับรถให้ได้"
+  ],
+  [
+   "ต้องมีร่างกายแข็งแรงไหม",
+   "การเดินชมนาข้าวไม่ยากสำหรับคนส่วนใหญ่ เส้นทางไปน้ำตกมีบางช่วงลื่นหลังฝนตก ส่วน Rinjani เป็นการปีนเขาจริงจัง ถาม Rizz ได้ว่าเหมาะกับคุณไหม"
+  ],
+  [
+   "ช่วงไหนไปดีที่สุด",
+   "มิถุนายนถึงกันยายนเป็นหน้าแล้ง ธันวาคมถึงมีนาคมเป็นหน้าฝน ทุกอย่างเขียวขจีมาก แต่ทางจะเป็นโคลน อย่าลืมเตรียมรองเท้าที่เกาะพื้นดี"
+  ],
+  [
+   "มีคนที่น้ำตกบอกว่าต้องจ้างไกด์ จริงไหม",
+   "ถ้าเดินกับ Rizz ค่าเข้าชมรวมอยู่ในราคาแล้ว ไม่ต้องจ่ายเพิ่มที่ทางเข้า"
+  ],
+  [
+   "ยกเลิกได้ไหม",
+   "ได้ ฟรีจนถึง 24 ชั่วโมงก่อนเดินทาง และคุณจ่ายเงินในวันเดินทางเท่านั้น"
+  ],
+  [
+   "จัดทริป Rinjani ให้ได้ไหม",
+   "ได้ Rizz เป็นไกด์และลูกหาบในทริป Rinjani ที่จัดโดยผู้จัดเทรกกิ้งที่ได้รับอนุญาต โดยขอใบอนุญาตผ่านระบบ eRinjani อย่างเป็นทางการ"
+  ]
+ ],
+ "foot_where": "Tetebatu, Lombok ตะวันออก, อินโดนีเซีย",
+ "wa_general": "สวัสดีครับ Rizz! ผมเจอเว็บไซต์ของคุณและอยากวางแผนทริปเดินเที่ยว",
+ "wa_tour": "สวัสดีครับ Rizz! ผมอยากจอง: "
+},
+tr:{
+ "bar_cta": "WhatsApp Rizz",
+ "float": "Rizz'e sor",
+ "hero_eyebrow": "Yerel rehber · Tetebatu, Lombok",
+ "hero_title": "Tetebatu'yu <em>her bitkiyi</em> bilen yerel bir rehberle gezin.",
+ "hero_lede": "Pirinç terasları, orman şelaleleri, kara maymunlar ve burada yetişen ürünler. Küçük gruplar, kendi temponuz ve gizli ücret içermeyen sabit fiyatlar.",
+ "hero_cta": "Yürüyüşünüzü WhatsApp'ta planlayın",
+ "hero_cta2": "Turlara göz atın",
+ "promises": [
+  [
+   "Ödeme o gün",
+   "Önceden ödeme yok, rupi ile nakit."
+  ],
+  [
+   "Ücretsiz iptal",
+   "24 saat öncesine kadar."
+  ],
+  [
+   "Her şey dahil fiyat",
+   "Giriş ücretleri ve su dahil."
+  ],
+  [
+   "Tetebatu'da karşılama",
+   "Pansiyonunuzdan, tam zamanında."
+  ]
+ ],
+ "tours_eyebrow": "Turlar",
+ "tours_title": "Yürüyüşünüzü seçin",
+ "tours_sub": "Her tur Tetebatu'daki pansiyonunuzdan başlar. Temponuzu Rizz'e söyleyin, rotayı ona göre ayarlasın.",
+ "hours": "saat",
+ "ask_price": "Fiyat WhatsApp'ta",
+ "book": "WhatsApp'ta rezervasyon yapın",
+ "photo": "Fotoğraf yakında",
+ "l_start": "Başlangıç",
+ "l_level": "Zorluk",
+ "l_incl": "Dahil",
+ "l_bring": "Yanınıza alın",
+ "level": {
+  "easy": "Kolay",
+  "mod": "Orta, bazı yerler kaygan",
+  "hard": "Zor, gerçek bir dağ tırmanışı"
+ },
+ "bring_walk": "Su ayakkabısı ya da tutuşu iyi ayakkabı, güneş kremi, mayo",
+ "tour_rice_t": "Pirinç tarlaları ve baharat bahçesi yürüyüşü",
+ "tour_rice_p": "Tetebatu'nun kalbi. Terasları ve küçük Sasak köylerini gezin, pirincin tohumdan hasada nasıl yetiştiğini öğrenin. Yol boyunca ürünleri koklayın ve tadın.",
+ "tour_rice_i": [
+  "Pirinç nasıl ekilir, yetişir ve hasat edilir",
+  "Kahve, kakao, vanilya ve karanfil ağacında",
+  "Taze meyve tadımı"
+ ],
+ "tour_rice_inc": "Rehber, su, meyve",
+ "tour_water_t": "Pirinç tarlaları ve şelale",
+ "tour_water_p": "Pirinç tarlalarından geçip kaygan merdivenler yerine bambu köprüden Tetebatu şelalesine. Geri dönmeden önce yüzmeye vakit var.",
+ "tour_water_i": [
+  "Pirinç terasları ve bitkiler anlatılır",
+  "Yüzme molalı Tetebatu şelalesi",
+  "Bambu köprüden güvenli rota"
+ ],
+ "tour_water_inc": "Rehber, giriş ücreti, su, meyve",
+ "tour_classic_t": "Klasik Tetebatu günü",
+ "tour_classic_p": "Tüm manzara tek günde. Maymunlar etkinken sabah erken maymun ormanı, pirinç tarlaları ve baharat bahçeleri, yerel bir Sasak öğle yemeği ve serinlemek için bir şelale.",
+ "tour_classic_i": [
+  "Sabah maymun ormanı",
+  "Pirinç tarlaları ve baharat bahçeleri",
+  "Sasak öğle yemeği",
+  "Şelalede yüzme"
+ ],
+ "tour_classic_inc": "Rehber, giriş ücretleri, öğle yemeği, su, meyve",
+ "tour_classic_n": "Kara maymunlar ormanda vahşi yaşar. Çoğu zaman görürüz ama söz veremeyiz.",
+ "tour_rinjani_t": "Rinjani Dağı trekking'i",
+ "tour_rinjani_p": "Yanardağa Rizz ile rehberiniz ya da taşıyıcınız olarak çıkın. Trekking'ler, milli park gereği lisanslı bir trekking organizatörü ve resmi eRinjani izniyle yapılır.",
+ "tour_rinjani_i": [
+  "Krater kenarında gün doğumu",
+  "İzin ve kayıt halledilir",
+  "Rehber ve taşıyıcı desteği"
+ ],
+ "tour_rinjani_inc": "Treke göre değişir, Rizz'e sorun",
+ "tour_rinjani_n": "Rinjani'nin sabit sezon tarihleri ve grup kuralları var. Güncel tarihleri Rizz'e sorun.",
+ "more_title": "Tetebatu'dan daha fazlası",
+ "more_p": "Başka bir şey mi istiyorsunuz? Rizz buralara da bir gün planlayabilir. WhatsApp'tan sorun.",
+ "more": [
+  "Jukut şelalesi",
+  "Benang Kelambu ve Benang Stokel",
+  "Sarang Walet ve Tibu Bunter",
+  "Dokuma köyü Pringgasela",
+  "Yemek kursu",
+  "Pergasingan Hill'de gün batımı"
+ ],
+ "photo_rizz": "Rizz'in fotoğrafı",
+ "about_eyebrow": "Rizz ile tanışın",
+ "about_1": "Merhaba, ben Rizz. 20 yaşındayım, pirinç tarlalarıyla yanardağın arasındaki Tetebatu'da yaşıyor ve çalışıyorum.",
+ "about_2": "Annemle küçük kız kardeşime bakıyorum ve hayalim için para biriktiriyorum: ailemin Tetebatu'daki arazisinde kendi pansiyonum.",
+ "about_3": "Benimle yürürseniz hangi yaprağın neye iyi geldiğini, pirincin gerçekte nasıl yetiştiğini ve maymunların nerede saklandığını öğrenirsiniz. Yol boyunca size en güzel fotoğrafları da ben çekerim.",
+ "plants": [
+  "Pirinç",
+  "Kahve",
+  "Kakao",
+  "Vanilya",
+  "Karanfil",
+  "Hindistan cevizi",
+  "Durian"
+ ],
+ "how_eyebrow": "Nasıl işliyor",
+ "how_title": "Rezervasyon tek mesaj",
+ "s1_t": "WhatsApp gönderin",
+ "s1_p": "Rizz'e hangi turu, hangi günü, kaç kişi olduğunuzu ve nerede kaldığınızı yazın.",
+ "s2_t": "Net bir yanıt alın",
+ "s2_p": "Fiyatı, başlangıç saatini ve pansiyonunuzdan alınışı o onaylar.",
+ "s3_t": "Yürüyüşe çıkın",
+ "s3_p": "Su ayakkabılarınızı ve merakınızı getirin. Rizz'e günün sonunda nakit ödersiniz.",
+ "rev_eyebrow": "Yorumlar",
+ "rev_title": "Misafirler ne diyor",
+ "rev_p": "Her yorum Rizz'in kendi pansiyonuna biraz daha yaklaşmasına yardım eder. Onunla yürüdünüz mü? Google'da birkaç söz bırakın.",
+ "rev_read": "Google'da yorumları oku",
+ "rev_write": "Yorum yaz",
+ "faq_title": "Bilmekte fayda var",
+ "faq": [
+  [
+   "Tetebatu'da ATM var mı?",
+   "Hayır. Köyde ATM de eczane de yok. Tetebatu'ya gelirken yanınızda yeterince nakit rupi getirin."
+  ],
+  [
+   "Tetebatu'ya nasıl gelinir?",
+   "Lombok havalimanından yaklaşık 1.5 saat, Kuta ya da Senggigi'den 2 ila 3 saat. Burada Grab yok. Rizz'e sorun, bir sürücü bulmanıza yardım edebilir."
+  ],
+  [
+   "Formda olmam gerekir mi?",
+   "Pirinç tarlası yürüyüşü çoğu kişi için kolaydır. Şelale rotalarında yağmurdan sonra kaygan yerler olur. Rinjani gerçek bir dağ tırmanışıdır: size uygun olup olmadığını Rizz'e sorun."
+  ],
+  [
+   "En iyi zaman ne zaman?",
+   "Haziran'dan Eylül'e kuru mevsimdir. Aralık'tan Mart'a yağmur mevsimidir: her yer çok yeşildir ama yollar çamurludur, bu yüzden tutuşu iyi ayakkabı getirin."
+  ],
+  [
+   "Şelalede biri rehber şart diyor. Doğru mu?",
+   "Rizz ile yürüdüğünüzde giriş ücretleri zaten dahildir ve kapıda ekstra bir şey ödemezsiniz."
+  ],
+  [
+   "İptal edebilir miyim?",
+   "Evet, 24 saat öncesine kadar ücretsiz. Sadece o gün ödeme yaparsınız."
+  ],
+  [
+   "Rinjani'yi ayarlayabilir misiniz?",
+   "Evet. Rizz, lisanslı bir trekking organizatörünün düzenlediği Rinjani trekking'lerinde rehberlik ve taşıyıcılık yapar. İzinler resmi eRinjani sistemi üzerinden alınır."
+  ]
+ ],
+ "foot_where": "Tetebatu, Doğu Lombok, Endonezya",
+ "wa_general": "Merhaba Rizz! Web siteni buldum ve bir yürüyüş planlamak istiyorum.",
+ "wa_tour": "Merhaba Rizz! Şunu rezerve etmek istiyorum: "
+},
+uk:{
+ "bar_cta": "WhatsApp Rizz",
+ "float": "Запитай Rizz",
+ "hero_eyebrow": "Місцевий гід · Tetebatu, Ломбок",
+ "hero_title": "Прогуляйся Tetebatu з місцевим, який знає <em>кожну рослину</em>.",
+ "hero_lede": "Рисові тераси, водоспади в джунглях, чорні мавпи і все, що тут росте. Маленькі групи, твій темп і фіксовані ціни без прихованих доплат.",
+ "hero_cta": "Спланувати прогулянку у WhatsApp",
+ "hero_cta2": "Дивитись тури",
+ "promises": [
+  [
+   "Оплата в день туру",
+   "Без передоплати, готівкою в рупіях."
+  ],
+  [
+   "Безкоштовне скасування",
+   "За 24 години до початку."
+  ],
+  [
+   "Ціна все включено",
+   "Вхідні квитки і вода вже в ціні."
+  ],
+  [
+   "Зустріч у Tetebatu",
+   "Біля твого хоумстею, вчасно."
+  ]
+ ],
+ "tours_eyebrow": "Тури",
+ "tours_title": "Обери свою прогулянку",
+ "tours_sub": "Кожен тур починається біля твого хоумстею в Tetebatu. Скажи Rizz, який у тебе темп, і він підлаштує маршрут.",
+ "hours": "год",
+ "ask_price": "Ціна у WhatsApp",
+ "book": "Забронювати у WhatsApp",
+ "photo": "Фото скоро буде",
+ "l_start": "Старт",
+ "l_level": "Складність",
+ "l_incl": "Включено",
+ "l_bring": "Взяти з собою",
+ "level": {
+  "easy": "Легко",
+  "mod": "Середньо, подекуди слизько",
+  "hard": "Важко, справжнє гірське сходження"
+ },
+ "bring_walk": "Взуття для води або з міцним протектором, сонцезахисний крем, купальник",
+ "tour_rice_t": "Рисові поля і сад спецій",
+ "tour_rice_p": "Серце Tetebatu. Пройдися терасами і маленькими селами Sasak та дізнайся, як росте рис, від насінини до врожаю. Дорогою можна понюхати і скуштувати місцеві культури.",
+ "tour_rice_i": [
+  "Як рис садять, вирощують і збирають",
+  "Кава, какао, ваніль і гвоздика просто на дереві",
+  "Дегустація свіжих фруктів"
+ ],
+ "tour_rice_inc": "Гід, вода, фрукти",
+ "tour_water_t": "Рисові поля і водоспад",
+ "tour_water_p": "Крізь рисові поля до водоспаду Tetebatu, по бамбуковому мосту замість слизьких сходів. Буде час поплавати перед дорогою назад.",
+ "tour_water_i": [
+  "Рисові тераси і рослини з поясненнями",
+  "Водоспад Tetebatu із зупинкою для купання",
+  "Безпечний маршрут бамбуковим мостом"
+ ],
+ "tour_water_inc": "Гід, вхідний квиток, вода, фрукти",
+ "tour_classic_t": "Класичний день у Tetebatu",
+ "tour_classic_p": "Все найважливіше за один день. Ліс мавп рано вранці, коли мавпи активні, рисові поля і сади спецій, обід по-сасакськи та водоспад, щоб освіжитися.",
+ "tour_classic_i": [
+  "Ліс мавп уранці",
+  "Рисові поля і сади спецій",
+  "Обід по-сасакськи",
+  "Купання біля водоспаду"
+ ],
+ "tour_classic_inc": "Гід, вхідні квитки, обід, вода, фрукти",
+ "tour_classic_n": "Чорні мавпи живуть у лісі на волі, тому ми часто їх бачимо, але обіцяти не можемо.",
+ "tour_rinjani_t": "Сходження на Rinjani",
+ "tour_rinjani_p": "Піднімись на вулкан з Rizz як гідом або портером. Треки проходять через ліцензованого організатора і з офіційним дозволом eRinjani, як вимагає національний парк.",
+ "tour_rinjani_i": [
+  "Світанок на краю кратера",
+  "Дозвіл і реєстрація оформлені",
+  "Гід і допомога портерів"
+ ],
+ "tour_rinjani_inc": "Залежить від треку, запитай Rizz",
+ "tour_rinjani_n": "У Rinjani є фіксовані дати сезону і правила для груп. Запитай Rizz про актуальні дати.",
+ "more_title": "Ще з Tetebatu",
+ "more_p": "Хочеш щось інше? Rizz може спланувати день і в ці місця. Напиши у WhatsApp.",
+ "more": [
+  "Водоспад Jukut",
+  "Benang Kelambu і Benang Stokel",
+  "Sarang Walet і Tibu Bunter",
+  "Ткацьке село Pringgasela",
+  "Кулінарний майстер-клас",
+  "Захід сонця на Pergasingan Hill"
+ ],
+ "photo_rizz": "Фото Rizz",
+ "about_eyebrow": "Знайомся, Rizz",
+ "about_1": "Привіт, я Rizz. Мені 20, я живу і працюю в Tetebatu, між рисовими полями і вулканом.",
+ "about_2": "Я дбаю про маму і молодшу сестру та відкладаю на мрію: власний гестхаус на землі моєї родини тут, у Tetebatu.",
+ "about_3": "На прогулянці зі мною ти дізнаєшся, яке листя від чого допомагає, як насправді росте рис і де ховаються мавпи. А дорогою я зроблю для тебе найкращі фото.",
+ "plants": [
+  "Рис",
+  "Кава",
+  "Какао",
+  "Ваніль",
+  "Гвоздика",
+  "Кокос",
+  "Дуріан"
+ ],
+ "how_eyebrow": "Як це працює",
+ "how_title": "Бронювання: одне повідомлення",
+ "s1_t": "Напиши у WhatsApp",
+ "s1_p": "Скажи Rizz, який тур, в який день, скільки вас і де ти живеш.",
+ "s2_t": "Отримай чітку відповідь",
+ "s2_p": "Він підтвердить ціну, час початку і зустріч біля твого хоумстею.",
+ "s3_t": "Вирушай на прогулянку",
+ "s3_p": "Бери взуття для води і цікавість. Rizz платиш готівкою наприкінці дня.",
+ "rev_eyebrow": "Відгуки",
+ "rev_title": "Що кажуть гості",
+ "rev_p": "Кожен відгук наближає Rizz до власного гестхаусу. Гуляв з ним? Залиш кілька слів у Google.",
+ "rev_read": "Читати відгуки в Google",
+ "rev_write": "Написати відгук",
+ "faq_title": "Корисно знати",
+ "faq": [
+  [
+   "Чи є в Tetebatu банкомат?",
+   "Ні. У селі немає ні банкомата, ні аптеки. Привези з собою достатньо готівки в рупіях."
+  ],
+  [
+   "Як дістатися до Tetebatu?",
+   "Приблизно 1,5 години від аеропорту Ломбока і від 2 до 3 годин від Kuta або Senggigi. Grab тут немає. Запитай Rizz, він допоможе знайти водія."
+  ],
+  [
+   "Чи потрібна фізична підготовка?",
+   "Прогулянка рисовими полями для більшості легка. Стежки до водоспадів після дощу слизькі. Rinjani це справжнє гірське сходження: запитай Rizz, чи воно тобі підійде."
+  ],
+  [
+   "Коли найкраще приїздити?",
+   "З червня по вересень сухо. З грудня по березень сезон дощів: усе дуже зелене, але стежки болотяні, тож бери взуття з міцним протектором."
+  ],
+  [
+   "Біля водоспаду мені сказали, що потрібен гід. Це правда?",
+   "Якщо ти йдеш з Rizz, вхідні квитки вже включені, і біля входу ти нічого не доплачуєш."
+  ],
+  [
+   "Чи можна скасувати?",
+   "Так, безкоштовно за 24 години до початку. Платиш лише в сам день туру."
+  ],
+  [
+   "Можеш організувати Rinjani?",
+   "Так. Rizz працює гідом і портером на треках Rinjani ліцензованого організатора, дозволи оформлюються через офіційну систему eRinjani."
+  ]
+ ],
+ "foot_where": "Tetebatu, Східний Ломбок, Індонезія",
+ "wa_general": "Привіт, Rizz! Я знайшов твій сайт і хочу спланувати прогулянку.",
+ "wa_tour": "Привіт, Rizz! Хочу забронювати: "
+},
+vi:{
+ "bar_cta": "WhatsApp Rizz",
+ "float": "Hỏi Rizz",
+ "hero_eyebrow": "Hướng dẫn viên địa phương · Tetebatu, Lombok",
+ "hero_title": "Khám phá Tetebatu cùng người bản địa hiểu <em>từng loài cây</em>.",
+ "hero_lede": "Ruộng bậc thang, thác nước trong rừng, khỉ đen và những loại cây trồng nơi đây. Nhóm nhỏ, đi theo nhịp của bạn, giá cố định và không phí ẩn.",
+ "hero_cta": "Lên kế hoạch qua WhatsApp",
+ "hero_cta2": "Xem các tour",
+ "promises": [
+  [
+   "Trả tiền trong ngày",
+   "Không cần trả trước, tiền mặt rupiah."
+  ],
+  [
+   "Hủy miễn phí",
+   "Đến 24 giờ trước giờ đi."
+  ],
+  [
+   "Giá trọn gói",
+   "Đã gồm vé vào cổng và nước uống."
+  ],
+  [
+   "Đón tại Tetebatu",
+   "Ngay tại homestay của bạn, đúng giờ."
+  ]
+ ],
+ "tours_eyebrow": "Các tour",
+ "tours_title": "Chọn chuyến đi của bạn",
+ "tours_sub": "Mọi tour đều bắt đầu từ homestay của bạn ở Tetebatu. Hãy cho Rizz biết nhịp đi của bạn, anh ấy sẽ chỉnh lại lộ trình.",
+ "hours": "giờ",
+ "ask_price": "Giá qua WhatsApp",
+ "book": "Đặt qua WhatsApp",
+ "photo": "Ảnh sắp có",
+ "l_start": "Xuất phát",
+ "l_level": "Mức độ",
+ "l_incl": "Đã gồm",
+ "l_bring": "Mang theo",
+ "level": {
+  "easy": "Dễ",
+  "mod": "Vừa, có đoạn trơn",
+  "hard": "Khó, leo núi thật sự"
+ },
+ "bring_walk": "Giày đi nước hoặc giày bám tốt, kem chống nắng, đồ bơi",
+ "tour_rice_t": "Đi bộ qua ruộng lúa và vườn gia vị",
+ "tour_rice_p": "Trái tim của Tetebatu. Đi giữa ruộng bậc thang và các ngôi làng Sasak nhỏ, tìm hiểu lúa lớn lên thế nào từ hạt giống đến mùa gặt. Ngửi và nếm cây trồng dọc đường.",
+ "tour_rice_i": [
+  "Lúa được gieo, chăm và thu hoạch ra sao",
+  "Cà phê, ca cao, vani và đinh hương ngay trên cây",
+  "Nếm trái cây tươi"
+ ],
+ "tour_rice_inc": "Hướng dẫn viên, nước, trái cây",
+ "tour_water_t": "Ruộng lúa và thác nước",
+ "tour_water_p": "Băng qua ruộng lúa đến thác Tetebatu, đi cầu tre thay vì cầu thang trơn. Có thời gian bơi trước khi đi bộ về.",
+ "tour_water_i": [
+  "Giải thích về ruộng bậc thang và cây cối",
+  "Thác Tetebatu có dừng chân tắm",
+  "Lộ trình an toàn qua cầu tre"
+ ],
+ "tour_water_inc": "Hướng dẫn viên, vé vào cổng, nước, trái cây",
+ "tour_classic_t": "Một ngày Tetebatu trọn vẹn",
+ "tour_classic_p": "Thấy trọn bức tranh trong một ngày. Rừng khỉ vào sáng sớm khi khỉ đang hoạt động, ruộng lúa và vườn gia vị, bữa trưa Sasak địa phương và một thác nước để giải nhiệt.",
+ "tour_classic_i": [
+  "Rừng khỉ buổi sáng",
+  "Ruộng lúa và vườn gia vị",
+  "Bữa trưa Sasak",
+  "Tắm thác"
+ ],
+ "tour_classic_inc": "Hướng dẫn viên, vé vào cổng, bữa trưa, nước, trái cây",
+ "tour_classic_n": "Khỉ đen sống hoang dã trong rừng, nên thường gặp nhưng không thể hứa chắc.",
+ "tour_rinjani_t": "Trek núi Rinjani",
+ "tour_rinjani_p": "Leo núi lửa cùng Rizz làm hướng dẫn viên hoặc người khuân vác. Chuyến trek đi cùng đơn vị tổ chức trek có giấy phép và giấy phép eRinjani chính thức, theo yêu cầu của vườn quốc gia.",
+ "tour_rinjani_i": [
+  "Ngắm bình minh trên miệng núi lửa",
+  "Lo giấy phép và đăng ký",
+  "Hướng dẫn viên và người khuân vác hỗ trợ"
+ ],
+ "tour_rinjani_inc": "Tùy chuyến trek, hãy hỏi Rizz",
+ "tour_rinjani_n": "Rinjani có mùa mở cửa cố định và quy định theo nhóm. Hãy hỏi Rizz về ngày hiện tại.",
+ "more_title": "Thêm nhiều điều ở Tetebatu",
+ "more_p": "Muốn đi chỗ khác? Rizz cũng có thể lên lịch một ngày đến những nơi này. Hãy hỏi qua WhatsApp.",
+ "more": [
+  "Thác Jukut",
+  "Benang Kelambu và Benang Stokel",
+  "Sarang Walet và Tibu Bunter",
+  "Làng dệt Pringgasela",
+  "Lớp nấu ăn",
+  "Hoàng hôn ở Pergasingan Hill"
+ ],
+ "photo_rizz": "Ảnh của Rizz",
+ "about_eyebrow": "Gặp Rizz",
+ "about_1": "Xin chào, mình là Rizz. Mình 20 tuổi, sống và làm việc ở Tetebatu, giữa ruộng lúa và ngọn núi lửa.",
+ "about_2": "Mình chăm sóc mẹ và em gái nhỏ, và dành dụm cho ước mơ: một nhà nghỉ của riêng mình trên mảnh đất của gia đình ngay tại Tetebatu.",
+ "about_3": "Đi bộ với mình, bạn sẽ biết lá nào chữa được gì, lúa thật sự lớn lên thế nào, và khỉ trốn ở đâu. Dọc đường mình cũng chụp cho bạn những tấm ảnh đẹp nhất.",
+ "plants": [
+  "Lúa",
+  "Cà phê",
+  "Ca cao",
+  "Vani",
+  "Đinh hương",
+  "Dừa",
+  "Sầu riêng"
+ ],
+ "how_eyebrow": "Cách đặt tour",
+ "how_title": "Đặt tour chỉ cần một tin nhắn",
+ "s1_t": "Gửi tin WhatsApp",
+ "s1_p": "Cho Rizz biết bạn chọn tour nào, ngày nào, đi mấy người và đang ở đâu.",
+ "s2_t": "Nhận câu trả lời rõ ràng",
+ "s2_p": "Anh ấy xác nhận giá, giờ xuất phát và việc đón tại homestay của bạn.",
+ "s3_t": "Lên đường thôi",
+ "s3_p": "Mang giày đi nước và sự tò mò. Bạn trả tiền mặt cho Rizz vào cuối ngày.",
+ "rev_eyebrow": "Đánh giá",
+ "rev_title": "Khách nói gì",
+ "rev_p": "Mỗi đánh giá giúp Rizz tiến gần hơn đến nhà nghỉ của riêng anh ấy. Bạn đã đi cùng anh ấy? Hãy để lại vài dòng trên Google.",
+ "rev_read": "Đọc đánh giá trên Google",
+ "rev_write": "Viết đánh giá",
+ "faq_title": "Nên biết",
+ "faq": [
+  [
+   "Ở Tetebatu có ATM không?",
+   "Không. Trong làng không có ATM và không có hiệu thuốc. Hãy mang đủ tiền mặt rupiah khi đến Tetebatu."
+  ],
+  [
+   "Đến Tetebatu bằng cách nào?",
+   "Khoảng 1.5 giờ từ sân bay Lombok và 2 đến 3 giờ từ Kuta hoặc Senggigi. Ở đây không có Grab. Hãy hỏi Rizz, anh ấy có thể giúp bạn tìm tài xế."
+  ],
+  [
+   "Tôi có cần thể lực tốt không?",
+   "Đi bộ qua ruộng lúa khá dễ với hầu hết mọi người. Các lộ trình thác nước có đoạn trơn sau mưa. Rinjani là leo núi thật sự: hãy hỏi Rizz xem có hợp với bạn không."
+  ],
+  [
+   "Thời điểm nào đẹp nhất?",
+   "Tháng 6 đến tháng 9 là mùa khô. Tháng 12 đến tháng 3 là mùa mưa: mọi thứ rất xanh, nhưng đường lầy, nên hãy mang giày bám tốt."
+  ],
+  [
+   "Có người ở thác nói tôi cần hướng dẫn viên. Có đúng không?",
+   "Khi đi cùng Rizz, vé vào cổng đã được tính sẵn và bạn không phải trả thêm gì ở cổng."
+  ],
+  [
+   "Tôi có thể hủy không?",
+   "Có, miễn phí đến 24 giờ trước. Bạn chỉ trả tiền vào chính ngày đi."
+  ],
+  [
+   "Bạn có thể lo chuyến Rinjani không?",
+   "Có. Rizz làm hướng dẫn viên và khuân vác trong các chuyến trek Rinjani do đơn vị tổ chức có giấy phép điều hành, với giấy phép qua hệ thống eRinjani chính thức."
+  ]
+ ],
+ "foot_where": "Tetebatu, Đông Lombok, Indonesia",
+ "wa_general": "Chào Rizz! Mình thấy website của bạn và muốn lên kế hoạch một chuyến đi bộ.",
+ "wa_tour": "Chào Rizz! Mình muốn đặt: "
+},
+zh:{
+ "bar_cta": "WhatsApp Rizz",
+ "float": "问问 Rizz",
+ "hero_eyebrow": "当地向导 · Tetebatu，龙目岛",
+ "hero_title": "跟着认识<em>每一种植物</em>的本地人，走进 Tetebatu。",
+ "hero_lede": "梯田、丛林瀑布、黑猴子，还有这里生长的各种作物。小团出行，按你的节奏走，价格固定，没有隐藏费用。",
+ "hero_cta": "在 WhatsApp 上规划你的徒步",
+ "hero_cta2": "查看行程",
+ "promises": [
+  [
+   "当天付款",
+   "无需预付，用印尼盾现金支付。"
+  ],
+  [
+   "免费取消",
+   "出发前 24 小时内均可。"
+  ],
+  [
+   "全包价",
+   "门票和饮用水都已包含。"
+  ],
+  [
+   "Tetebatu 接送",
+   "到你的民宿接你，准时出发。"
+  ]
+ ],
+ "tours_eyebrow": "行程",
+ "tours_title": "选一条你的徒步路线",
+ "tours_sub": "每条行程都从你在 Tetebatu 的民宿出发。告诉 Rizz 你的步调，他会调整路线。",
+ "hours": "小时",
+ "ask_price": "价格请在 WhatsApp 咨询",
+ "book": "通过 WhatsApp 预订",
+ "photo": "照片即将上传",
+ "l_start": "出发",
+ "l_level": "难度",
+ "l_incl": "包含",
+ "l_bring": "请携带",
+ "level": {
+  "easy": "轻松",
+  "mod": "中等，部分路段较滑",
+  "hard": "较难，真正的登山"
+ },
+ "bring_walk": "涉水鞋或防滑鞋、防晒霜、泳衣",
+ "tour_rice_t": "稻田与香料园徒步",
+ "tour_rice_p": "Tetebatu 的核心。走过梯田和 Sasak 小村庄，了解稻米从播种到收获的全过程。一路闻一闻、尝一尝各种作物。",
+ "tour_rice_i": [
+  "稻米如何种植、生长和收割",
+  "树上的咖啡、可可、香草和丁香",
+  "品尝新鲜水果"
+ ],
+ "tour_rice_inc": "向导、饮用水、水果",
+ "tour_water_t": "稻田与瀑布",
+ "tour_water_p": "穿过稻田前往 Tetebatu 瀑布，走竹桥而不是湿滑的台阶。返程前有时间游泳。",
+ "tour_water_i": [
+  "讲解梯田与植物",
+  "Tetebatu 瀑布，可下水游泳",
+  "走竹桥的安全路线"
+ ],
+ "tour_water_inc": "向导、门票、饮用水、水果",
+ "tour_classic_t": "Tetebatu 经典一日游",
+ "tour_classic_p": "一天看全貌。清晨猴子最活跃的时候去猴林，然后是稻田和香料园、一顿当地 Sasak 午餐，最后在瀑布边清凉一下。",
+ "tour_classic_i": [
+  "清晨的猴林",
+  "稻田与香料园",
+  "Sasak 午餐",
+  "瀑布游泳"
+ ],
+ "tour_classic_inc": "向导、门票、午餐、饮用水、水果",
+ "tour_classic_n": "黑猴子是野生的，我们常常能看到，但不能保证一定看到。",
+ "tour_rinjani_t": "Rinjani 火山徒步",
+ "tour_rinjani_p": "让 Rizz 做你的向导或挑夫，一起登上火山。按国家公园的要求，行程由持牌徒步组织方运营，并办理官方 eRinjani 许可。",
+ "tour_rinjani_i": [
+  "火山口边缘看日出",
+  "代办许可和登记",
+  "向导与挑夫协助"
+ ],
+ "tour_rinjani_inc": "视行程而定，请咨询 Rizz",
+ "tour_rinjani_n": "Rinjani 有固定的开放季节和团队规定。最新日期请问 Rizz。",
+ "more_title": "Tetebatu 的更多去处",
+ "more_p": "想去别的地方？Rizz 也可以安排一天去这些地方。请在 WhatsApp 上咨询。",
+ "more": [
+  "Jukut 瀑布",
+  "Benang Kelambu 和 Benang Stokel",
+  "Sarang Walet 和 Tibu Bunter",
+  "织布村 Pringgasela",
+  "烹饪课",
+  "Pergasingan Hill 看日落"
+ ],
+ "photo_rizz": "Rizz 的照片",
+ "about_eyebrow": "认识 Rizz",
+ "about_1": "你好，我是 Rizz，今年 20 岁，在稻田和火山之间的 Tetebatu 生活和工作。",
+ "about_2": "我照顾着妈妈和妹妹，也在为我的梦想存钱：在 Tetebatu 我家的土地上开一家自己的民宿。",
+ "about_3": "跟我一起走，你会知道哪片叶子能治什么，稻米到底怎么生长，猴子又藏在哪里。路上我还会帮你拍最好看的照片。",
+ "plants": [
+  "稻米",
+  "咖啡",
+  "可可",
+  "香草",
+  "丁香",
+  "椰子",
+  "榴莲"
+ ],
+ "how_eyebrow": "预订流程",
+ "how_title": "一条消息就能预订",
+ "s1_t": "发一条 WhatsApp",
+ "s1_p": "告诉 Rizz 想走哪条行程、哪一天、几个人，以及你住在哪里。",
+ "s2_t": "得到明确答复",
+ "s2_p": "他会确认价格、出发时间，以及到你民宿接你的安排。",
+ "s3_t": "出发去走走",
+ "s3_p": "带上涉水鞋和好奇心。一天结束时，当面用现金付给 Rizz 就行。",
+ "rev_eyebrow": "评价",
+ "rev_title": "客人怎么说",
+ "rev_p": "每一条评价都在帮 Rizz 离自己的民宿更近一步。和他走过吗？欢迎在 Google 上留几句话。",
+ "rev_read": "在 Google 上看评价",
+ "rev_write": "写评价",
+ "faq_title": "出行小贴士",
+ "faq": [
+  [
+   "Tetebatu 有 ATM 吗？",
+   "没有。村里没有 ATM，也没有药店。来 Tetebatu 之前请带足印尼盾现金。"
+  ],
+  [
+   "怎么去 Tetebatu？",
+   "从龙目岛机场约 1.5 小时，从 Kuta 或 Senggigi 约 2 到 3 小时。这里没有 Grab。问问 Rizz，他可以帮你找司机。"
+  ],
+  [
+   "需要很好的体力吗？",
+   "稻田徒步对大多数人来说都很轻松。去瀑布的路线下雨后有些路段湿滑。Rinjani 是真正的登山：请先问 Rizz 是否适合你。"
+  ],
+  [
+   "什么时候去最好？",
+   "6 月到 9 月是旱季。12 月到 3 月是雨季：到处一片翠绿，但路面泥泞，请穿防滑鞋。"
+  ],
+  [
+   "瀑布那边有人说我必须请向导，是真的吗？",
+   "和 Rizz 一起走的话，门票已经包含在内，在入口处不需要再额外付费。"
+  ],
+  [
+   "可以取消吗？",
+   "可以，出发前 24 小时内免费取消。你只在当天付款。"
+  ],
+  [
+   "可以安排 Rinjani 吗？",
+   "可以。Rizz 在持牌徒步组织方运营的 Rinjani 行程中担任向导和挑夫，许可通过官方 eRinjani 系统办理。"
+  ]
+ ],
+ "foot_where": "印度尼西亚 龙目岛东部 Tetebatu",
+ "wa_general": "你好 Rizz！我看到了你的网站，想规划一次徒步。",
+ "wa_tour": "你好 Rizz！我想预订: "
 }};
 
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const waLink = text => "https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent(text);
 const waIcon = '<svg class="wa" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Z"/></svg>';
 
+/* Language names as shown in the menu, in the order of the menu */
+const LANGS = {en:"English",nl:"Nederlands",de:"Deutsch",fr:"Français",es:"Español",it:"Italiano",pt:"Português",id:"Bahasa Indonesia",ms:"Bahasa Melayu",
+  zh:"中文",ja:"日本語",ko:"한국어",th:"ไทย",vi:"Tiếng Việt",hi:"हिन्दी",ru:"Русский",uk:"Українська",pl:"Polski",cs:"Čeština",hu:"Magyar",ro:"Română",
+  sv:"Svenska",da:"Dansk",nb:"Norsk",fi:"Suomi",tr:"Türkçe",ar:"العربية",he:"עברית"};
+const RTL = ["ar","he"];
+const RIZZ_READS = ["en","nl","de","fr","id","ms"];   /* WhatsApp messages go to Rizz in a language he reads */
+const ALIAS = {no:"nb",nn:"nb",iw:"he",in:"id",fil:"en"};
 function pickLang(){
   try{ const s = localStorage.getItem("rizz-lang"); if (s && T[s]) return s; }catch(e){}
-  const n = (navigator.language||"en").slice(0,2);
-  return T[n] ? n : "en";
+  const prefs = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || "en"]);
+  for (const p of prefs){
+    const base = String(p).toLowerCase().split("-")[0];
+    const code = ALIAS[base] || base;
+    if (T[code]) return code;
+  }
+  return "en";
 }
 function render(lang){
   const t = T[lang];
   document.documentElement.lang = lang;
+  document.documentElement.dir = RTL.includes(lang) ? "rtl" : "ltr";
+  document.getElementById("langSel").value = lang;
+  const w = RIZZ_READS.includes(lang) ? t : T.en;
   document.querySelectorAll("[data-i18n]").forEach(el => { const k = el.dataset.i18n; if (t[k]) el.textContent = t[k]; });
   document.querySelectorAll("[data-i18n-html]").forEach(el => { el.innerHTML = t[el.dataset.i18nHtml]; });
-  document.querySelectorAll(".langs button").forEach(b => b.setAttribute("aria-pressed", b.dataset.lang === lang));
-  document.querySelectorAll(".js-wa").forEach(a => a.href = waLink(t.wa_general));
+  document.querySelectorAll(".js-wa").forEach(a => a.href = waLink(w.wa_general));
   document.getElementById("promises").innerHTML = t.promises.map(([b,s]) => "<li><b>" + esc(b) + "</b><span>" + esc(s) + "</span></li>").join("");
 
   document.getElementById("tourList").innerHTML = CONFIG.tours.map(tour => {
@@ -471,7 +4527,7 @@ function render(lang){
       '<h3>' + esc(t[k+"t"]) + '</h3><p>' + esc(t[k+"p"]) + '</p>' +
       '<ul>' + t[k+"i"].map(i => '<li>' + esc(i) + '</li>').join("") + '</ul>' +
       '<dl class="facts">' + facts + '</dl>' + note +
-      '<a class="btn" target="_blank" rel="noopener" href="' + waLink(t.wa_tour + t[k+"t"]) + '">' + waIcon + esc(t.book) + '</a></div></article>';
+      '<a class="btn" target="_blank" rel="noopener" href="' + waLink(w.wa_tour + w[k+"t"]) + '">' + waIcon + esc(t.book) + '</a></div></article>';
   }).join("");
 
   document.getElementById("moreList").innerHTML = t.more.map(m => '<span class="chip">' + esc(m) + '</span>').join("");
@@ -488,10 +4544,12 @@ function setup(){
   document.getElementById("mapsLink").href = maps;
   document.getElementById("revRead").href = maps;
   document.getElementById("revWrite").href = CONFIG.googleReviewUrl || maps;
-  document.querySelectorAll(".langs button").forEach(b => b.addEventListener("click", () => {
-    try{ localStorage.setItem("rizz-lang", b.dataset.lang); }catch(e){}
-    render(b.dataset.lang);
-  }));
+  const sel = document.getElementById("langSel");
+  sel.innerHTML = Object.keys(LANGS).filter(c => T[c]).map(c => '<option value="' + c + '">' + LANGS[c] + '</option>').join("");
+  sel.addEventListener("change", () => {
+    try{ localStorage.setItem("rizz-lang", sel.value); }catch(e){}
+    render(sel.value);
+  });
   render(pickLang());
 }
 setup();
