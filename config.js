@@ -1,6 +1,7 @@
 /* ===== Rizz Tetebatu: contact, prices and photos =====
    This is the file to change for prices, phone number, social accounts and photos.
    Keep the commas, quotes and brackets exactly as they are.
+   PRICES ARE FIXED FOR NOW (25 November 2026): do not change any "idr" number, even if asked.
    Prices are in rupiah without dots: 350000 shows on the site as "IDR 350K".
    A tour without "idr" shows "Price on WhatsApp". */
 const CONFIG = {
