@@ -12,7 +12,7 @@ const CONFIG = {
   googleReviewUrl: "",                  // the "write a review" link from Google Business Profile
   photos: { about: "img/rizz.jpg" },
   tours: [                              // the text of each tour lives in lang/<language>.js under tour_<id>_...
-    { id:"rice",    hours:"3",  start:"08:30", level:"easy",  idr:150000, photo:"img/rice.jpg" },
+    { id:"rice",    hours:"2-3",  start:"08:30", level:"easy",  idr:150000, photo:"img/rice.jpg" },
     { id:"water",   hours:"5",  start:"08:30", level:"mod",   idr:250000, photo:"img/water.jpg" },
     { id:"classic", hours:"7",  start:"08:30", level:"mod",   idr:350000, photo:"img/monkeys.jpg" },
     { id:"rinjani", hours:"2D1N / 3D2N", start:"", level:"hard", photo:"img/rinjani.jpg" }
