@@ -149,7 +149,7 @@ T.en = {
    "Yes. Rizz guides and carries on Rinjani treks run by a licensed trekking organizer, with permits through the official eRinjani system."
   ]
  ],
- "foot_where": "Tetebatu, East Lombok, Indonesia",
+ "foot_where": "Tetebatu, East Lombok, Indonesia 🌾",
  "wa_general": "Hi Rizz! I found your website and want to plan a walk.",
  "wa_tour": "Hi Rizz! I'd like to book: "
 };
