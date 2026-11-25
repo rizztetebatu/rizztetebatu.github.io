@@ -124,7 +124,7 @@ function render(lang){
 
   document.getElementById("tourList").innerHTML = CONFIG.tours.map(tour => {
     const k = "tour_" + tour.id + "_";
-    const hours = /^\d+$/.test(tour.hours) ? tour.hours + " " + t.hours : tour.hours;
+    const hours = /^\d+(-\d+)?$/.test(tour.hours) ? tour.hours + " " + t.hours : tour.hours;
     const price = tour.idr ? esc(priceLabel(tour.idr)) + " <small>" + esc(PP[lang] || PP.en) + "</small>" : esc(t.ask_price);
     const conv = tour.idr ? approx(tour.idr, lang) : "";
     const photo = tour.photo ? '<img src="' + esc(tour.photo) + '" width="1200" height="900" loading="lazy" alt="' + esc(t[k+"t"]) + '">' : esc(t.photo);
