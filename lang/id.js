@@ -121,8 +121,8 @@ T.id = {
  "faq_title": "Perlu diketahui",
  "faq": [
   [
-   "Apakah ada ATM di Tetebatu?",
-   "Tidak. Di desa tidak ada ATM dan tidak ada apotek. Bawa uang tunai rupiah yang cukup saat datang ke Tetebatu."
+   "Apakah ada ATM dan apotek di Tetebatu?",
+   "Ya, sekarang ada ATM dan apotek di Tetebatu. Tur dibayar tunai di hari itu, jadi sebaiknya tetap bawa uang tunai rupiah."
   ],
   [
    "Bagaimana cara ke Tetebatu?",
