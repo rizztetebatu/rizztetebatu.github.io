@@ -121,8 +121,8 @@ T.en = {
  "faq_title": "Good to know",
  "faq": [
   [
-   "Is there an ATM in Tetebatu?",
-   "No. There is no ATM and no pharmacy in the village. Bring enough cash in rupiah when you come to Tetebatu."
+   "Is there an ATM and a pharmacy in Tetebatu?",
+   "Yes, there is now an ATM and a pharmacy in Tetebatu. Tours are paid in cash on the day, so it is still best to bring cash in rupiah."
   ],
   [
    "How do I get to Tetebatu?",
